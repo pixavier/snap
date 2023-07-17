@@ -22,7 +22,12 @@ Event name: <input type="text" id="evt" size="8"> Data: <input type="text"  size
 	function btn01() {
 		let evt = document.getElementById("evt").value;
 		let datum = document.getElementById("datum").value;
-		window.opener.ide.broadcast(evt, null, datum);
+		if (window.opener) {
+			window.opener.ide.broadcast(evt, null, datum);
+		} else if (window.parent)  {
+			window.parent.ide.broadcast(evt, null, datum);
+		}
+		
 	}
 </script>
 <script src="./libs/JSON5.js"></script>
