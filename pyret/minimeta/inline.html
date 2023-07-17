@@ -52,7 +52,7 @@
                 world = new WorldMorph(document.getElementById('world'), false);
 		world2 = document.getElementById('world2');
                 ide.openIn(world);
-		world2.ide = ide;
+		window.ide = ide;
                 requestAnimationFrame(loop);
             };
         </script>
