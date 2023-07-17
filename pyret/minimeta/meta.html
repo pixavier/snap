@@ -936,6 +936,7 @@ function removeTexture(param) {
 	let res = true;
 	let obj = getObjectByNameOrId(param.name);
 	if (obj.material.map) {
+		obj.material.map.dispose();
 		obj.material.map = null;
 	}
 	obj.material.needsUpdate = true;
