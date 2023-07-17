@@ -29,7 +29,7 @@
         <script>
 	    Process.prototype.enableJS = true;
             var world;
-            var world2 = document.getElementById('world2');
+            var world2;
             window.onload = function () {
                 var ide = new IDE_Morph({
                         path: '.',
@@ -50,6 +50,7 @@
                         world.doOneCycle();
                     };
                 world = new WorldMorph(document.getElementById('world'), false);
+		world2 = document.getElementById('world2');
                 ide.openIn(world);
 		world2.ide = ide;
                 requestAnimationFrame(loop);
