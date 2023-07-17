@@ -27,9 +27,9 @@
         <script src="../../src/sha512.js"></script>
         <script src="../../src/FileSaver.min.js"></script>
         <script>
-		Process.prototype.enableJS = true;
+	    Process.prototype.enableJS = true;
             var world;
-            var world2;
+            var world2 = document.getElementById('world2');
             window.onload = function () {
                 world2.ide = new IDE_Morph({
                         path: '.',
@@ -51,8 +51,6 @@
                     };
                 world = new WorldMorph(document.getElementById('world'), false);
                 world2.ide.openIn(world);
-	            world2 = document.getElementById('world2');
-
                 requestAnimationFrame(loop);
             };
         </script>
