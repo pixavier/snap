@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Low-Code Experimental Basic 4.0 Metaverse</title>
+    <style>
+		html, body {font-family:Verdana,sans-serif;font-size:13px;line-height:1.5;width:99%;height:97%;} 	
+		canvas {
+          display: block;
+          margin: 5px auto;
+          width: 100%;
+          height: 100%;
+		}
+    </style>
+  </head>
+<body>
+<button onclick="btn01()" style="visibility:visible">Send message to Snap<i>!</i></button>
+Event name: <input type="text" id="evt" size="8"> Data: <input type="text"  size="25" id="datum">
+<script>
+
+	window.onresize = function(){location.reload();}; 
+
+	function btn01() {
+		let evt = document.getElementById("evt").value;
+		let datum = document.getElementById("datum").value;
+		window.opener.ide.broadcast(evt, null, datum);
+	}
+</script>
+<script src="./libs/JSON5.js"></script>
+<script async src="./libs/es-module-shims.js"></script>
+<script type="importmap">
+{
+	"imports": {
+		"three": "./libs/three.module.js"
+	}
+}
+</script>
+<script type="module">
+
+import * as THREE from 'three';
+import {OrbitControls} from './libs/OrbitControls.js';
+import {STLLoader} from './libs/STLLoader.js';
+import {FontLoader} from './libs/FontLoader.js';
+import {CSS3DObject, CSS3DRenderer} from './libs/CSS3DRenderer.js';
+import CSG from "./libs/three-csg.js";
+
+window.meta4snap = {};
+
+//let defaultColor = 'darkgray';
+let defaultColor = 0x666666;
+let font01;
+var collidableMeshList = [];
+var collisionObj;
+
+let camera = null;
+let controls = null;
+let controlPressed = false;
+let shiftPressed = false;
+let canvas = null;
+
+
+createSceneCameraAndRenderer();
+
+animate();
+
+function animate() {
+	requestAnimationFrame(animate);
+	render();
+}
+
+
+//message = function(payload) {
+//function pmessage(evt) {
+function pmessage(data) {
+	let res = '';
+	var payload = data;
+	try {
+//		console.log(payload.toString());
+		let json = JSON5.parse(payload);
+		let op = json.op;
+		let param = json.param;
+/*		
+		console.log(op);
+		console.log(param);
+*/
+		if (op == 'createContainer') {
+			res = createSystemReference(param);	
+		}
+
+		if (op == 'createText') {
+			res = createText(param);	
+		}
+
+		if (op == 'createSpline') {
+			res = createSpline(param);
+		}
+		
+		if (op == 'loadStl') {
+			res = loadStl(param);	
+		}
+		
+		if (op == 'createElem') {
+		
+			if (param.type == 'Parallelpipped' || param.type == 'Cube') {
+				res = createParallelpipped(param);			
+			}
+
+			if (param.type == 'Sphere') {
+				res = createSphere(param);
+			}
+
+			if (param.type == 'Cone' || param.type == 'Cylinder') {
+				res = createCone(param);
+			}
+
+			if (param.type == 'Torus') {
+				res = createTorus(param);
+			}
+			
+			if (param.type == 'PlaneRectangle') {
+				res = createPlaneRectangle(param);
+			}
+			
+			if (param.type == 'PlaneCircle') {
+				res = createPlaneCircle(param);
+			}
+			
+			if (param.type == 'HTMLPanel') {
+				res = createHTMLPanel(param);
+			}
+		}
+
+		if (op == 'clone') {
+			res = clone (param);
+		}
+
+		if (op == 'setUserType') {
+			res = setUserType(param);
+		}
+
+		if (op == 'setCamera') {
+			res = setCamera(param);
+		}
+
+		if (op == 'setPose') {
+			res = setPose(param);
+		}
+
+		if (op == 'setOpacity') {
+			res = setOpacity(param);
+		}
+
+		if (op == 'setColor') {
+			res = setColor(param);
+		}
+
+		if (op == 'add') {
+			res = add(param);
+		}
+
+		if (op == 'remove') {
+			res = remove(param);
+		}
+
+		if (op == 'removeSpline') {
+			res = removeSpline(param);
+		}
+
+
+		if (op == 'showAxes') {
+			return showAxes(param);
+		}
+
+		if (op == 'hideAxes') {
+			res = hideAxes(param);
+		}
+
+		if (op == 'reload') {
+			location.reload();
+			res = true;
+		}
+
+		if (op == 'introspect') {
+			res = introspect(param);
+		}
+
+		if (op == 'getPose') {
+			res = getPose(param);
+		}
+
+		if (op == 'getPoseAbsolute') {
+			res = getPoseAbsolute(param);
+		}
+
+		if (op == 'getClass') {
+			res = getClass(param);
+		}
+
+		if (op == 'getPointAt') {
+			res = getPointAt(param);
+		}
+
+		if (op == 'getTrajectory') {
+			res = getTrajectory(param);
+		}
+
+		if (op == 'scale') {
+			res = scale(param);
+		}
+
+		if (op == 'setCollisionObj') {
+			res = setCollisionObj(param);
+		}
+
+		if (op == 'addCollidable') {
+			res = addCollidable(param);
+		}
+
+		if (op == 'resetCollidables') {
+			collidableMeshList.length = 0;
+			res = true;
+		}
+
+		if (op == 'collisionCheck') {
+			res = doCollisionCkeck(param);
+		}
+
+		if (op == 'getCollisionObj') {
+			res = getCollisionObj(param);
+		}
+
+		if (op == 'getCollidables') {
+			res = getCollidables(param);
+		}
+
+		if (op == 'setOrbitControls') {
+			res = setOrbitControls(param);
+		}
+
+		if (op == 'setAttribute') {
+			res = setAttribute(param);
+		}
+
+		if (op == 'getAttribute') {
+			res = getAtribute(param);
+		}
+
+		if (op == 'getOID') {
+			res = getOID(param);
+		}
+
+		if (op == 'getDistance') {
+			res = getDistance(param);
+		}
+
+		if (op == 'getSnapshot') {
+			res = getSnapshot(param);
+		}
+		
+		if (op == 'setBackgroundColor') {
+			res = setBackgroundColor(param);
+		}
+
+		if (op == 'substract') {
+			res = substract(param);
+		}
+
+		if (op == 'setLight1Color') {
+			res = setLight1Color(param);
+		}
+		
+		if (op == 'setLight1Intensity') {
+			res = setLight1Intensity(param);
+		}
+
+		if (op == 'setLight1Placement') {
+			res = setLight1Placement(param);
+		}
+
+		if (op == 'getLight1Placement') {
+			res = getLight1Placement();
+		}
+
+		if (op == 'setLight2Color') {
+			res = setLight2Color(param);
+		}
+		
+		if (op == 'setLight2Intensity') {
+			res = setLight2Intensity(param);
+		}
+
+		if (op == 'setLight2Placement') {
+			res = setLight2Placement(param);
+		}
+
+		if (op == 'getLight2Placement') {
+			res = getLight2Placement();
+		}
+
+		if (op == 'setLight3Color') {
+			res = setLight3Color(param);
+		}
+		
+		if (op == 'setLight3Intensity') {
+			res = setLight3Intensity(param);
+		}
+
+		if (op == 'setLight3Placement') {
+			res = setLight3Placement(param);
+		}
+
+		if (op == 'getLight3Placement') {
+			res = getLight3Placement();
+		}
+
+		if (op == 'setTexture') {
+			res = setTexture(param);
+		}
+
+		if (op == 'removeTexture') {
+			res = removeTexture(param);
+		}
+
+		render();
+	} catch (e) {	
+		console.log(e.stack);
+//		console.log(e.message);
+	}
+	return res;
+}
+
+/*
+if (window.addEventListener) {
+	// For standards-compliant web browsers
+	window.addEventListener("message", message, false);
+}
+else {
+	window.attachEvent("onmessage", message);
+}
+*/
+
+function tailLastComma(str) {
+	str = str.replace(/,\s*$/, "");
+	return str;
+}
+
+function tailIncrement(str) {
+	str = str.replace(/\+\+,\s*$/, "");
+	return str;
+}
+
+function tailDecrement(str) {
+	str = str.replace(/\-\-\s*$/, "");
+	return str;
+}
+
+function setLight1Color(param) {
+	let res = true;
+	window.meta4snap.light1.color.setHex(parseInt(param.color));
+	return res;
+}
+
+function setLight1Intensity(param) {
+	let res = true;
+	window.meta4snap.light1.intensity = param.intensity;
+	return res;
+}
+
+function setLight1Placement(param) {
+	let res = true;
+	window.meta4snap.light1.position.set(param.x, param.y, param.z);
+	return res;
+}
+
+function getLight1Placement() {
+	let res = [];
+	let obj = window.meta4snap.light1;
+	if (obj) {
+		res[0] = obj.position.x;
+		res[1] = obj.position.y;
+		res[2] = obj.position.z;
+		res[3] = THREE.Math.radToDeg(obj.rotation.x);
+		res[4] = THREE.Math.radToDeg(obj.rotation.y);
+		res[5] = THREE.Math.radToDeg(obj.rotation.z);
+	}
+	return JSON.stringify(res, null, 2);
+}
+
+
+function setLight2Color(param) {
+	let res = true;
+	window.meta4snap.light2.color.setHex(parseInt(param.color));
+	return res;
+}
+
+function setLight2Intensity(param) {
+	let res = true;
+	window.meta4snap.light2.intensity = param.intensity;
+	return res;
+}
+
+function setLight2Placement(param) {
+	let res = true;
+	window.meta4snap.light2.position.set(param.x, param.y, param.z);
+	return res;
+}
+
+function getLight2Placement() {
+	let res = [];
+	let obj = window.meta4snap.light2;
+	if (obj) {
+		res[0] = obj.position.x;
+		res[1] = obj.position.y;
+		res[2] = obj.position.z;
+		res[3] = THREE.Math.radToDeg(obj.rotation.x);
+		res[4] = THREE.Math.radToDeg(obj.rotation.y);
+		res[5] = THREE.Math.radToDeg(obj.rotation.z);
+	}
+	return JSON.stringify(res, null, 2);
+}
+
+function setLight3Color(param) {
+	let res = true;
+	window.meta4snap.light3.color.setHex(parseInt(param.color));
+	return res;
+}
+
+function setLight3Intensity(param) {
+	let res = true;
+	window.meta4snap.light3.intensity = param.intensity;
+	return res;
+}
+
+function setLight3Placement(param) {
+	let res = true;
+	window.meta4snap.light3.position.set(param.x, param.y, param.z);
+	return res;
+}
+
+function getLight3Placement() {
+	let res = [];
+	let obj = window.meta4snap.light3;
+	if (obj) {
+		res[0] = obj.position.x;
+		res[1] = obj.position.y;
+		res[2] = obj.position.z;
+		res[3] = THREE.Math.radToDeg(obj.rotation.x);
+		res[4] = THREE.Math.radToDeg(obj.rotation.y);
+		res[5] = THREE.Math.radToDeg(obj.rotation.z);
+	}
+	return JSON.stringify(res, null, 2);
+}
+
+
+function createSceneCameraAndRenderer() {
+	let res = true;
+	window.meta4snap.scene = new THREE.Scene();
+
+//	let skyColor = 0xB1E1FF;  // light blue
+//	let groundColor = 0xB97A20;  // brownish orange
+	let skyColor = 0xffffff;
+	let groundColor = 0xffffff;
+	
+	let intensity = 3;
+	
+//	window.meta4snap.light1 = new THREE.HemisphereLight(skyColor, groundColor, intensity);
+//	window.meta4snap.light1 = new THREE.AmbientLight(skyColor, intensity);
+
+	window.meta4snap.light1 = new THREE.DirectionalLight(skyColor, intensity);
+	window.meta4snap.light1.position.set(200, 500, 300);
+
+	window.meta4snap.light2 = new THREE.DirectionalLight(skyColor, intensity);
+	window.meta4snap.light2.position.set(200, -500, 300);
+	
+	window.meta4snap.scene.add(window.meta4snap.light1);	
+	window.meta4snap.scene.add(window.meta4snap.light2);	
+	
+//	window.meta4snap.renderer = new THREE.WebGLRenderer();
+	window.meta4snap.renderer = new THREE.WebGLRenderer( { antialias: true, preserveDrawingBuffer: true } );	
+	
+	canvas = window.meta4snap.renderer.domElement;
+    document.body.appendChild(canvas);
+    window.meta4snap.renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    window.meta4snap.renderer.setClearColor(0xdddddd, 1);
+
+	camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+	camera.position.x = 2;
+	camera.position.y = 2;
+	camera.position.z = 10;
+	window.meta4snap.camera = camera;
+
+	controls = new OrbitControls(camera, canvas);
+	window.meta4snap.controls = controls;
+
+	let loader = new FontLoader();
+	loader.load( './libs/fonts/helvetiker_regular.typeface.json', function (font) {font01 = font});
+	
+	const onKeyDown = function (event) {
+		
+		switch (event.code) {
+			case 'ArrowUp':
+				camera.position.x -= 0.2 * Math.sin(camera.rotation.y);
+				camera.position.z -= 0.2 * Math.cos(camera.rotation.y);
+//				console.log(event.code);	
+//				console.log(camera);	
+				break;
+
+			case 'ArrowDown':
+				camera.position.x += 0.2 * Math.sin(camera.rotation.y);
+				camera.position.z += 0.2 * Math.cos(camera.rotation.y);
+//				console.log(event.code);	
+//				console.log(camera);	
+				break;
+
+			case 'ArrowLeft':
+				camera.rotation.y += 0.1;
+				break;
+
+			case 'ArrowRight':
+				camera.rotation.y -= 0.1;
+				break;
+
+			case 'ControlArrowUp':
+				break;
+
+			case 'ControlArrowDown':
+				break;
+
+			case 'ShiftArrowUp':
+				camera.position.y += 0.1;
+				break;
+
+			case 'ShiftArrowDown':
+				camera.position.y -= 0.1;
+				break;
+
+			case 'Space':
+				break;
+
+		}
+//		updateCameraOrbit();
+//		camera.updateProjectionMatrix();		
+//		controls.update();
+	};
+	
+	document.addEventListener('keydown', onKeyDown);
+
+	const updateCameraOrbit = function() {
+	  // Update OrbitControls target to a point just in front of the camera
+	  const forward = new THREE.Vector3();
+	  camera.getWorldDirection(forward);
+	  controls.target.copy(camera.position).add(forward);
+	};
+
+	const onKeyUp = function (event) {
+		
+//		console.log(event.code);
+	
+		switch (event.code) {
+			case 'ShiftArrowUp':
+				shiftPressed = false;
+				break;
+
+			case 'ShiftArrowDown':
+				shiftPressed = true;
+				break;
+
+			case 'ControlArrowUp':
+				controlPressed = true;
+				break;
+
+			case 'ControlArrowDown':
+				controlPressed = false;
+				break;
+		}
+	}
+	
+	document.addEventListener('keyup', onKeyUp);
+	return res;
+}
+
+// ---------------------------------------------------------------
+
+
+function createParallelpipped(param) {
+	let res = true;
+	let b = param.base;
+	let h = param.height;
+	let l = param.length;
+	let name = param.name;
+	let snapType = param.type;
+	
+	res = checkUniqueNameFirstLevel (window.meta4snap.scene, name);
+	if (res) {
+		const geometry = new THREE.BoxBufferGeometry(b, h, l);
+		let material = new THREE.MeshStandardMaterial({color: defaultColor, roughness: 0.2, metalness: 0.3});
+		material.transparent = true;
+		material.opacity = 1;
+		const obj = new THREE.Mesh(geometry, material);
+		if (name) obj.name = name;
+		obj.userData.snapType = snapType;
+		window.meta4snap.scene.add(obj);
+	}
+	return res;
+}
+
+function createSphere(param) {
+	let res = true;
+	let r = param.r;
+	let arc = param.arc;
+	let name = param.name;
+	let snapType = param.type;
+
+	res = checkUniqueNameFirstLevel (window.meta4snap.scene, name);
+	if (res) {
+		let arcRad = arc * 2 * Math.PI / 360;
+		const geometry = new THREE.SphereBufferGeometry(r, 32, 16, 0, arcRad);
+		let material = new THREE.MeshStandardMaterial({color: defaultColor, roughness: 0.2, metalness: 0.3});
+		material.transparent = true;
+		material.opacity = 1;
+		const obj = new THREE.Mesh(geometry, material);
+		if (name) obj.name = name;
+		obj.userData.snapType = snapType;
+		window.meta4snap.scene.add(obj);
+	}
+	return res;
+}
+
+function createCone(param) {
+	let res = true;
+	let r1 = param.r1;
+	let r2 = param.r2;
+	let l = param.length;
+	let arc = param.arc;
+	let name = param.name;
+	let snapType = param.type;
+
+	res = checkUniqueNameFirstLevel (window.meta4snap.scene, name);
+	if (res) {
+		let arcRad = arc * 2 * Math.PI / 360;
+		const geometry = new THREE.CylinderBufferGeometry(r1, r2, l, 32, 16, false, 0, arcRad);
+		let material = new THREE.MeshStandardMaterial({color: defaultColor, roughness: 0.2, metalness: 0.3});
+		material.transparent = true;
+		material.opacity = 1;
+		const obj = new THREE.Mesh(geometry, material);
+		if (name) obj.name = name;
+		obj.userData.snapType = snapType;
+		window.meta4snap.scene.add(obj);
+	}
+	return res;
+}
+
+function createTorus(param) {
+	let res = true;
+	let r = param.r;
+	let rTube = param.rTube;
+	let arc = param.arc;
+	let name = param.name;
+	let snapType = param.type;
+
+	res = checkUniqueNameFirstLevel (window.meta4snap.scene, name);
+	if (res) {
+		let arcRad = arc * 2 * Math.PI / 360;
+		const geometry = new THREE.TorusBufferGeometry(r, rTube, 16, 100, arcRad);
+		const material = new THREE.MeshStandardMaterial({color: defaultColor, roughness: 0.2, metalness: 0.3});
+		material.transparent = true;
+		material.opacity = 1;
+		const obj = new THREE.Mesh(geometry, material);
+		if (name) obj.name = name;
+		obj.userData.snapType = snapType;
+		window.meta4snap.scene.add(obj);
+	}
+	return res;
+}
+
+function createText(param) {
+	let res = true;
+	let text = param.text;
+	let name = param.name;
+	let snapType = param.type;
+	
+	res = checkUniqueNameFirstLevel (window.meta4snap.scene, name);
+	if (res) {
+		const material = new THREE.MeshStandardMaterial({color: defaultColor, roughness: 0.2, metalness: 0.3});
+		const shapes = font01.generateShapes(text, 0.7);
+		const geometry = new THREE.ShapeBufferGeometry(shapes);
+		geometry.computeBoundingBox();
+		const obj = new THREE.Mesh(geometry, material);
+		if (name) obj.name = name;
+		obj.userData.snapType = snapType;
+		window.meta4snap.scene.add(obj);
+	}
+	return res;
+}
+
+function createPlaneRectangle(param) {
+	let res = true;
+	let width = param.width;
+	let height = param.height;
+	let name = param.name;
+	let snapType = param.type;
+
+	res = checkUniqueNameFirstLevel (window.meta4snap.scene, name);
+	if (res) {
+		const geometry = new THREE.PlaneBufferGeometry(width, height);
+		const material = new THREE.MeshStandardMaterial({color: defaultColor, side: THREE.DoubleSide});
+		const obj = new THREE.Mesh(geometry, material);
+		if (name) obj.name = name;
+		obj.userData.snapType = snapType;
+		window.meta4snap.scene.add(obj);
+	}
+	return res;
+}
+
+function createPlaneCircle(param) {
+	let res = true;
+	let radius = param.radius;
+	let name = param.name;
+	let snapType = param.type;
+
+	res = checkUniqueNameFirstLevel (window.meta4snap.scene, name);
+	if (res) {
+		material = new THREE.MeshStandardMaterial({color: defaultColor, side: THREE.DoubleSide});
+		geometry = new THREE.CircleBufferGeometry(radius, 32);
+		obj = new THREE.Mesh(geometry, material);
+		if (name) obj.name = name;
+		obj.userData.snapType = snapType;
+		window.meta4snap.scene.add(obj);
+	}
+	return res;
+}
+
+function createSpline(param) {
+	let res = true;
+	let name = param.name;
+	let snapType = param.type;
+
+	res = checkUniqueNameFirstLevel (window.meta4snap.scene, name);
+	if (res) {
+		let obj = getObjectByNameOrId(name);
+		if (obj) {
+			let vPoints = [];
+			for (child of obj.children) {
+				if (child.userData.userType == 'Point') {
+					vPoints.push(new THREE.Vector3(child.position.x, child.position.y, child.position.z));
+				}
+			}
+			let curve = new THREE.CatmullRomCurve3(vPoints);
+			let points = curve.getPoints(50);
+			let geometry = new THREE.BufferGeometry().setFromPoints(points);
+			let material = new THREE.LineBasicMaterial({color: 0xff0000});
+			material.transparent = true;
+			material.opacity = 1;
+			let curveObject = new THREE.Line(geometry, material);
+			curveObject.name = obj.name + '_spline';
+			curveObject.userData.points = vPoints;
+	//		curveObject.userData.points = JSON5.stringify(vPoints);
+			obj.add(curveObject);
+		}
+	}
+	return res;
+}
+
+function createHTMLPanel(param) {
+	let res = true;
+	let width = param.width;
+	let height = param.height;
+	let name = param.name;
+	let snapType = param.type;
+
+	res = checkUniqueNameFirstLevel (window.meta4snap.scene, name);
+	if (res) {
+
+		// convert the string to dome elements
+		var wrapper = document.createElement('div');
+		
+		let content = 
+			'<div id="cmp01" style="position:absolute;top:180px;left:400;width:400px;height:200px;border:0.5px solid;overflow:auto">' +
+			'	<h3>Hello from Cambridge</h3>' +
+			'</div>';
+		
+		wrapper.innerHTML = content;
+	//	var div = wrapper.firstChild;
+		var div = wrapper;
+		
+		// set some values on the div to style it.
+		// normally you do this directly in HTML and 
+		// CSS files.
+		div.style.width = width + 'px';
+		div.style.height = height + 'px';
+		div.style.opacity = 0.7;
+		div.style.background = new THREE.Color(Math.random() * 0xffffff).getStyle();
+	}
+	return res;
+}
+
+function loadStl(param) {
+	let res = true;
+	let filename = param.filename;
+	let name = param.name;
+	let snapType = param.type;
+    
+	res = checkUniqueNameFirstLevel (window.meta4snap.scene, name);
+	if (res) {
+	// https://dustinpfister.github.io/2021/06/21/threejs-texture-loader
+		let loader = new STLLoader();
+		let group = new THREE.Object3D();
+		loader.load("./libs/objs/" + filename, function (geometry) {
+	//		var material = new THREE.MeshLambertMaterial({color: defaultColor});
+			var material = new THREE.MeshStandardMaterial({color: defaultColor, roughness: 0.2, metalness: 0.3});
+			group = new THREE.Mesh(geometry, material);
+	//		group.rotation.x = -0.5 * Math.PI;
+			group.scale.set(0.05, 0.05, 0.05);
+			if (name) group.name = name;
+			group.userData.snapType = snapType;
+			window.meta4snap.scene.add(group);
+		});
+	}
+	return true;
+}
+
+function createSystemReference(param) {  // Container
+	let res = true;
+	let name = param.name;
+	let snapType = param.type;
+
+	res = checkUniqueNameFirstLevel (window.meta4snap.scene, name);
+	let sysref = new THREE.Object3D();
+	if (name) sysref.name = name;
+	sysref.userData.snapType = snapType;
+	window.meta4snap.scene.add(sysref);
+	return res;
+}
+	
+	
+function clone(param) {
+	let res = true;
+	let name = param.name;
+	let newname = param.newname;
+	
+	let obj = getObjectByNameOrId(name);
+	if (obj) {
+		res = checkUniqueNameFirstLevel (window.meta4snap.scene, newname);
+		let obj2 = obj.clone();
+		obj2.name = newname;
+		window.meta4snap.scene.add(obj2);
+	}
+	return res;
+}
+
+function setUserType(param) {
+	let res = true;
+	let name = param.name;
+	let userType = param.userType;
+	
+	let obj = getObjectByNameOrId(name);
+	if (obj && obj.userData) obj.userData.userType = userType;
+	return res;
+}
+
+function setPose(param) {
+	let res = true;
+	let obj = getObjectByNameOrId(param.name);
+	if (obj) {
+		let x = param.x;
+		let y = param.y;
+		let z = param.z;
+		let rx = param.rx;
+		let ry = param.ry;
+		let rz = param.rz;
+		try {
+			if (x) {
+				if (x.endsWith('++')) obj.position.x += parseFloat(tailIncrement(x));
+				else if (x.endsWith('--')) obj.position.x -= parseFloat(tailDecrement(x));
+				else obj.position.x = parseFloat(x);
+			}
+			if (y) {
+				if (y.endsWith('++')) obj.position.y += parseFloat(tailIncrement(y));
+				else if (y.endsWith('--')) obj.position.y -= parseFloat(tailDecrement(y));
+				else obj.position.y = parseFloat(y);
+			}
+			if (z) {
+				if (z.endsWith('++')) obj.position.z += parseFloat(tailIncrement(z));
+				else if (z.endsWith('--')) obj.position.z -= parseFloat(tailDecrement(z));
+				else obj.position.z = parseFloat(z);
+			}
+			if (rx) {
+				if (rx.endsWith('++')) obj.rotation.x += THREE.Math.degToRad(parseFloat(tailIncrement(rx)));
+				else if (rx.endsWith('--')) obj.rotation.x -= THREE.Math.degToRad(parseFloat(tailDecrement(rx)));
+				else obj.rotation.x = THREE.Math.degToRad(parseFloat(rx));
+			}
+			if (ry) {
+				if (ry.endsWith('++')) obj.rotation.y += THREE.Math.degToRad(parseFloat(tailIncrement(ry)));
+				else if (ry.endsWith('--')) obj.rotation.y -= THREE.Math.degToRad(parseFloat(tailDecrement(ry)));
+				else obj.rotation.y = THREE.Math.degToRad(parseFloat(ry));
+			}
+			if (rz) {
+				if (rz.endsWith('++')) obj.rotation.z += THREE.Math.degToRad(parseFloat(tailIncrement(rz)));
+				else if (rz.endsWith('--')) obj.rotation.z -= THREE.Math.degToRad(parseFloat(tailDecrement(rz)));
+				else obj.rotation.z = THREE.Math.degToRad(parseFloat(rz));
+			}
+		} catch (e) {
+			console.log(e);
+		}
+	}
+	return res;
+}
+
+function setOpacity(param) {
+	let res = true;
+	let obj = getObjectByNameOrId(param.name);
+	if (obj) setElementOpacity(obj, param.opacity);
+	return res;
+}
+
+function setColor(param) {
+	let res = true;
+	let obj = getObjectByNameOrId(param.name);
+	if (obj) setElementColor(obj, param.color);
+	return res;
+}
+
+function setTexture(param) {
+	let res = true;
+	let obj = getObjectByNameOrId(param.name);
+	let textureLoader = new THREE.TextureLoader();
+	try {
+		let texture = textureLoader.load('./libs/textures/' + param.texture + '.png');
+		obj.material.map = texture;
+	} catch (e) {
+	}
+	obj.material.needsUpdate = true;
+	return res;
+}
+
+function removeTexture(param) {
+	let res = true;
+	let obj = getObjectByNameOrId(param.name);
+	if (obj.material.map) {
+		obj.material.map = null;
+	}
+	obj.material.needsUpdate = true;
+	return res;
+}
+
+
+
+function add(param) {
+	let res = true;
+	let obj = getObjectByNameOrId(param.name);
+
+	let objParent = getObjectByNameOrId(param.parent);
+
+	res = checkUniqueNameFirstLevel (objParent, param.name);
+
+	if (res) {
+		if (obj && objParent) objParent.add(obj);
+	}
+	return res;
+}
+
+function remove(param) {
+	let res = true;
+	let obj = getObjectByNameOrId(param.name);
+	if (obj) obj.parent.remove(obj);
+	return res;
+}
+
+function removeSpline(param) {
+	let res = true;
+	let obj = getObjectByNameOrId(param.name);
+	if (obj) {
+		let child = getChild(obj, '_spline');
+		obj.remove(child);
+	}
+	return res;
+}
+
+function substract(param) {
+	let res = true;
+	let obj1 = getObjectByNameOrId(param.name1);
+	let obj2 = getObjectByNameOrId(param.name2);
+
+	obj1.updateMatrix()
+	obj2.updateMatrix()
+
+	let bsp1 = CSG.fromMesh(obj1);                        
+	let bsp2 = CSG.fromMesh(obj2);
+
+	let bspResult = bsp1.subtract(bsp2);
+	let meshResult = CSG.toMesh(bspResult, obj1.matrix, obj1.material);
+				
+	meshResult.name = param.name3;
+	
+	window.meta4snap.scene.add(meshResult);
+	return res;
+}
+
+function showAxes(param) {
+	let res = true;
+	const axesHelper = new THREE.AxesHelper(param.length);
+	let obj;
+	if (param.name && param.name != 'scene') {
+		axesHelper.name = param.name + '_axes';
+		obj = getObjectByNameOrId(param.name);
+	} else {
+		axesHelper.name = 'scene_axes';
+		obj = window.meta4snap.scene;
+	}
+	if (obj) obj.add(axesHelper);
+	return res;
+}
+
+function hideAxes(param) {
+	let res = true;
+	let obj;
+	let objAxes;
+	if (param.name && param.name != 'scene') {
+		obj = getObjectByNameOrId(param.name);
+		objAxes = obj.getObjectByName(param.name + '_axes');
+	} else {
+		obj = window.meta4snap.scene;
+		objAxes = obj.getObjectByName('scene_axes');
+	}
+	if (obj) obj.remove(objAxes);
+	return res;
+}
+
+function introspect(param) {
+	let res = {};
+	try {
+		let obj, rot;
+		if (param.name == '' || param.name == 'scene') {
+			obj = window.meta4snap.scene;
+			obj.userData.snapType = 'minimalMetaverse';
+		} else {
+			obj = getObjectByNameOrId(param.name);
+		}
+		if (obj) {
+			let objThis = {};
+			objThis.name = obj.name;
+			objThis.id = 'oid' + obj.id;
+			if (param.extended) {
+				objThis.type = obj.type;
+				objThis.userType = obj.userData.userType??'';
+				objThis.snapType = obj.userData.snapType??'';
+				objThis.position = obj.position;
+				rot = {};
+				rot.rx = obj.rotation.x;
+				rot.ry = obj.rotation.y;
+				rot.rz = obj.rotation.z;
+				objThis.rotation = rot;
+			}
+			res.object = objThis;
+			let objParent = {};
+			if (obj.parent) {
+				objParent.name = obj.parent.name;
+				objParent.id = 'oid' + obj.parent.id;
+				if (param.extended) {
+					objParent.type = obj.parent.type;
+					objParent.userType = obj.parent.userData.userType??'';
+					objParent.snapType = obj.parent.userData.snapType??'';
+					objParent.position = obj.parent.position;
+					rot = {};
+					rot.rx = obj.parent.rotation.x;
+					rot.ry = obj.parent.rotation.y;
+					rot.rz = obj.parent.rotation.z;
+					objParent.rotation = rot;
+				}
+			}
+			res.parent = objParent;
+			let children = [];
+			for (let child of obj.children) {
+				let objChild;
+				if ((	child.type == 'Mesh' || child.type == 'Line' ||	child.type == 'Object3D') && 
+						child.name != 'Ground' &&
+						child.name != 'BoundingBoxHelper' &&
+						!child.name.endsWith('_axes')) {
+						
+					objChild = {};
+					
+					objChild.name = child.name;
+					objChild.id = 'oid' + child.id;
+					if (param.extended) {
+						objChild.type = child.type;
+						objChild.userType = child.userData.userType??'';
+						objChild.snapType = child.userData.snapType??'';
+						objChild.position = child.position;
+						rot = {};
+						rot.rx = child.rotation.x;
+						rot.ry = child.rotation.y;
+						rot.rz = child.rotation.z;
+						objChild.rotation = rot;
+					}
+				}
+				if(objChild) children.push(objChild);
+			}
+			res.children = children;
+		}
+	} catch (e) {
+//		console.log(e);
+		res = {};
+	}
+	return JSON.stringify(res, null, 2);
+}
+
+function getPose(param) {
+	let res = new Array(6);
+	let obj = getObjectByNameOrId(param.name);
+	if (obj) {
+		res[0] = obj.position.x;
+		res[1] = obj.position.y;
+		res[2] = obj.position.z;
+		res[3] = THREE.Math.radToDeg(obj.rotation.x);
+		res[4] = THREE.Math.radToDeg(obj.rotation.y);
+		res[5] = THREE.Math.radToDeg(obj.rotation.z);
+	}
+	return JSON.stringify(res, null, 2);
+}
+
+function getPoseAbsolute(param) {
+	let res = new Array(6);
+	let obj = getObjectByNameOrId(param.name);
+	if (obj) {
+		obj.updateMatrixWorld();
+		let absPosition = new THREE.Vector3();
+		obj.getWorldPosition(absPosition);				
+		res[0] = absPosition.x;
+		res[1] = absPosition.y;
+		res[2] = absPosition.z;
+		let absRotation = new THREE.Euler();
+		let quaternion = new THREE.Quaternion();
+		obj.getWorldQuaternion(quaternion);
+		absRotation.setFromQuaternion(quaternion);
+		res[3] = THREE.Math.radToDeg(absRotation.x);
+		res[4] = THREE.Math.radToDeg(absRotation.y);
+		res[5] = THREE.Math.radToDeg(absRotation.z);
+	}
+	return JSON.stringify(res, null, 2);
+}
+
+function getClass(param) {
+	let res = '';
+	let obj = getObjectByNameOrId(param.name);
+	if (obj && obj.userData.userType) {
+		res = obj.userData.userType;
+	}
+	return res;
+}
+
+function getPointAt(param) {
+	let res = '';
+	let obj = getObjectByNameOrId(param.name);
+	if (obj) {
+		let child = getChild(obj, '_spline');
+		if (child) {
+			let curve = new THREE.CatmullRomCurve3(child.userData.points);
+			let v = curve.getPointAt(param.t > 1 ? 1 : param.t);
+			res = '[' + v.x + ',' + v.y + ',' + v.z + ']';
+		}
+	}
+	return res;
+}
+
+function getTrajectory(param) {
+	let res = '';
+	let m = parseInt(param.n);
+	let step = 1 / (m - 1);
+	let t = 0;
+	let obj = getObjectByNameOrId(param.name);
+	if (obj) {
+		let child = getChild(obj, '_spline');
+		if (child) {
+			let curve = new THREE.CatmullRomCurve3(child.userData.points);
+			res = '[';
+			for (i = 0; i < m; i++) {
+				let v = curve.getPointAt(t);
+				res += '\n[' + v.x + ',' + v.y + ',' + v.z + '],';
+				t += step;
+				if (t > 1) t = 1;
+			}
+			res = tailLastComma(res);
+			res += '\n]';
+		}
+	}
+	return res;
+}
+
+function setScale(param) {
+	let res = true;
+	let obj = getObjectByNameOrId(param.name);
+	if (obj) setElementScale(obj, param.factor, param.factor, param.factor);
+	return res;
+}
+
+function setCollisionObj(param) {
+	let res = true;
+	collisionObj = getObjectByNameOrId(param.name);
+	return res;
+}
+
+function addCollidable(param) {
+	let res = true;
+	let obj = getObjectByNameOrId(param.name);
+	if (obj) {
+		collidableMeshList.push(obj);
+	}
+	return res;
+}
+
+function doCollisionCheck(param) {
+	let res = '';
+	res = '' + collisionCheck();
+	return res;
+}
+
+function getCollisionObj(param) {
+	let res = {};
+	if (collisionObj) {
+		res.name = collisionObj.name;
+		res.id = 'oid' + collisionObj.id;
+	}
+	return JSON.stringify(res, null, 2);
+}
+
+function getCollidables(param) {
+	let res = '[]';
+	let v = [];
+	let objRes;
+	for (let coll of collidableMeshList) {
+		objRes = {};
+		objRes.name = coll.name;
+		objRes.id = 'oid' + coll.id;
+		v.push(objRes);
+	}
+	res = JSON.stringify(v, null, 2);;
+	return res;
+}
+
+function setOrbitControls(param) {
+	let res = true;
+	let obj = getObjectByNameOrId(param.name);
+	if (obj) {
+		controls.target.copy(obj.position);
+	}
+	return res;
+}
+
+function setAttribute(param) {
+	let res = true;
+	let obj = getObjectByNameOrId(param.name);
+	if (obj) {
+		if (obj.userData.attr) {
+			obj.userData.attr[param.attr] = param.value;			
+		} else {
+			obj.userData.attr = {};
+			obj.userData.attr[param.attr] = param.value;			
+		}
+	}
+	return res;
+}
+
+function getAttribute(param) {
+	let res = '';
+	let obj = getObjectByNameOrId(param.name);
+	if (obj && obj.userData.attr) {
+		res = obj.userData.attr[param.attr];
+	}
+	return res;
+}
+
+function getOID(param) {
+	let res = '';
+	let obj = getObjectByNameOrId(param.name);
+	if (obj) {
+		res = 'oid' + obj.id;
+	}
+	return res;
+}
+
+function getDistance(param) {
+	let res = 0;
+	let x1 = param.point1[0];
+	let y1 = param.point1[1];
+	let z1 = param.point1[2];
+	let x2 = param.point2[0];
+	let y2 = param.point2[1];
+	let z2 = param.point2[2];
+	res = '' + Math.sqrt((x2-x1)^2 + (y2-y1)^2 + (z2-z1)^2); 
+	return res;
+}
+
+
+function getSnapshot(param) {
+	let res = '';
+	canvas.getContext('webgl' , {preserveDrawingBuffer: true});
+	render();
+	res = canvas.toDataURL();
+	canvas.getContext('webgl' , {preserveDrawingBuffer: false});	
+	window.meta4snap.lastSnapshot = res;
+	return res;
+}
+
+
+function setElementColor(obj, color) {   // recursive helper
+	if (obj) {
+		if (obj.material) obj.material.color = new THREE.Color(color); 
+		for (let child of obj.children) {
+			if (!child.name.endsWith('_axes')) {
+				setElementColor(child, color);
+			}
+		}
+	}
+}
+
+function setElementOpacity(obj, value) {   // recursive helper
+	if (obj) {
+		if (obj.material) obj.material.opacity = value; 
+		for (let child of obj.children) {
+			setElementOpacity(child, value);
+		}
+	}
+}
+
+function setElementScale(obj, xf, yf, zf) {  // recursive helper
+	if (obj) {
+		obj.scale.x = xf;
+		obj.scale.y = yf;
+		obj.scale.z = zf;
+		obj.position.x *= xf;
+		obj.position.y *= yf;
+		obj.position.z *= zf;
+		for (let child of obj.children) {
+			setElementScale(child, xf, yf, zf);
+		}
+	}
+}
+
+function getObjectByNameFirstLevel(obj, name) {
+	let res = {};
+	let n = obj.children.length;
+	for (let i = 0; i < n; i++) {
+		if (obj.children[i].name == name) {
+			res = obj.children[i];
+			break;
+		}
+	}
+	return res;
+}
+
+function getChild(obj, suffix) {
+	let res = {};
+	for (let child of obj.children) {
+		if (child.name.endsWith(suffix)) {
+			res = child;
+			break;
+		} 
+	}
+	return res;
+}
+
+
+function checkUniqueNameFirstLevel (obj, name) {
+	let res = true;
+	if (name) {
+		if (getObjectByNameFirstLevel(obj, name).name) {
+//			console.log(obj);
+//			console.log(name);
+			console.log('Duplicate name ' + name + ' in the same level at ' + (obj.name == '' ? 'scene' : obj.name));
+			// throw new Error ('Duplicate name ' + name + ' in the same level at ' + (obj.name == '' ? 'scene' : obj.name));
+			res = false;
+		}
+	} else {
+//		throw new Error("Cannot create object without name");
+		res = false;
+
+	}
+	return res;
+}
+
+function getObjectByNameOrId(name) {
+	let res = {};  // 0 => obj, 1 => objLines (optional)
+	
+	if (name && name == 'camera') {
+		res = camera;
+	} else if (name && name == 'scene') {
+		res = window.meta4snap.scene;
+	} else if (name && name.startsWith('oid')) {
+		let id = parseInt(name.substring(3));
+		res = window.meta4snap.scene.getObjectById(id);
+	} else if (name && name != 'scene') {
+		if (name.indexOf(';') >= 0 || name.indexOf('/') >= 0) {
+			let names = name.replaceAll('/', ';');
+			names = name.split(';');
+			let n = names.length;
+			let obj = window.meta4snap.scene.getObjectByName(names[0]);
+			if (!obj) return res;
+			for (let i = 1; i < n; i++) {
+				obj = getObjectByNameFirstLevel(obj, names[i]);
+				if (!obj) return res;
+			}
+			res = obj;
+		} else {
+			res = getObjectByNameFirstLevel(window.meta4snap.scene, name);
+		}
+	}
+	return res;
+}
+
+
+function collisionCheck() {
+	let res = '[]';
+	if (collisionObj) {
+		let originPoint = collisionObj.position.clone();
+		let v = [];
+		let objElem;
+		for (let vertexIndex = 0; vertexIndex < collisionObj.geometry.vertices.length; vertexIndex++)
+		{
+			let localVertex = collisionObj.geometry.vertices[vertexIndex].clone();
+			let globalVertex = localVertex.applyMatrix4(collisionObj.matrixWorld);
+			let directionVector = globalVertex.sub(collisionObj.position);
+			let ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
+			let collisionResults = ray.intersectObjects(collidableMeshList);
+			if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()) {
+				objElem = {};
+				objElem.name = collisionResults[0].object.name??'';
+				objElem.id = 'oid' + collisionResults[0].object.id;
+				let found = false;
+				for (let vElem of v) {
+					if (vElem.id == objElem.id) {
+						found = true;
+						break;
+					}
+				}
+				if (!found)	v.push(objElem);
+			}
+		}
+		res = JSON.stringify(v, null, 2);
+	}
+	return res;
+}
+
+function setBackgroundColor(param) {
+	let res = true;
+    window.meta4snap.renderer.setClearColor(parseInt(param.color), 1);
+	window.meta4snap.renderer.render(window.meta4snap.scene, camera);
+	return res;
+}
+
+function render() {
+	window.meta4snap.renderer.render(window.meta4snap.scene, camera);
+}
+
+
+window.meta4snap.pmessage = pmessage;
+window.meta4snap.animate = animate;
+window.meta4snap.getObjectByNameOrId = getObjectByNameOrId;
+window.meta4snap.render = render;
+
+
+</script>
+
+</body>
+</html>
