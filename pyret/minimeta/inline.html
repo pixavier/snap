@@ -31,7 +31,7 @@
             var world;
             var world2;
             window.onload = function () {
-                window.ide = new IDE_Morph({
+                world2.ide = new IDE_Morph({
                         path: '.',
                         load: 'meta.xml',
                         design: "flat",
@@ -50,7 +50,7 @@
                         world.doOneCycle();
                     };
                 world = new WorldMorph(document.getElementById('world'), false);
-                window.ide.openIn(world);
+                world2.ide.openIn(world);
 	        world2 = document.getElementById('world2');
 
                 requestAnimationFrame(loop);
