@@ -24,10 +24,9 @@ Event name: <input type="text" id="evt" size="8"> Data: <input type="text"  size
 		let datum = document.getElementById("datum").value;
 		if (window.opener) {
 			window.opener.ide.broadcast(evt, null, datum);
-		} else if (window.parent)  {
+		} else if (window.parent) {
 			window.parent.ide.broadcast(evt, null, datum);
 		}
-		
 	}
 </script>
 <script src="./libs/JSON5.js"></script>
@@ -269,6 +268,14 @@ function pmessage(data) {
 			res = substract(param);
 		}
 
+		if (op == 'union') {
+			res = union(param);
+		}
+
+		if (op == 'intersect') {
+			res = intersect(param);
+		}
+
 		if (op == 'setLight1Color') {
 			res = setLight1Color(param);
 		}
@@ -465,19 +472,28 @@ function createSceneCameraAndRenderer() {
 	let skyColor = 0xffffff;
 	let groundColor = 0xffffff;
 	
-	let intensity = 3;
+	let intensity0 = 2;
+	let intensity1 = 3;
+	let intensity2 = 3;
+	let intensity3 = 1;
 	
 //	window.meta4snap.light1 = new THREE.HemisphereLight(skyColor, groundColor, intensity);
-//	window.meta4snap.light1 = new THREE.AmbientLight(skyColor, intensity);
 
-	window.meta4snap.light1 = new THREE.DirectionalLight(skyColor, intensity);
+	window.meta4snap.light0 = new THREE.AmbientLight(skyColor, intensity0);
+
+	window.meta4snap.light1 = new THREE.DirectionalLight(skyColor, intensity1);
 	window.meta4snap.light1.position.set(200, 500, 300);
 
-	window.meta4snap.light2 = new THREE.DirectionalLight(skyColor, intensity);
+	window.meta4snap.light2 = new THREE.DirectionalLight(skyColor, intensity2);
 	window.meta4snap.light2.position.set(200, -500, 300);
+
+	window.meta4snap.light3 = new THREE.DirectionalLight(skyColor, intensity3);
+	window.meta4snap.light3.position.set(-250, -500, 300);
 	
+	window.meta4snap.scene.add(window.meta4snap.light0);	
 	window.meta4snap.scene.add(window.meta4snap.light1);	
 	window.meta4snap.scene.add(window.meta4snap.light2);	
+//	window.meta4snap.scene.add(window.meta4snap.light3);	
 	
 //	window.meta4snap.renderer = new THREE.WebGLRenderer();
 	window.meta4snap.renderer = new THREE.WebGLRenderer( { antialias: true, preserveDrawingBuffer: true } );	
@@ -494,6 +510,7 @@ function createSceneCameraAndRenderer() {
 	window.meta4snap.camera = camera;
 
 	controls = new OrbitControls(camera, canvas);
+	controls.rotateSpeed = 1;
 	window.meta4snap.controls = controls;
 
 	let loader = new FontLoader();
@@ -518,24 +535,30 @@ function createSceneCameraAndRenderer() {
 
 			case 'ArrowLeft':
 				camera.rotation.y += 0.1;
+//				controls.target.set(camera.position.x,camera.position.y,camera.position.z);
 				break;
 
 			case 'ArrowRight':
 				camera.rotation.y -= 0.1;
+//				controls.target.set(camera.position.x,camera.position.y,camera.position.z);
 				break;
 
 			case 'ControlArrowUp':
+				controls.target.set(camera.position.x,camera.position.y,camera.position.z);
+//				controls.update();
+				camera.rotation.x += 0.1;
 				break;
 
 			case 'ControlArrowDown':
+				controls.target.set(camera.position.x,camera.position.y,camera.position.z);
+//				controls.update();
+				camera.rotation.x -= 0.1;
 				break;
 
 			case 'ShiftArrowUp':
-				camera.position.y += 0.1;
 				break;
 
 			case 'ShiftArrowDown':
-				camera.position.y -= 0.1;
 				break;
 
 			case 'Space':
@@ -553,7 +576,11 @@ function createSceneCameraAndRenderer() {
 	  // Update OrbitControls target to a point just in front of the camera
 	  const forward = new THREE.Vector3();
 	  camera.getWorldDirection(forward);
-	  controls.target.copy(camera.position).add(forward);
+//	  controls.target.copy(camera.position).add(forward);
+      controls.target.set(camera.position.x, camera.position.y, camera.position.z);
+	  camera.rotation.x = 0;
+	  camera.rotation.y = 0;
+	  camera.rotation.z = 0;
 	};
 
 	const onKeyUp = function (event) {
@@ -706,9 +733,9 @@ function createPlaneRectangle(param) {
 
 	res = checkUniqueNameFirstLevel (window.meta4snap.scene, name);
 	if (res) {
-		const geometry = new THREE.PlaneBufferGeometry(width, height);
-		const material = new THREE.MeshStandardMaterial({color: defaultColor, side: THREE.DoubleSide});
-		const obj = new THREE.Mesh(geometry, material);
+		let geometry = new THREE.PlaneBufferGeometry(width, height);
+		let material = new THREE.MeshStandardMaterial({color: defaultColor, side: THREE.DoubleSide});
+		let obj = new THREE.Mesh(geometry, material);
 		if (name) obj.name = name;
 		obj.userData.snapType = snapType;
 		window.meta4snap.scene.add(obj);
@@ -724,9 +751,9 @@ function createPlaneCircle(param) {
 
 	res = checkUniqueNameFirstLevel (window.meta4snap.scene, name);
 	if (res) {
-		material = new THREE.MeshStandardMaterial({color: defaultColor, side: THREE.DoubleSide});
-		geometry = new THREE.CircleBufferGeometry(radius, 32);
-		obj = new THREE.Mesh(geometry, material);
+		let geometry = new THREE.CircleBufferGeometry(radius, 32);
+		let material = new THREE.MeshStandardMaterial({color: defaultColor, side: THREE.DoubleSide});
+		let obj = new THREE.Mesh(geometry, material);
 		if (name) obj.name = name;
 		obj.userData.snapType = snapType;
 		window.meta4snap.scene.add(obj);
@@ -910,6 +937,7 @@ function setPose(param) {
 	return res;
 }
 
+
 function setOpacity(param) {
 	let res = true;
 	let obj = getObjectByNameOrId(param.name);
@@ -929,7 +957,16 @@ function setTexture(param) {
 	let obj = getObjectByNameOrId(param.name);
 	let textureLoader = new THREE.TextureLoader();
 	try {
-		let texture = textureLoader.load('./libs/textures/' + param.texture + '.png');
+		let texture;
+		if (param.texture.startsWith('http')) {
+			texture = textureLoader.load(param.texture);
+		} else {
+			texture = textureLoader.load('./libs/textures/' + param.texture + '.png');
+		}
+		texture.wrapS = THREE.RepeatWrapping
+		texture.wrapT = THREE.RepeatWrapping
+//		texture.offset.set(0, 0);
+		texture.repeat.set(param.htimes, param.vtimes);
 		obj.material.map = texture;
 	} catch (e) {
 	}
@@ -992,6 +1029,46 @@ function substract(param) {
 	let bsp2 = CSG.fromMesh(obj2);
 
 	let bspResult = bsp1.subtract(bsp2);
+	let meshResult = CSG.toMesh(bspResult, obj1.matrix, obj1.material);
+				
+	meshResult.name = param.name3;
+	
+	window.meta4snap.scene.add(meshResult);
+	return res;
+}
+
+function union(param) {
+	let res = true;
+	let obj1 = getObjectByNameOrId(param.name1);
+	let obj2 = getObjectByNameOrId(param.name2);
+
+	obj1.updateMatrix()
+	obj2.updateMatrix()
+
+	let bsp1 = CSG.fromMesh(obj1);                        
+	let bsp2 = CSG.fromMesh(obj2);
+
+	let bspResult = bsp1.union(bsp2);
+	let meshResult = CSG.toMesh(bspResult, obj1.matrix, obj1.material);
+				
+	meshResult.name = param.name3;
+	
+	window.meta4snap.scene.add(meshResult);
+	return res;
+}
+
+function intersect(param) {
+	let res = true;
+	let obj1 = getObjectByNameOrId(param.name1);
+	let obj2 = getObjectByNameOrId(param.name2);
+
+	obj1.updateMatrix()
+	obj2.updateMatrix()
+
+	let bsp1 = CSG.fromMesh(obj1);                        
+	let bsp2 = CSG.fromMesh(obj2);
+
+	let bspResult = bsp1.intersect(bsp2);
 	let meshResult = CSG.toMesh(bspResult, obj1.matrix, obj1.material);
 				
 	meshResult.name = param.name3;
