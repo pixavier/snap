@@ -27,13 +27,13 @@
         <script src="../../src/sha512.js"></script>
         <script src="../../src/FileSaver.min.js"></script>
         <script>
-	    Process.prototype.enableJS = true;
+		Process.prototype.enableJS = true;
             var world;
             var world2;
             window.onload = function () {
                 var ide = new IDE_Morph({
                         path: '.',
-                        load: 'meta.xml',
+                        load: 'meta_mview.xml',
                         design: "flat",
                         border: 1,
                         hideControls: false,
@@ -50,9 +50,9 @@
                         world.doOneCycle();
                     };
                 world = new WorldMorph(document.getElementById('world'), false);
-		world2 = document.getElementById('world2');
+				world2 = document.getElementById('world2');
                 ide.openIn(world);
-		window.ide = ide;
+                window.ide = ide;
                 requestAnimationFrame(loop);
             };
         </script>
