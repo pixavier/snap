@@ -518,12 +518,14 @@ function createSceneCameraAndRenderer() {
 	
 	const onKeyDown = function (event) {
 
-//		console.log(event);
+		console.log(event);
 		
 		switch (event.code) {
 			case 'ArrowUp':
 				if (event.ctrlKey) {
 					camera.position.y += 0.2
+				} else if (event.shiftKey) {
+					camera.rotateX(0.1);
 				} else {
 					camera.position.x -= 0.2 * Math.sin(camera.rotation.y);
 					camera.position.z -= 0.2 * Math.cos(camera.rotation.y);
@@ -533,6 +535,8 @@ function createSceneCameraAndRenderer() {
 			case 'ArrowDown':
 				if (event.ctrlKey) {
 					camera.position.y -= 0.2
+				} else if (event.shiftKey) {
+					camera.rotateX(-0.1);
 				} else {
 					camera.position.x += 0.2 * Math.sin(camera.rotation.y);
 					camera.position.z += 0.2 * Math.cos(camera.rotation.y);
