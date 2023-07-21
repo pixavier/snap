@@ -540,15 +540,23 @@ function createSceneCameraAndRenderer() {
 				break;
 
 			case 'ArrowLeft':
-				camera.rotation.x = 0;
-				camera.rotation.y += 0.1;
-				camera.rotation.z = 0;
+				if (event.ctrlKey) {
+					camera.position.z += 0.2
+				} else {
+					camera.rotation.x = 0;
+					camera.rotation.y += 0.1;
+					camera.rotation.z = 0;
+				}
 				break;
 
 			case 'ArrowRight':
-				camera.rotation.x = 0;
-				camera.rotation.y -= 0.1;
-				camera.rotation.z = 0;
+				if (event.ctrlKey) {
+					camera.position.z -= 0.2
+				} else {
+					camera.rotation.x = 0;
+					camera.rotation.y -= 0.1;
+					camera.rotation.z = 0;
+				}
 				break;
 
 			case 'Space':
