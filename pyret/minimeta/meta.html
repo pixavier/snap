@@ -517,57 +517,44 @@ function createSceneCameraAndRenderer() {
 	loader.load( './libs/fonts/helvetiker_regular.typeface.json', function (font) {font01 = font});
 	
 	const onKeyDown = function (event) {
+
+//		console.log(event);
 		
 		switch (event.code) {
 			case 'ArrowUp':
-				camera.position.x -= 0.2 * Math.sin(camera.rotation.y);
-				camera.position.z -= 0.2 * Math.cos(camera.rotation.y);
-//				console.log(event.code);	
-//				console.log(camera);	
+				if (event.ctrlKey) {
+					camera.position.y += 0.2
+				} else {
+					camera.position.x -= 0.2 * Math.sin(camera.rotation.y);
+					camera.position.z -= 0.2 * Math.cos(camera.rotation.y);
+				}
 				break;
 
 			case 'ArrowDown':
-				camera.position.x += 0.2 * Math.sin(camera.rotation.y);
-				camera.position.z += 0.2 * Math.cos(camera.rotation.y);
-//				console.log(event.code);	
-//				console.log(camera);	
+				if (event.ctrlKey) {
+					camera.position.y -= 0.2
+				} else {
+					camera.position.x += 0.2 * Math.sin(camera.rotation.y);
+					camera.position.z += 0.2 * Math.cos(camera.rotation.y);
+				}
 				break;
 
 			case 'ArrowLeft':
+				camera.rotation.x = 0;
 				camera.rotation.y += 0.1;
-//				controls.target.set(camera.position.x,camera.position.y,camera.position.z);
+				camera.rotation.z = 0;
 				break;
 
 			case 'ArrowRight':
+				camera.rotation.x = 0;
 				camera.rotation.y -= 0.1;
-//				controls.target.set(camera.position.x,camera.position.y,camera.position.z);
-				break;
-
-			case 'ControlArrowUp':
-				controls.target.set(camera.position.x,camera.position.y,camera.position.z);
-//				controls.update();
-				camera.rotation.x += 0.1;
-				break;
-
-			case 'ControlArrowDown':
-				controls.target.set(camera.position.x,camera.position.y,camera.position.z);
-//				controls.update();
-				camera.rotation.x -= 0.1;
-				break;
-
-			case 'ShiftArrowUp':
-				break;
-
-			case 'ShiftArrowDown':
+				camera.rotation.z = 0;
 				break;
 
 			case 'Space':
 				break;
 
 		}
-//		updateCameraOrbit();
-//		camera.updateProjectionMatrix();		
-//		controls.update();
 	};
 	
 	document.addEventListener('keydown', onKeyDown);
