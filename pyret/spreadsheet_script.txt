@@ -1,0 +1,31 @@
+// https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet-app
+
+function doGet(request) {
+  let res = 'OK';
+  let op = '' + request.parameters.op;
+  let sheet = '' + request.parameters.sheet;
+  let cell = '' + request.parameters.cell;
+  let value = '' + request.parameters.value;
+
+  let activeSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheet)
+  let pos = 0;
+
+  if (op == 'get') {
+    if (cell.indexOf(':') >= 0) {
+      res = JSON.stringify(activeSheet.getRange(cell).getValues());
+    } else {
+      res = activeSheet.getRange(cell).getValue();
+    }
+  }
+
+  if (op == 'set') {
+    if (cell.indexOf(':') >= 0) {
+      activeSheet.getRange(cell).setValues(JSON.parse(value));
+    } else {
+      activeSheet.getRange(cell).setValue(value);
+    }
+  }
+
+  return ContentService.createTextOutput(res).setMimeType(ContentService.MimeType.TEXT);
+}
+
