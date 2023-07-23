@@ -43,6 +43,7 @@ Event name: <input type="text" id="evt" size="8"> Data: <input type="text"  size
 import * as THREE from 'three';
 import {OrbitControls} from './libs/OrbitControls.js';
 import {STLLoader} from './libs/STLLoader.js';
+import {STLExporter} from './libs/STLExporter.js';
 import {FontLoader} from './libs/FontLoader.js';
 import {CSS3DObject, CSS3DRenderer} from './libs/CSS3DRenderer.js';
 import CSG from "./libs/three-csg.js";
@@ -102,6 +103,10 @@ function pmessage(data) {
 			res = loadStl(param);	
 		}
 		
+		if (op == 'stlExport') {
+			res = stlExport(param);	
+		}
+
 		if (op == 'createElem') {
 		
 			if (param.type == 'Parallelpipped' || param.type == 'Cube') {
@@ -847,6 +852,26 @@ function loadStl(param) {
 		});
 	}
 	return true;
+}
+
+function stlExport(param) {
+	let res = true;
+
+	let name = param.name;
+	let snapType = param.type;
+	
+	let obj = getObjectByNameOrId(name);
+	let exporter = new STLExporter();
+	
+    let str = exporter.parse(obj); // Export the scene
+    let blob = new Blob([str], { type: 'text/plain' }); // Generate Blob from the string
+    let link = document.createElement('a');
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.href = URL.createObjectURL(blob);
+    link.download = 'Scene.stl';
+    link.click();	
+	return res;
 }
 
 function createSystemReference(param) {  // Container
