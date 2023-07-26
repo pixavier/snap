@@ -17,6 +17,9 @@
 Event name: <input type="text" id="evt" size="8"> Data: <input type="text"  size="25" id="datum">
 <script>
 
+	let broker = 'wss://broker.emqx.io:8084/mqtt';
+	let client = mqtt.connect(broker);
+
 	window.onresize = function(){location.reload();}; 
 
 	function btn01() {
@@ -28,8 +31,14 @@ Event name: <input type="text" id="evt" size="8"> Data: <input type="text"  size
 			window.parent.ide.broadcast(evt, null, datum);
 		}
 	}
+
+	client.on("message", function (topic, payload) {
+		window.meta4snap.pmessage(payload);
+	}	
+});
 </script>
 <script src="./libs/JSON5.js"></script>
+<script src="./libs/mqtt.js"></script>
 <script async src="./libs/es-module-shims.js"></script>
 <script type="importmap">
 {
@@ -99,6 +108,10 @@ function pmessage(data) {
 			res = createSpline(param);
 		}
 		
+		if (op == 'createPolyline') {
+			res = createPolyline(param);
+		}
+		
 		if (op == 'loadStl') {
 			res = loadStl(param);	
 		}
@@ -133,9 +146,6 @@ function pmessage(data) {
 				res = createPlaneCircle(param);
 			}
 			
-			if (param.type == 'HTMLPanel') {
-				res = createHTMLPanel(param);
-			}
 		}
 
 		if (op == 'clone') {
@@ -523,7 +533,7 @@ function createSceneCameraAndRenderer() {
 	
 	const onKeyDown = function (event) {
 
-		console.log(event);
+//		console.log(event);
 		
 		switch (event.code) {
 			case 'ArrowUp':
@@ -739,6 +749,8 @@ function createPlaneRectangle(param) {
 	if (res) {
 		let geometry = new THREE.PlaneBufferGeometry(width, height);
 		let material = new THREE.MeshStandardMaterial({color: defaultColor, side: THREE.DoubleSide});
+		material.transparent = true;
+		material.opacity = 1;
 		let obj = new THREE.Mesh(geometry, material);
 		if (name) obj.name = name;
 		obj.userData.snapType = snapType;
@@ -757,6 +769,8 @@ function createPlaneCircle(param) {
 	if (res) {
 		let geometry = new THREE.CircleBufferGeometry(radius, 32);
 		let material = new THREE.MeshStandardMaterial({color: defaultColor, side: THREE.DoubleSide});
+		material.transparent = true;
+		material.opacity = 1;
 		let obj = new THREE.Mesh(geometry, material);
 		if (name) obj.name = name;
 		obj.userData.snapType = snapType;
@@ -768,63 +782,30 @@ function createPlaneCircle(param) {
 function createSpline(param) {
 	let res = true;
 	let name = param.name;
+	let closed = param.closed;
+	let n = param.n;   // points
 	let snapType = param.type;
 
-	res = checkUniqueNameFirstLevel (window.meta4snap.scene, name);
-	if (res) {
-		let obj = getObjectByNameOrId(name);
-		if (obj) {
-			let vPoints = [];
-			for (child of obj.children) {
-				if (child.userData.userType == 'Point') {
-					vPoints.push(new THREE.Vector3(child.position.x, child.position.y, child.position.z));
-				}
+	let obj = getObjectByNameOrId(name);
+	if (obj) {
+		let vPoints = [];
+		for (let child of obj.children) {
+			if (child.userData.userType == 'Point') {
+				vPoints.push(new THREE.Vector3(child.position.x, child.position.y, child.position.z));
 			}
-			let curve = new THREE.CatmullRomCurve3(vPoints);
-			let points = curve.getPoints(50);
-			let geometry = new THREE.BufferGeometry().setFromPoints(points);
-			let material = new THREE.LineBasicMaterial({color: 0xff0000});
-			material.transparent = true;
-			material.opacity = 1;
-			let curveObject = new THREE.Line(geometry, material);
-			curveObject.name = obj.name + '_spline';
-			curveObject.userData.points = vPoints;
-	//		curveObject.userData.points = JSON5.stringify(vPoints);
-			obj.add(curveObject);
 		}
-	}
-	return res;
-}
-
-function createHTMLPanel(param) {
-	let res = true;
-	let width = param.width;
-	let height = param.height;
-	let name = param.name;
-	let snapType = param.type;
-
-	res = checkUniqueNameFirstLevel (window.meta4snap.scene, name);
-	if (res) {
-
-		// convert the string to dome elements
-		var wrapper = document.createElement('div');
-		
-		let content = 
-			'<div id="cmp01" style="position:absolute;top:180px;left:400;width:400px;height:200px;border:0.5px solid;overflow:auto">' +
-			'	<h3>Hello from Cambridge</h3>' +
-			'</div>';
-		
-		wrapper.innerHTML = content;
-	//	var div = wrapper.firstChild;
-		var div = wrapper;
-		
-		// set some values on the div to style it.
-		// normally you do this directly in HTML and 
-		// CSS files.
-		div.style.width = width + 'px';
-		div.style.height = height + 'px';
-		div.style.opacity = 0.7;
-		div.style.background = new THREE.Color(Math.random() * 0xffffff).getStyle();
+		let curve = new THREE.CatmullRomCurve3(vPoints);
+		curve.closed = closed;
+		let points = curve.getPoints(n);
+		let geometry = new THREE.BufferGeometry().setFromPoints(points);
+		let material = new THREE.LineBasicMaterial({color: 0xff0000});
+		material.transparent = true;
+		material.opacity = 1;
+		let curveObject = new THREE.Line(geometry, material);
+		curveObject.name = obj.name + '_spline';
+		curveObject.userData.points = vPoints;
+//		curveObject.userData.points = JSON5.stringify(vPoints);
+		obj.add(curveObject);
 	}
 	return res;
 }
@@ -916,7 +897,7 @@ function setUserType(param) {
 function setPose(param) {
 	let res = true;
 	let obj = getObjectByNameOrId(param.name);
-	if (obj) {
+	if (obj.position) {
 		let x = param.x;
 		let y = param.y;
 		let z = param.z;
@@ -985,7 +966,7 @@ function setTexture(param) {
 		if (param.texture.startsWith('http')) {
 			texture = textureLoader.load(param.texture);
 		} else {
-			texture = textureLoader.load('./libs/textures/' + param.texture + '.png');
+			texture = textureLoader.load('./libs/textures/' + param.texture);
 		}
 		texture.wrapS = THREE.RepeatWrapping
 		texture.wrapT = THREE.RepeatWrapping
@@ -1278,7 +1259,7 @@ function getTrajectory(param) {
 		if (child) {
 			let curve = new THREE.CatmullRomCurve3(child.userData.points);
 			res = '[';
-			for (i = 0; i < m; i++) {
+			for (let i = 0; i < m; i++) {
 				let v = curve.getPointAt(t);
 				res += '\n[' + v.x + ',' + v.y + ',' + v.z + '],';
 				t += step;
@@ -1355,12 +1336,10 @@ function setAttribute(param) {
 	let res = true;
 	let obj = getObjectByNameOrId(param.name);
 	if (obj) {
-		if (obj.userData.attr) {
-			obj.userData.attr[param.attr] = param.value;			
-		} else {
+		if (!obj.userData.attr) {
 			obj.userData.attr = {};
-			obj.userData.attr[param.attr] = param.value;			
 		}
+		obj.userData.attr[param.attr] = param.value;			
 	}
 	return res;
 }
@@ -1441,18 +1420,6 @@ function setElementScale(obj, xf, yf, zf) {  // recursive helper
 	}
 }
 
-function getObjectByNameFirstLevel(obj, name) {
-	let res = {};
-	let n = obj.children.length;
-	for (let i = 0; i < n; i++) {
-		if (obj.children[i].name == name) {
-			res = obj.children[i];
-			break;
-		}
-	}
-	return res;
-}
-
 function getChild(obj, suffix) {
 	let res = {};
 	for (let child of obj.children) {
@@ -1464,6 +1431,17 @@ function getChild(obj, suffix) {
 	return res;
 }
 
+function getObjectByNameFirstLevel(obj, name) {
+	let res = {};
+	let n = obj.children.length;
+	for (let i = 0; i < n; i++) {
+		if (obj.children[i].name == name) {
+			res = obj.children[i];
+			break;
+		}
+	}
+	return res;
+}
 
 function checkUniqueNameFirstLevel (obj, name) {
 	let res = true;
