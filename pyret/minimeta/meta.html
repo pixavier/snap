@@ -18,7 +18,7 @@ Event name: <input type="text" id="evt" size="8"> Data: <input type="text"  size
 <script>
 
 	let broker = 'wss://broker.emqx.io:8084/mqtt';
-	let client = mqtt.connect(broker);
+	let topic = 'meta4snap';
 
 	window.onresize = function(){location.reload();}; 
 
@@ -32,7 +32,15 @@ Event name: <input type="text" id="evt" size="8"> Data: <input type="text"  size
 		}
 	}
 
-	client.on("message", function (topic, payload) {
+	let client = mqtt.connect(broker);
+
+
+	client.on('connect', function(connack) {
+	//	console.log('Connected');
+		client.subscribe(topic);
+	});
+	
+	client.on('message', function (topic, payload) {
 		window.meta4snap.pmessage(payload);
 	});
 
