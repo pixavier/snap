@@ -829,7 +829,11 @@ function loadStl(param) {
 	// https://dustinpfister.github.io/2021/06/21/threejs-texture-loader
 		let loader = new STLLoader();
 		let group = new THREE.Object3D();
-		loader.load("./libs/objs/" + filename, function (geometry) {
+		let path = '';
+		if (!filename.startsWith('file://')) {
+			path = 	'./libs/objs/';
+		}
+		loader.load(path + filename, function (geometry) {
 	//		var material = new THREE.MeshLambertMaterial({color: defaultColor});
 			var material = new THREE.MeshStandardMaterial({color: defaultColor, roughness: 0.2, metalness: 0.3});
 			group = new THREE.Mesh(geometry, material);
