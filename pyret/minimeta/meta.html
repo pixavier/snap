@@ -830,7 +830,7 @@ function loadStl(param) {
 		let loader = new STLLoader();
 		let group = new THREE.Object3D();
 		let path = '';
-		if (!filename.startsWith('file://')) {
+		if (!filename.startsWith('http://') && !filename.startsWith('https://') && !filename.startsWith('file://')) {
 			path = 	'./libs/objs/';
 		}
 		loader.load(path + filename, function (geometry) {
