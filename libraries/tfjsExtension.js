@@ -43,8 +43,7 @@ SnapExtensions.primitives.set(
 		if (!modelFile) {
 			stage._tmjs.models[modelName] = undefined;
 		} else {
-//			stage._tmjs.models[modelName] = await tmImage.load(modelFile, modelMetadata);
-			window.tfModelImg = await tmImage.load(modelFile, modelMetadata);
+			stage._tmjs.models[modelName] = await tmImage.load(modelFile, modelMetadata);
 		}
 	}
 );
@@ -98,10 +97,10 @@ SnapExtensions.primitives.set(
 		
 		let model = stage._tmjs.models[modelName];
 
-		if (window.tfModelImg) {
+		if (model) {
 			window._tfParam = param;	
 			
-			window.tfModelImg.predict(param.contents).then (prediction => {
+			model.predict(param.contents).then (prediction => {
 				console.log(prediction);
 				stage._tmjs.semaphores['tfj_tm_predict_img'].result = JSON.stringify(prediction);
 				stage._tmjs.semaphores['tfj_tm_predict_img'].value = 1;
