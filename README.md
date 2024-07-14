@@ -3,7 +3,9 @@
 
 [https://snap.berkeley.edu][snap]
 
-**[Try Snap<em>!</em> Now](https://snap.berkeley.edu/snap/)**
+**[Try official Snap<em>!</em> Now](https://snap.berkeley.edu/snap/)**
+
+**[Try this Snap<em>! fork</em> Now](https://pixavier.github.io/snap/)**
 
 a visual, blocks based programming language
 inspired by Scratch
