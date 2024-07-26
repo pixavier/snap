@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microworld</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        #frameSuperior {
+            width: 100%;
+            height: 95vh; /* El 70% de la altura de la ventana */
+            overflow-y: auto; /* Uso de 'auto' para mostrar la barra de desplazamiento solo cuando sea necesario */
+            border-bottom: 2px solid #ccc;
+        }
+
+        #frameInferior {
+            width: 100%;
+            height: 5vh; /* El 30% de la altura de la ventana */
+            border-top: 2px solid #ccc;
+            position: fixed;
+            bottom: 0;
+            background-color: #f5f5f5;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+			font-size: 12px;
+        }
+    </style>
+    <link rel="stylesheet" href="w3.css">
+    <script>
+		$ = function (id) {
+			if (id.toString().startsWith('#')) {
+				return document.getElementById(id.substring(1));
+			} else if (id.toString().startsWith('.')) {
+				return document.getElementsByClassName(id.substring(1))[0];
+			}
+		};
+
+		window.onload = function() {
+			window.netLogo = {};
+			window.netLogo.doClick = function(label) {
+				let res = '';
+				let f = document.getElementById('frameSuperior');
+				let labs = f.contentWindow.document.getElementsByClassName('netlogo-label'); 
+				let lab = {};
+				for (lab of labs) {
+					if (lab.innerHTML == label) {
+						break;
+					}
+				}
+				lab.dispatchEvent(new MouseEvent('click'));
+				return res;
+			}
+			
+			window.netLogo.getTickCount = function() {
+				let res = '';
+				let f = document.getElementById('frameSuperior');
+				res = f.contentWindow.world.ticker.tickCount();
+				return res;
+			}
+			
+			window.netLogo.getVar = function(name) {
+				let res = '';
+				let f = document.getElementById('frameSuperior');
+				res = f.contentWindow.world.observer.getVariable(name);
+				return res;
+			}
+			
+			window.netLogo.setVar = function(name, value) {
+				let f = document.getElementById('frameSuperior');
+				f.contentWindow.world.observer.setVariable(name, parseFloat(value));
+			}
+			
+		};
+
+
+	</script>
+</head>
+<body>
+    <iframe id="frameSuperior" src="climate_forest_c.html">
+    </iframe>
+
+    <div id="frameInferior">
+	Event name: <input type="text" id="evt" size="8"> Data: <input type="text"  size="25" id="datum">
+    </div>
+</body>
+</html>
