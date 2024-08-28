@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/w3-css/4.1.0/w3.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/json5/2.2.3/index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/5.8.1/mqtt.min.js"></script>
+<body>
+<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+<button id="btn01" onclick="window.pmessage(JSON.stringify({op:'test'}))">Test</button>
+<br><br>
+<a href="https://www.chartjs.org/docs/latest/samples/information.html" target="_blank">Chart.js examples</a>
+
+<script>
+let broker = 'ws://broker.emqx.io:8083/mqtt';
+let topic = 'chart';
+
+let client = mqtt.connect(broker);
+client.subscribe('pmessage');
+
+client.on('message', function (topic, payload) {
+	window.pmessage(payload);
+});
+
+
+let ch01 = {};
+const xValues = [50,60,70,80,90,100,110,120,130,140,150];
+const yValues = [7,8,8,9,9,9,10,11,14,14,15];
+const yValues2 = [7,8,8,9,9,9,10,11,14,9,7];
+
+
+window.pmessage = function(data) {
+	let res = '';
+	var payload = data;
+	try {
+//		console.log(payload.toString());
+		let json = JSON5.parse(payload);
+		let op = json.op;
+		let param = json.param;
+		
+		console.log(op);
+		console.log(param);
+
+		if (op == 'createLinesChart') {
+			ch01 = new Chart("myChart", {
+			  type: "line",
+			  data: {
+				labels: xValues,
+				datasets: [{
+				  fill: false,
+				  lineTension: 0,
+				  backgroundColor: "rgba(0,0,255,1.0)",
+				  borderColor: "rgba(0,0,255,0.1)",
+				  data: yValues
+				}]
+			  },
+			  options: {
+				animation: false,
+				legend: {display: false},
+				scales: {
+				  yAxes: [{ticks: {min: 6, max:16}}],
+				}
+			  }
+			});
+		}
+
+		if (op == 'test') {
+			ch01.data.datasets[0].data = yValues2;
+			ch01.data.datasets[0].lineTension = 0.4;
+			ch01.update();
+		}
+
+		if (op == 'updateYValues') {
+			ch01.data.datasets[0].data = param.values;
+			ch01.update();
+		}
+
+	} catch (e) {	
+		console.log(e.stack);
+//		console.log(e.message);
+	}
+	return res;
+}
+
+
+</script>
+
+</body>
+</html>
+

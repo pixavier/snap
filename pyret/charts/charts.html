@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/json5/2.2.3/index.js"></script>
+<body>
+
+<script>
+
+	$ = function (id) {
+		if (id.toString().startsWith('#')) {
+			return document.getElementById(id.substring(1));
+		}
+		if (id.toString().startsWith('.')) {
+			return document.getElementsByClassName(id.substring(1))[0];
+		}
+	}
+
+	window.chartJs = [];
+
+	function pmessage(data) {
+		let res = '';
+		var payload = data;
+		try {
+	//		console.log(payload.toString());
+			let json = JSON5.parse(payload);
+			let idChart = json.id;
+			let op = json.op;
+			let param = json.param;
+
+			console.log(idChart);
+			console.log(op);
+			console.log(param);
+
+			if (op == 'createChart') {
+				let config = param;
+				let canv = document.createElement('canvas');
+				canv.id = idChart;
+				canv.style = "width:100%;max-width:600px";
+				document.body.appendChild(canv);
+				window.chartJs[idChart] = new Chart(idChart, config);
+			}
+
+			if (op == 'removeChart') {
+				let canv = $('#' + idChart);
+				document.body.removeChild(canv);
+			}
+
+			if (op == 'setData') {
+				window.chartJs[idChart].data.labels = param.x;
+				window.chartJs[idChart].data.datasets[0].data = param.y;
+			}
+
+			if (op == 'appendData') {
+				window.chartJs[idChart].data.labels.push(param.x);
+				window.chartJs[idChart].data.datasets[0].data.push(param.y);
+			}
+
+			if (op == 'updateChart') {
+				window.chartJs[idChart].update();
+			}
+
+			if (op == 'scaleChart') {
+				window.chartJs[idChart].options.scales.yAxes[0].ticks.min = param.yMin;
+				window.chartJs[idChart].options.scales.yAxes[0].ticks.max = param.yMax;
+			}
+
+			
+		} catch (e) {	
+			console.log(e.stack);
+	//		console.log(e.message);
+		}
+		return res;
+	}
+
+
+</script>
+
+</body>
+</html>
+
