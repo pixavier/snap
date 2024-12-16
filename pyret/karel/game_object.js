@@ -285,6 +285,19 @@ window.karel.executeCode = function (code) {
     }
 }
 
+window.karel.executeCommand = function (code) {
+  let ret = null;
+  GameObject.setError("");
+  try {
+	ret = GameObject.worlds[i].executeCommand(code);		  
+  } catch(err) {
+	console.log(err);
+	GameObject.setError(err);
+//        GameObject.reset();
+  }
+  return ret;
+}
+
 window.karel.run = function () {
     var code = GameObject.code();
     GameObject.setError("");
