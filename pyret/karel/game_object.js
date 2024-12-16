@@ -285,11 +285,11 @@ window.karel.executeCode = function (code) {
     }
 }
 
-window.karel.executeCommand = function (code) {
+window.karel.executeCommand = function (code, worldIndex = 0) {
   let ret = null;
   GameObject.setError("");
   try {
-	ret = GameObject.worlds[i].executeCommand(code);		  
+	ret = GameObject.worlds[worldIndex].executeCommand(code);		  
   } catch(err) {
 	console.log(err);
 	GameObject.setError(err);
