@@ -397,7 +397,8 @@ SyntaxElementMorph.prototype.labelParts = {
             'name' : ['name'],
             'width' : ['width'],
             'height' : ['height'],
-            'pixels' : ['pixels']
+            'pixels' : ['pixels'],
+            'base64' : ['base64']		
         }
     },
     '%imgsource': {
