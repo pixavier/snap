@@ -7738,6 +7738,8 @@ Process.prototype.reportGetImageAttribute = function (choice, name) {
         return cst.height();
     case 'pixels':
         return cst.rasterized().pixels();
+    case 'base64':
+        return cst.base64();
     default:
         return cst;
     }
