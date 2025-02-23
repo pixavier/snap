@@ -13319,6 +13319,10 @@ Costume.prototype.pixels = function () {
     return new List(pixels);
 };
 
+Costume.prototype.base64 = function () {
+	return this.contents.toDataURL();
+};
+
 // Costume catching "tainted" canvases
 
 Costume.prototype.isTainted = function () {
