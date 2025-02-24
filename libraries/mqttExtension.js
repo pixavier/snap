@@ -376,7 +376,7 @@ SnapExtensions.primitives.set(
 
 SnapExtensions.primitives.set(
     'mqt_load_sound(url, name)',
-    function (snd, name, proc) {
+    function (url, name, proc) {
         if (!proc.context.accumulator) {
             proc.context.accumulator = {
 	        audio: document.createElement('audio'),
