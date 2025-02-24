@@ -365,6 +365,7 @@ SnapExtensions.primitives.set(
 SnapExtensions.primitives.set(
     'mqt_base64(media)',
     function (media) {
+	    console.log(media);
 		if (media instanceof Sound) {
 			return media.audio.src;
 		} else {
