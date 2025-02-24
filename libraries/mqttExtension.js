@@ -361,3 +361,24 @@ SnapExtensions.primitives.set(
 		}
 	}
 );
+
+SnapExtensions.primitives.set(
+    'mqt_base64(media)',
+    function (media) {
+		if (media instanceof Sound) {
+			return media.audio.src;
+		} else {
+			return media.contents.toDataURL();
+		}
+    }
+);
+
+SnapExtensions.primitives.set(
+    'mqt_load_sound(url, name)',
+    function (snd, name) {
+		var audio = document.createElement('audio');
+		audio.src = snd;
+		var sound = new Sound(audio, name);
+		return sound;
+	}
+);
