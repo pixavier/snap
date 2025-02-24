@@ -376,10 +376,20 @@ SnapExtensions.primitives.set(
 
 SnapExtensions.primitives.set(
     'mqt_load_sound(url, name)',
-    function (snd, name) {
-		var audio = document.createElement('audio');
-		audio.src = snd;
-		var sound = new Sound(audio, name);
-		return sound;
-	}
+    function (snd, name, proc) {
+        if (!proc.context.accumulator) {
+            proc.context.accumulator = {
+	        audio: document.createElement('audio'),
+                snd: null
+            };
+            proc.context.accumulator.audio.addEventListener("loadeddata", () => {
+	        proc.context.accumulator.snd = new Sound(proc.context.accumulator.audio, name);
+            });
+            proc.context.accumulator.audio.src = url;
+        } else if (proc.context.accumulator.snd) {
+            return proc.context.accumulator.snd;
+        }
+        proc.pushContext('doYield');
+        proc.pushContext();
+   }
 );
