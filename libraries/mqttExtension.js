@@ -363,7 +363,7 @@ SnapExtensions.primitives.set(
 );
 
 SnapExtensions.primitives.set(
-    'mqt_to_base64(media)',
+    'mqt_to_base64(media_or_data)',
     function (media_or_data) {
         if (media_or_data instanceof Sound) {
             return media_or_data.audio.src;
