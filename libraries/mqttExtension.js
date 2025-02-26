@@ -77,8 +77,6 @@ SnapExtensions.primitives.set(
 			wsbroker = wsbroker + '/mqtt'
 		} else if (wsbroker == 'wss://test.mosquitto.org') {
 			wsbroker = wsbroker + ':8081'
-		} else if (wsbroker == 'ws://vps656540.ovh.net') {
-			wsbroker = wsbroker + ':8080'
 		} else if (wsbroker == 'ws://test.mosquitto.org') {
 			wsbroker = wsbroker + ':8080'
 		} else if (broker == 'broker.xmqtt.net') {
