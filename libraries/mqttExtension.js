@@ -17,6 +17,7 @@
  * V1.6.2 17Jan2023 Bugfix -remove automatic convert JSON to Snap! list
  * V1.7.0 12Jul2024 Add in maximum QoS for subscribe
  * V1.7.1 28Feb2025 Added Base64 encoding/decoding blocks
+ * V1.7.2 02Mar2025 Added HiveMQ public broker in the list
  */
 
 
@@ -86,6 +87,10 @@ SnapExtensions.primitives.set(
 			wsbroker = wsbroker + ':8084'
 		} else if (wsbroker == 'ws://cymplecy.uk') {
 			wsbroker = wsbroker + ':8083'
+		} else if (wsbroker == 'ws://broker.hivemq.com') {
+			wsbroker = wsbroker + ':8000'
+		} else if (wsbroker == 'wss://broker.hivemq.com') {
+			wsbroker = wsbroker + ':8884'
 		} else if (wsbroker == 'ws://localhost') {
 			wsbroker = wsbroker + ':9001'
 		}
