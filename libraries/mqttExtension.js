@@ -418,7 +418,7 @@ SnapExtensions.primitives.set(
 SnapExtensions.primitives.set(
     'mqt_base64_to_list(b64)',
     function (b64) {
-       if (b64.startsWith('image') || b64.startsWith('audio')) {
+       if (b64.startsWith('data:image') || b64.startsWith('data:audio')) {
            b64 = b64.slice(str.indexOf(',') + 1)
        } 
        return window.atob(b64).asArray();
