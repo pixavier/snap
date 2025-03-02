@@ -195,7 +195,11 @@ SnapExtensions.primitives.set(
 			} catch(e) {
 				p.initializeFor(callback, new List([]));
 			}
-			stage.threads.processes.push(p);
+			
+			try {
+				stage.threads.processes.push(p);
+			} catch(e2) {
+			}
 		};
 		
 		mqttListener.topic = topic;
@@ -405,6 +409,4 @@ SnapExtensions.primitives.set(
         }
     }
 );
-
-
 
