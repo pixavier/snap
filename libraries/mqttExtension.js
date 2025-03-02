@@ -409,16 +409,16 @@ SnapExtensions.primitives.set(
 );
 
 SnapExtensions.primitives.set(
-    'mqt_list_to_binary(lst)',
+    'mqt_list_to_base64(lst)',
     function (lst) {
-       return new Buffer.from(Uint8Array(lst.map(Number)));
+       return window.btoa(new Uint8Array(lst.map(Number)).buffer);
     }
 );
 
 SnapExtensions.primitives.set(
-    'mqt_binary_to_list(bytes)',
-    function (bytes) {
-       return new List(new Uint8Array(bytes));
+    'mqt_base64_to_list(b64)',
+    function (b64) {
+       return new List(window.atob(b64));
     }
 );
 
