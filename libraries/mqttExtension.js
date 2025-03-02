@@ -367,20 +367,6 @@ SnapExtensions.primitives.set(
 
 
 SnapExtensions.primitives.set(
-    'mqt_list_to_binary(lst)',
-    function (lst) {
-       return new Uint8Array(lst.map(Number)).buffer;
-    }
-);
-
-SnapExtensions.primitives.set(
-    'mqt_binary_to_list(bytes)',
-    function (bytes) {
-       return new List(new Uint8Array(bytes));
-    }
-);
-
-SnapExtensions.primitives.set(
     'mqt_to_base64(media_or_data)',
     function (media_or_data) {
 	console.log(media_or_data);
@@ -419,6 +405,20 @@ SnapExtensions.primitives.set(
         } else {
             return window.atob(b64);
         }
+    }
+);
+
+SnapExtensions.primitives.set(
+    'mqt_list_to_binary(lst)',
+    function (lst) {
+       return new Uint8Array(lst.map(Number)).buffer;
+    }
+);
+
+SnapExtensions.primitives.set(
+    'mqt_binary_to_list(bytes)',
+    function (bytes) {
+       return new List(new Uint8Array(bytes));
     }
 );
 
