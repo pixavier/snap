@@ -21,7 +21,6 @@
  */
 
 
-
 SnapExtensions.primitives.set(
 	'mqt_connect(broker,callback,options)',
 	function (broker,callback,options,proc) {
