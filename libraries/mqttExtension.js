@@ -195,7 +195,7 @@ SnapExtensions.primitives.set(
 			} catch(e) {
 				p.initializeFor(callback, new List([]));
 			}
-			
+
 			try {
 				stage.threads.processes.push(p);
 			} catch(e2) {
