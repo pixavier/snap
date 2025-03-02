@@ -17,7 +17,7 @@
  * V1.6.2 17Jan2023 Bugfix -remove automatic convert JSON to Snap! list
  * V1.7.0 12Jul2024 Add in maximum QoS for subscribe
  * V1.7.1 28Feb2025 Added Base64 encoding/decoding blocks
- * V1.7.2 02Mar2025 Added HiveMQ public broker to the list
+ * V1.7.2 02Mar2025 Added the public HiveMQ broker to the list
  */
 
 
