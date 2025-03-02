@@ -31,11 +31,11 @@
 IDE_Morph, CamSnapshotDialogMorph, SoundRecorderDialogMorph, isSnapObject, nop,
 Color, Process, contains, localize, SnapTranslator, isString, detect, Point,
 SVG_Costume, newCanvas, WatcherMorph, BlockMorph, HatBlockMorph, invoke,
-BigUint64Array*/
+BigUint64Array, DeviceOrientationEvent, console*/
 
 /*jshint esversion: 11, bitwise: false*/
 
-modules.extensions = '2025-January-09';
+modules.extensions = '2025-February-28';
 
 // Global stuff
 
@@ -842,6 +842,69 @@ SnapExtensions.primitives.set(
     }
 );
 
+// Device Orientation (ori_ "tilt")
+
+SnapExtensions.primitives.set(
+    'ori_tilt(xyz)',
+    function (axis) {
+        var ide = this.parentThatIsA(IDE_Morph),
+            myself = this;
+
+        function updateTilt(event) {
+            var z = event.alpha || 0;
+            ide.tilt.put(event.gamma || 0, 1);
+            ide.tilt.put(-(event.beta || 0), 2);
+            ide.tilt.put(z >= 180 ? 360 - z : -z, 3);
+        }
+
+        function userTriggerTilt() {
+            DeviceOrientationEvent.requestPermission().then(response => {
+                if (response === 'granted') {
+                    // Permission granted
+                    window.addEventListener(
+                        'deviceorientation',
+                        updateTilt
+                    );
+                } else {
+                    // Permission denied
+                    myself.inform('Warning:\nDevice orientation failed.');
+                }
+            }).catch(console.error);
+        }
+
+        function activate() {
+            if (typeof(DeviceOrientationEvent) !== 'undefined' &&
+                typeof(DeviceOrientationEvent.requestPermission) === 'function'
+            ) {
+                ide.confirm(
+                    'Activate device orientation',
+                    'Tilt Sensor',
+                    userTriggerTilt
+                );
+            } else {
+                // other devices
+                window.addEventListener('deviceorientation', updateTilt);
+            }
+        }
+
+        if (!ide.tilt) {
+            ide.tilt = new List([0, 0, 0]);
+            activate();
+        }
+
+        switch (axis) {
+            case 'x':
+                return ide.tilt.at(1);
+            case 'y':
+                return ide.tilt.at(2);
+            case 'z':
+                return ide.tilt.at(3);
+            default:
+                return ide.tilt;
+        }
+    }
+);
+
 // MediaComp (mda_)
 
 SnapExtensions.primitives.set(
@@ -888,6 +951,15 @@ SnapExtensions.primitives.set(
         soundRecorder.key = 'microphone';
         soundRecorder.popUp(this.world());
         return () => result;
+    }
+);
+
+SnapExtensions.primitives.set(
+    'mda_set_mic_resolution(idx)',
+    function (idx, proc) {
+        proc.assertType(+idx, 'number');
+        var microphone = this.parentThatIsA(StageMorph).microphone;
+        microphone.setResolution(+idx);
     }
 );
 
