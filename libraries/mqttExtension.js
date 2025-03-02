@@ -72,27 +72,27 @@ SnapExtensions.primitives.set(
 			wsbroker = prefix + '://' + broker;
 		}
 		if (wsbroker == 'wss://broker.emqx.io') {
-			wsbroker = wsbroker + ':8084/mqtt'
+			wsbroker += ':8084/mqtt';
 		} else if (wsbroker == 'ws://broker.emqx.io') {
-			wsbroker = wsbroker + ':8083/mqtt'
+			wsbroker += ':8083/mqtt';
 		} else if (broker == 'mqtt.eclipseprojects.io') {
-			wsbroker = wsbroker + '/mqtt'
+			wsbroker += '/mqtt';
 		} else if (wsbroker == 'wss://test.mosquitto.org') {
-			wsbroker = wsbroker + ':8081'
+			wsbroker += ':8081';
 		} else if (wsbroker == 'ws://test.mosquitto.org') {
-			wsbroker = wsbroker + ':8080'
+			wsbroker += ':8080';
 		} else if (broker == 'broker.xmqtt.net') {
-			wsbroker = wsbroker + '/mqtt'
+			wsbroker += '/mqtt';
 		} else if (wsbroker == 'wss://cymplecy.uk') {
-			wsbroker = wsbroker + ':8084'
+			wsbroker += ':8084';
 		} else if (wsbroker == 'ws://cymplecy.uk') {
-			wsbroker = wsbroker + ':8083'
+			wsbroker += ':8083';
 		} else if (wsbroker == 'ws://broker.hivemq.com') {
-			wsbroker = wsbroker + ':8000'
+			wsbroker += ':8000/mqtt';
 		} else if (wsbroker == 'wss://broker.hivemq.com') {
-			wsbroker = wsbroker + ':8884'
+			wsbroker += ':8884/mqtt';
 		} else if (wsbroker == 'ws://localhost') {
-			wsbroker = wsbroker + ':9001'
+			wsbroker += ':9001';
 		}
 		//log(wsbroker)
 		try {
