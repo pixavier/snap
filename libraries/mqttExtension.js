@@ -370,34 +370,34 @@ SnapExtensions.primitives.set(
         } else if (media_or_data instanceof Costume) {
             return media_or_data.contents.toDataURL();
         } else {
-			return window.btoa(media_or_data);
+            return window.btoa(media_or_data);
         }
     }
 );
+
 
 SnapExtensions.primitives.set(
     'mqt_from_base64(b64)',
     function (b64, proc) {
         if (b64.startsWith('data:image')) {
-			return SnapExtensions.primitives.get('cst_load(url)')(b64);
-		} else if (b64.startsWith('data:audio')) {
-			if (!proc.context.accumulator) {
-				proc.context.accumulator = {
-				audio: document.createElement('audio'),
-					snd: null
-				};
-				proc.context.accumulator.audio.addEventListener("loadeddata", () => {
-				proc.context.accumulator.snd = new Sound(proc.context.accumulator.audio, name);
-				});
-				proc.context.accumulator.audio.src = url;
-			} else if (proc.context.accumulator.snd) {
-				return proc.context.accumulator.snd;
-			}
-			proc.pushContext('doYield');
-			proc.pushContext();
-		
-		} else {
-			return window.atob(b64);
-		}
+            return SnapExtensions.primitives.get('cst_load(url)')(b64);
+        } else if (b64.startsWith('data:audio')) {
+            if (!proc.context.accumulator) {
+                proc.context.accumulator = {
+                    audio: document.createElement('audio'),
+                    snd: null
+                };
+                proc.context.accumulator.audio.addEventListener("loadeddata", () => {
+                    proc.context.accumulator.snd = new Sound(proc.context.accumulator.audio, name);
+                });
+                proc.context.accumulator.audio.src = url;
+            } else if (proc.context.accumulator.snd) {
+                return proc.context.accumulator.snd;
+            }
+            proc.pushContext('doYield');
+            proc.pushContext();
+        } else {
+            return window.atob(b64);
+        }
     }
 );
