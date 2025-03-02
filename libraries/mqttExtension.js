@@ -369,6 +369,7 @@ SnapExtensions.primitives.set(
 SnapExtensions.primitives.set(
     'mqt_to_base64(media_or_data)',
     function (media_or_data) {
+        console.log(media_or_data);
         if (media_or_data instanceof List) {
            return SnapExtensions.primitives.get('mqt_list_to_base64(lst)')(media_or_data);
 	} else if (media_or_data instanceof Sound) {
