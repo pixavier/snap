@@ -369,6 +369,7 @@ SnapExtensions.primitives.set(
 SnapExtensions.primitives.set(
     'mqt_to_base64(media_or_data)',
     function (media_or_data) {
+	console.log(media_or_data);    
         if (media_or_data instanceof Sound) {
             return media_or_data.audio.src;
         } else if (media_or_data instanceof Costume) {
@@ -378,7 +379,6 @@ SnapExtensions.primitives.set(
         }
     }
 );
-
 
 SnapExtensions.primitives.set(
     'mqt_from_base64(b64)',
