@@ -418,7 +418,7 @@ SnapExtensions.primitives.set(
 SnapExtensions.primitives.set(
     'mqt_base64_to_list(b64)',
     function (b64) {
-       return new List(window.atob(b64));
+       return window.atob(b64).asArray();
     }
 );
 
