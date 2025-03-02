@@ -411,7 +411,7 @@ SnapExtensions.primitives.set(
 SnapExtensions.primitives.set(
     'mqt_list_to_binary(lst)',
     function (lst) {
-       return new Uint8Array(lst.map(Number));
+       return new Buffer.from(Uint8Array(lst.map(Number)));
     }
 );
 
