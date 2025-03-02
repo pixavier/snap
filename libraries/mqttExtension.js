@@ -4,20 +4,20 @@
  * Modified by Simon Walters and Xavier Pi
  * and converted into an extension
  * November 2021
- * V1.1   Change back to using standard naming e.g payload not message
- * V1.2.0 Added in code from pixavier to improve sub and unsub 9May2022 
- * V1.3.0 Added in code from pixavier brokerKey to enable more than one connection to the same broker with different users  
- * V1.4.0 30Jun22 Handle binary payloads correctly
- * V1.5.0 29Dec22 Handle utf8 character payloads correctly
- * V1.5.2 20Jan23 Change subscribe default to be text and accept boolean to change to binary (corrected 18:23)
- * V1.5.3 22Jan23 Make old subscribe block be compatible with new extension code
+ * V1.1 - change back to using standard naming e.g payload not message
+ * V1.2.0 added in code from pixavier to improve sub and unsub 9May2022 
+ * V1.3.0 added in code from pixavier brokerKey to enable more than one connection to the same broker with different users  
+ * V1.4.0 30Jun22 handle binary payloads correctly
+ * V1.5.0 29Dec22 handle utf8 character payloads correctly
+ * V1.5.2 20Jan23 change subscribe default to be text and accept boolean to change to binary (corrected 18:23)
+ * V1.5.3 22Jan23 make old subscribe block be compatible with new extension code
  * V1.5.4 15Feb22 When returning text to Snap!, restore explicitly making payload into a string.  Also restore cymplecy.uk instead of simplesi.cloud
  * V1.6.0 13Oct2023 If binary options selected then pub expects payload to be a flat List (values 0-255) and sub will return a List
  * V1.6.1 05Jan2024 "binary" replaced by "buffer mode"
- * V1.6.2 17Jan2023 Bugfix -remove automatic convert JSON to Snap! list
+ * V1.6.2 17Jan2023 bugfix -remove automatic convert JSON to Snap! list
  * V1.7.0 12Jul2024 Add in maximum QoS for subscribe
  * V1.7.1 28Feb2025 Added Base64 encoding/decoding blocks
- * V1.7.2 02Mar2025 Added the public HiveMQ broker to the list
+ * V1.7.2 02Mar2025 Added the public HiveMQ broker to the list 
  */
 
 
@@ -72,27 +72,29 @@ SnapExtensions.primitives.set(
 			wsbroker = prefix + '://' + broker;
 		}
 		if (wsbroker == 'wss://broker.emqx.io') {
-			wsbroker += ':8084/mqtt';
+			wsbroker = wsbroker + ':8084/mqtt'
 		} else if (wsbroker == 'ws://broker.emqx.io') {
-			wsbroker += ':8083/mqtt';
+			wsbroker = wsbroker + ':8083/mqtt'
 		} else if (broker == 'mqtt.eclipseprojects.io') {
-			wsbroker += '/mqtt';
+			wsbroker = wsbroker + '/mqtt'
 		} else if (wsbroker == 'wss://test.mosquitto.org') {
-			wsbroker += ':8081';
+			wsbroker = wsbroker + ':8081'
+		} else if (wsbroker == 'ws://vps656540.ovh.net') {
+			wsbroker = wsbroker + ':8080'
 		} else if (wsbroker == 'ws://test.mosquitto.org') {
-			wsbroker += ':8080';
+			wsbroker = wsbroker + ':8080'
 		} else if (broker == 'broker.xmqtt.net') {
-			wsbroker += '/mqtt';
+			wsbroker = wsbroker + '/mqtt'
 		} else if (wsbroker == 'wss://cymplecy.uk') {
-			wsbroker += ':8084';
+			wsbroker = wsbroker + ':8084'
 		} else if (wsbroker == 'ws://cymplecy.uk') {
-			wsbroker += ':8083';
+			wsbroker = wsbroker + ':8083'
 		} else if (wsbroker == 'ws://broker.hivemq.com') {
-			wsbroker += ':8000/mqtt';
+			wsbroker = wsbroker + ':8080/mqtt'
 		} else if (wsbroker == 'wss://broker.hivemq.com') {
-			wsbroker += ':8884/mqtt';
+			wsbroker = wsbroker + ':8884/mqtt'
 		} else if (wsbroker == 'ws://localhost') {
-			wsbroker += ':9001';
+			wsbroker = wsbroker + ':9001'
 		}
 		//log(wsbroker)
 		try {
@@ -365,7 +367,6 @@ SnapExtensions.primitives.set(
 		}
 	}
 );
-
 
 SnapExtensions.primitives.set(
     'mqt_to_base64(media_or_data)',
