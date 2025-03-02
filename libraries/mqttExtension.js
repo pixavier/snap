@@ -79,8 +79,6 @@ SnapExtensions.primitives.set(
 			wsbroker = wsbroker + '/mqtt'
 		} else if (wsbroker == 'wss://test.mosquitto.org') {
 			wsbroker = wsbroker + ':8081'
-		} else if (wsbroker == 'ws://vps656540.ovh.net') {
-			wsbroker = wsbroker + ':8080'
 		} else if (wsbroker == 'ws://test.mosquitto.org') {
 			wsbroker = wsbroker + ':8080'
 		} else if (broker == 'broker.xmqtt.net') {
@@ -89,10 +87,10 @@ SnapExtensions.primitives.set(
 			wsbroker = wsbroker + ':8084'
 		} else if (wsbroker == 'ws://cymplecy.uk') {
 			wsbroker = wsbroker + ':8083'
-		} else if (wsbroker == 'ws://broker.hivemq.com') {
-			wsbroker = wsbroker + ':8080/mqtt'
 		} else if (wsbroker == 'wss://broker.hivemq.com') {
 			wsbroker = wsbroker + ':8884/mqtt'
+		} else if (wsbroker == 'ws://broker.hivemq.com') {
+			wsbroker = wsbroker + ':8080/mqtt'
 		} else if (wsbroker == 'ws://localhost') {
 			wsbroker = wsbroker + ':9001'
 		}
