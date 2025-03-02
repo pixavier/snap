@@ -371,7 +371,7 @@ SnapExtensions.primitives.set(
     function (media_or_data) {
 	console.log(media_or_data);
         if (media_or_data instanceof List) {
-           return window.btoa(new Uint8Array(media_or_data.map(Number)).buffer);
+           return SnapExtensions.primitives.get('mqt_list_to_base64(lst)')(media_or_data);
 	} else if (media_or_data instanceof Sound) {
             return media_or_data.audio.src;
         } else if (media_or_data instanceof Costume) {
