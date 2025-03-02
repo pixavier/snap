@@ -390,7 +390,7 @@ SnapExtensions.primitives.set(
                 proc.context.accumulator.audio.addEventListener("loadeddata", () => {
                     proc.context.accumulator.snd = new Sound(proc.context.accumulator.audio, name);
                 });
-                proc.context.accumulator.audio.src = url;
+                proc.context.accumulator.audio.src = b64;
             } else if (proc.context.accumulator.snd) {
                 return proc.context.accumulator.snd;
             }
