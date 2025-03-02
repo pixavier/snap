@@ -384,7 +384,7 @@ SnapExtensions.primitives.set(
     'mqt_from_base64(b64)',
     function (b64, proc) {
         if (b64.startsWith('data:image')) {
-            return SnapExtensions.primitives.get('cst_load(url)')(b64);
+            return SnapExtensions.primitives.get('cst_load(url)')(b64, proc);
         } else if (b64.startsWith('data:audio')) {
             if (!proc.context.accumulator) {
                 proc.context.accumulator = {
