@@ -4,18 +4,19 @@
  * Modified by Simon Walters and Xavier Pi
  * and converted into an extension
  * November 2021
- * V1.1 - change back to using standard naming e.g payload not message
- * V1.2.0 added in code from pixavier to improve sub and unsub 9May2022 
- * V1.3.0 added in code from pixavier brokerKey to enable more than one connection to the same broker with different users  
- * V1.4.0 30Jun22 handle binary payloads correctly
- * V1.5.0 29Dec22 handle utf8 character payloads correctly
- * V1.5.2 20Jan23 change subscribe default to be text and accept boolean to change to binary (corrected 18:23)
- * V1.5.3 22Jan23 make old subscribe block be compatible with new extension code
+ * V1.1   Change back to using standard naming e.g payload not message
+ * V1.2.0 Added in code from pixavier to improve sub and unsub 9May2022 
+ * V1.3.0 Added in code from pixavier brokerKey to enable more than one connection to the same broker with different users  
+ * V1.4.0 30Jun22 Handle binary payloads correctly
+ * V1.5.0 29Dec22 Handle utf8 character payloads correctly
+ * V1.5.2 20Jan23 Change subscribe default to be text and accept boolean to change to binary (corrected 18:23)
+ * V1.5.3 22Jan23 Make old subscribe block be compatible with new extension code
  * V1.5.4 15Feb22 When returning text to Snap!, restore explicitly making payload into a string.  Also restore cymplecy.uk instead of simplesi.cloud
  * V1.6.0 13Oct2023 If binary options selected then pub expects payload to be a flat List (values 0-255) and sub will return a List
  * V1.6.1 05Jan2024 "binary" replaced by "buffer mode"
- * V1.6.2 17Jan2023 bugfix -remove automatic convert JSON to Snap! list
+ * V1.6.2 17Jan2023 Bugfix -remove automatic convert JSON to Snap! list
  * V1.7.0 12Jul2024 Add in maximum QoS for subscribe
+ * V1.7.1 28Feb2025 Added Base64 encoding/decoding blocks
  */
 
 
@@ -376,7 +377,7 @@ SnapExtensions.primitives.set(
 
 SnapExtensions.primitives.set(
     'mqt_from_base64(b64)',
-    function (b64) {
+    function (b64, proc) {
         if (b64.startsWith('data:image')) {
 			return SnapExtensions.primitives.get('cst_load(url)')(b64);
 		} else if (b64.startsWith('data:audio')) {
