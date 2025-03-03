@@ -422,7 +422,7 @@ SnapExtensions.primitives.set(
 	var n = bytes.length;    
         var byteArray = new Uint8Array(n);
 	for (i = 0; i < n; i++) {
-	    byteArray[i] = bytes[i] * 1;
+	    byteArray[i] = bytes[i] * 256;
 	}    
 	return new List(byteArray);
     }
