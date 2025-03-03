@@ -369,7 +369,6 @@ SnapExtensions.primitives.set(
 SnapExtensions.primitives.set(
     'mqt_to_base64(media_or_data)',
     function (media_or_data) {
-        console.log(media_or_data);
         if (media_or_data instanceof List) {
            return SnapExtensions.primitives.get('mqt_list_to_base64(lst)')(media_or_data);
 	} else if (media_or_data instanceof Sound) {
@@ -421,7 +420,14 @@ SnapExtensions.primitives.set(
        if (b64.startsWith('data:image') || b64.startsWith('data:audio')) {
            b64 = b64.slice(b64.indexOf(',') + 1);
        } 
-       return new List(window.atob(b64).split(',').map(e => '' + e));
+       return SnapExtensions.primitives.get('mqt_comma_sep_to_list(data)')(window.atob(b64));
+    }
+);
+
+SnapExtensions.primitives.set(
+    'mqt_comma_sep_to_list(data)',
+    function (data) {
+       return new List(data.split(',').map(e => '' + e));
     }
 );
 
