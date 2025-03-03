@@ -417,19 +417,10 @@ SnapExtensions.primitives.set(
 );
 
 SnapExtensions.primitives.set(
-    'mqt_base64_to_list(b64)',
-    function (b64) {
-       if (b64.startsWith('data:image') || b64.startsWith('data:audio')) {
-           b64 = b64.slice(b64.indexOf(',') + 1);
-       } 
-       return SnapExtensions.primitives.get('mqt_comma_sep_to_list(data)')(window.atob(b64));
+    'mqt_binary_to_list(bytes)',
+    function (bytes) {
+        return new List(new Uint8Array(bytes));
     }
 );
 
-SnapExtensions.primitives.set(
-    'mqt_comma_sep_to_list(data)',
-    function (data) {
-       return new List(data.split(',').map(e => '' + e));
-    }
-);
 
