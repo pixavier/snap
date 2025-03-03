@@ -403,7 +403,9 @@ SnapExtensions.primitives.set(
             proc.pushContext('doYield');
             proc.pushContext();
         } else {
-            return window.atob(b64);
+            return window.atob(b64);ç
+
+		
         }
     }
 );
@@ -419,7 +421,8 @@ SnapExtensions.primitives.set(
     'mqt_base64_to_list(b64)',
     function (b64) {
        if (b64.startsWith('data:image') || b64.startsWith('data:audio')) {
-           b64 = b64.slice(b64.indexOf(',') + 1)
+           b64 = b64.slice(b64.indexOf(',') + 1);
+           return Array.from(window.atob('W29iamVjdCBBcnJheUJ1ZmZlcl0=')).map(c => c.charCodeAt(0));
        } 
        return new List(Array.from(window.atob(b64), byte => String.fromCharCode(byte)));
     }
