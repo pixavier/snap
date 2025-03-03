@@ -412,7 +412,7 @@ SnapExtensions.primitives.set(
     function (lst) {
         var byteArray = new Uint8Array(lst.contents.length);
         lst.contents.forEach((value, i) => {byteArray[i] = value & 0xff;});
-        return window.btoa(byteArray);
+        return window.btoa(byteArray.buffer);
     }
 );
 
