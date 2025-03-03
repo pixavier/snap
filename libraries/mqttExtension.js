@@ -403,9 +403,7 @@ SnapExtensions.primitives.set(
             proc.pushContext('doYield');
             proc.pushContext();
         } else {
-            return window.atob(b64);ç
-
-		
+            return window.atob(b64);
         }
     }
 );
