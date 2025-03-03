@@ -421,7 +421,7 @@ SnapExtensions.primitives.set(
        if (b64.startsWith('data:image') || b64.startsWith('data:audio')) {
            b64 = b64.slice(b64.indexOf(',') + 1)
        } 
-       return window.atob(b64).asArray();
+       return Array.from(window.atob(b64), byte => String.fromCharCode(byte));
     }
 );
 
