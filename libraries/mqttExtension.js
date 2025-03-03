@@ -414,6 +414,7 @@ SnapExtensions.primitives.set(
     'mqt_list_to_base64(lst)',
     function (lst) {
        return window.btoa(new Uint8Array(lst.map(Number)).buffer);
+       new List(new Uint8Array(Uint8Array.from(numbersArray)))
     }
 );
 
