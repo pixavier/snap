@@ -420,7 +420,7 @@ SnapExtensions.primitives.set(
     'mqt_binary_to_list(bytes)',
     function (bytes) {
 	    console.log(bytes);
-	var lst = new List(new Uint8Array(bytes));
+	var lst = new List(new Uint8Array([...bytes]));
 	    console.log(lst);
         return lst;
     }
