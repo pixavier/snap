@@ -413,8 +413,7 @@ SnapExtensions.primitives.set(
 SnapExtensions.primitives.set(
     'mqt_list_to_base64(lst)',
     function (lst) {
-       return window.btoa(new Uint8Array(lst.map(Number)).buffer);
-       new List(new Uint8Array(Uint8Array.from(numbersArray)))
+       return window.btoa(lst.contents);
     }
 );
 
@@ -424,7 +423,7 @@ SnapExtensions.primitives.set(
        if (b64.startsWith('data:image') || b64.startsWith('data:audio')) {
            b64 = b64.slice(b64.indexOf(',') + 1);
        } 
-       return new List(Array.from(window.atob(b64)).map(c => '' + c.charCodeAt(0)));
+       return window.atob(b64).split(',').map(Number);
     }
 );
 
