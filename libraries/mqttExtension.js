@@ -411,12 +411,7 @@ SnapExtensions.primitives.set(
     'mqt_list_to_base64(lst)',
     function (lst) {
         var byteArray = new Uint8Array(lst.contents.length * 4); // 4 bytes per 32-bit integer
-        lst.contents.forEach((value, index) => {
-            byteArray[index * 4] = (value >> 24) & 0xff; // Most significant byte
-            byteArray[index * 4 + 1] = (value >> 16) & 0xff;
-            byteArray[index * 4 + 2] = (value >> 8) & 0xff;
-            byteArray[index * 4 + 3] = value & 0xff; // Least significant byte
-        });
+        lst.contents.forEach((value, i) => {byteArray[i] = value & 0xff;});
         return window.btoa(byteArray);
     }
 );
