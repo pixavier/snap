@@ -422,9 +422,8 @@ SnapExtensions.primitives.set(
     function (b64) {
        if (b64.startsWith('data:image') || b64.startsWith('data:audio')) {
            b64 = b64.slice(b64.indexOf(',') + 1);
-           return Array.from(window.atob('W29iamVjdCBBcnJheUJ1ZmZlcl0=')).map(c => c.charCodeAt(0));
        } 
-       return new List(Array.from(window.atob(b64), byte => String.fromCharCode(byte)));
+       return Array.from(window.atob(b64)).map(c => c.charCodeAt(0));
     }
 );
 
