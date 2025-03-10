@@ -402,7 +402,7 @@ SnapExtensions.primitives.set(
             proc.pushContext('doYield');
             proc.pushContext();
         } else {
-			var pos = b64.indeOf(',');
+			var pos = b64.indexOf(',');
 			if (pos >= 0) {
 				b64 = b64.substring(pos + 1);
 			}
