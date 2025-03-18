@@ -426,6 +426,7 @@ SnapExtensions.primitives.set(
 	    console.log(bytes.charCodeAt(i));
 	    byteArray[i] = bytes.charCodeAt(i);
 	}    
+	    console.log(new List(byteArray));
 	return new List(byteArray);
     }
 );
