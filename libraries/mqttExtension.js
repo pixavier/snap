@@ -440,6 +440,7 @@ SnapExtensions.primitives.set(
     'mqt_window_open(url,name,specs)',
     function (url,name,specs) {
 		let stage =  this.parentThatIsA(StageMorph);
+		window._stage = stage;
 		if (!('mqtt_windows' in stage)){
 			stage.mqtt_windows = [];
 		}
