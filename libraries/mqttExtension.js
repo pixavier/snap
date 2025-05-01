@@ -454,6 +454,7 @@ SnapExtensions.primitives.set(
 		let stage =  this.parentThatIsA(StageMorph);
 		if ('mqtt_windows' in stage){
 			stage.mqtt_windows[name].close();
+			delete stage.mqtt_windows[name];
 		}
     }
 );
