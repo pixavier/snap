@@ -439,7 +439,20 @@ SnapExtensions.primitives.set(
 SnapExtensions.primitives.set(
     'mqt_window_open(url,name,specs)',
     function (url,name,specs) {
-        window.open(url, name, specs);
+		let stage =  this.parentThatIsA(StageMorph);
+		if (!('mqtt_windows' in stage)){
+			stage.mqtt_windows = [];
+		}
+		stage.mqtt_windows[name] = window.open(url, name, specs);
     }
 );
 
+SnapExtensions.primitives.set(
+    'mqt_window_close(name)',
+    function (name) {
+		let stage =  this.parentThatIsA(StageMorph);
+		if (('mqtt_windows' in stage) && stage.mqtt_windows[name]){
+			stage.mqtt_windows[name].close();
+		}
+    }
+);
