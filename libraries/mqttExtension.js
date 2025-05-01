@@ -436,6 +436,16 @@ SnapExtensions.primitives.set(
     }
 );
 
+
+SnapExtensions.primitives.set(
+    'mqt_window_open(url,name,specs)',
+    function (url,name,specs) {
+		window.open(url, name, specs);
+    }
+);
+
+
+/*
 SnapExtensions.primitives.set(
     'mqt_window_open(url,name,specs)',
     function (url,name,specs) {
@@ -458,3 +468,4 @@ SnapExtensions.primitives.set(
 		}
     }
 );
+*/
