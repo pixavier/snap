@@ -87,7 +87,7 @@ HatBlockMorph, ZOOM*/
 
 // Global stuff ////////////////////////////////////////////////////////
 
-modules.gui = '2026-March-10';
+modules.gui = '2026-April-03';
 
 // Declarations
 
@@ -5921,12 +5921,16 @@ IDE_Morph.prototype.aboutSnap = function () {
         + '\nAchal Dave: Web Audio'
         + '\nJoe Otto: Morphic Testing and Debugging'
         + '\n\n'
-        + 'Jahrd, Derec, Jamet, Sarron, Aleassa, and Lirin costumes'
-        + '\nare watercolor paintings by Meghan Taylor and represent'
-        + '\n characters from her webcomic Prophecy of the Circle,'
-        + '\nlicensed to us only for use in Snap! projects.'
-        + '\nMeghan also painted the Tad costumes,'
-        + '\nbut that character is in the public domain.';
+        + 'Ketrina Thompson https://ketrinadrawsalot.com '
+        + 'created every costume'
+        + '\nexcept the ones inherited from Scratch, Alonzo, and the following:'
+        + '\n\n'
+        + 'Jahrd, Derec, Jamet, Sarron, Aleassa, and Lirin costumes '
+        + 'are watercolor\n paintings by Meghan Taylor and represent '
+        + 'characters from her webcomic\nProphecy of the Circle, '
+        + 'licensed to us only for use in Snap! projects. '
+        + '\nMeghan also painted the Tad costumes, '
+        + 'which are in the public domain.';
 
     for (module in modules) {
         if (Object.prototype.hasOwnProperty.call(modules, module)) {
@@ -5958,6 +5962,7 @@ IDE_Morph.prototype.aboutSnap = function () {
             ),
             scroller,
             maxHeight = world.height() - dlg.titleFontSize * 10;
+        tm.enableLinks = true; // let the user click on URLs to open in new tab
         if (tm.height() > maxHeight) {
             scroller = new ScrollFrameMorph();
             scroller.acceptsDrops = false;
@@ -6552,6 +6557,15 @@ IDE_Morph.prototype.generatePuzzle = function () {
 
     // refresh
     this.selectSprite(puzzle);
+
+    // turn the project into a template
+    this.scene.role = 'template';
+
+    // hide empty categories
+    this.scene.hideEmptyCategories = true;
+    this.createCategories();
+    this.createPaletteHandle();
+    this.fixLayout();
 };
 
 IDE_Morph.prototype.addToPuzzle = function () {

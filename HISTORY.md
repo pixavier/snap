@@ -10,6 +10,7 @@
         * marking a starter project / puzzle as "template" removes its name when loading it (and lets users create their own projects based on the template) 
         * projects based on a template let the user restore the visibility of global blocks in the template palette
         * template-projects store their magnification level if it's above 100%
+        * "generate puzzle" automatically turns the project into a template
     * tutorials
         * open and run a scene inside a separate modeless window
         * new "Tutorials" library for positioning and scaling the tutorial window and interacting with the editor
@@ -28,6 +29,8 @@
         * new "pen_path(points, [fill, close]" extension for drawing precise, filled shapes
         * new "Draw Paths" library for directly drawing filled or stroked polylines and polygons without moving the pen sprite
         * new "Shapes" extension for working with geometrical figures, modeled after Pyret's images. Under construction
+    * OOP 2.0 (data objects)
+        * "super" calls: using a ring as index inside the "ITEM ... OF ..." reporter answers a copy of the function (ring) that is bound to the list object in the second slot, enabling polymorphic methods, i.e. message dispatches to a "super class"
     * custom data types (ADTs)
         * include a ring entry named underscore + morph in data to specify a dynamic view
         * new "cst_morph(cst)" extension for specifying custom ADT visualizations
@@ -53,6 +56,7 @@
         * change name and color of custom categories
         * new "blocks" and "speaker" symbols, icons for the sprite-editor tabs
         * new "hide empty categories" setting
+        * "generate puzzle" automatically hides empty categories
         * added a black-gray-white palette to the bottom of the color picker for color input slots
         * new "blocks only" setting for costomized "functions-first" microworlds
     * more extensions
@@ -66,6 +70,7 @@
     * new help screens
         * new help screens for "combinations" and
         * "pipe" reporters, thanks, Brian and gang!
+    * new set of costumes and backgrounds by Ketrina!
 * **Notable Changes:**
     * data types
         * enhanced "is ... a ...?" predicate to support dependent data types and user defined structs (ADTs)
@@ -112,6 +117,33 @@
     * Chinese, thank you, @Ayist14 !
     * Catalan, thanks, Joan!
     * German
+
+### 2026-04-07
+* store: fixed retaining the remixID of cloud projects
+* threads: added metaprogramming support for "unevaluated number" type input slots (type 21)
+* blocks, threads, extensions: added metaprogramming support for reporter return types ("answer") and enforcing slot types ("strict")
+
+### 2026-04-03
+* objects: fixed restoring the hidden custom blocks in a palette of a template-based project
+* gui: automatically turn generated puzzles into templates and hide empty categories
+
+### 2026-04-02
+* threads: new feature: using a ring as index inside the "ITEM ... OF ..." reporter answers a copy of the function (ring) that is bound to the list object in the second slot, enabling polymorphic methods, i.e. message dispatches to a "super class"
+* updated shapes library with ability to rotate regular polygons
+* added Ketrina to the credits
+
+### 2026-04-01
+* updated shapes library
+* new costumes by Ketrina, yay!!!
+* huge Chinese translation update for libraries, thank you, @Ayist14 !
+
+### 2026-03-31
+* updated shapes library with new "regular polygon" block 
+* updated shapes library to also scale the line width
+
+### 2026-03-22
+* updated shapes library
+* fixed an adt-type inferral bug
 
 ### 2026-03-13
 * blocs, objects: made text-input slots type aware and removed landscape orientation

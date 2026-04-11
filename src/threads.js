@@ -66,7 +66,7 @@ CustomHatBlockMorph*/
 
 /*jshint esversion: 11, bitwise: false, evil: true*/
 
-modules.threads = '2026-March-02';
+modules.threads = '2026-April-07';
 
 var ThreadManager;
 var Process;
@@ -2469,6 +2469,11 @@ Process.prototype.reportListItem = function (index, list) {
     }
     if (index instanceof List && this.enableHyperOps) {
         return list.query(index);
+    }
+    if (index instanceof Context) {
+        // allow binding a function to another object to enable
+        // polymorphic messages involving a "super class"
+        return this.reportContextFor(index, list);
     }
     value = list.lookup(index);
     if (value instanceof Context && (parseFloat(index) !== +index)) {
@@ -4908,10 +4913,11 @@ Process.prototype.reportIsA = function (thing, typeString) {
         return primType === choice || // support ADTs (user defined structs)
             primType === 'list' &&
                 (this.reportListItem('_type', thing) === typeString ||
+                    ((this.reportListItem(['parent'], thing) === 'list') &&
                     this.reportIsA(
                         this.reportListItem(['parent'], thing),
                         typeString
-                    ));
+                    )));
     }
 };
 
@@ -8625,6 +8631,16 @@ Process.prototype.reportBasicBlockAttribute = function (attribute, block) {
         return ['command', 'reporter', 'predicate', 'hat'].indexOf(
             this.reportTypeOf(block)
         ) + 1;
+    case 'answer':
+        if (expr instanceof ReporterBlockMorph) {
+            if (expr.isCustomBlock) {
+                return (expr.isGlobal ? expr.definition
+                    : this.blockReceiver().getMethod(expr.semanticSpec)
+                ).reports || '';
+            }
+            return expr.reports || '';
+        }
+        return '';
     case 'scope':
         return expr.isCustomBlock ? (expr.isGlobal ? 1 : 2) : 0;
     case 'selector':
@@ -8650,6 +8666,14 @@ Process.prototype.reportBasicBlockAttribute = function (attribute, block) {
                         : each.getSpec())
             )
         ).map(spec => this.slotType(spec));
+    case 'strict':
+        if (expr.isCustomBlock) {
+            return (expr.isGlobal ?
+                expr.definition
+                : this.blockReceiver().getMethod(expr.semanticSpec)
+            ).enforceTypes;
+        }
+        return false;
     case 'defaults':
         slots = new List();
         if (expr.isCustomBlock) {
@@ -9080,7 +9104,11 @@ Process.prototype.slotType = function (spec) {
         // mnemonics:
         '{}':           20,
         'dict':         20,
-        'struct':       20
+        'struct':       20,
+
+        '21':           21,
+        'nue':          21 // spec
+        //mnemonics: none
 
     }[key];
     if (num === undefined) {
@@ -9110,7 +9138,7 @@ Process.prototype.slotSpec = function (num) {
 
     spec = ['s', 'n', 'b', 'l', 'mlt', 'cs', 'cmdRing', 'repRing', 'predRing',
     'anyUE', 'boolUE', 'obj', 'upvar', 'clr', 'scriptVars', 'loop', 'receive',
-    'send', 'elseif', 'parameter', 'adt'][id];
+    'send', 'elseif', 'parameter', 'adt', 'nUE'][id];
 
     if (spec === undefined) {
         return null;
@@ -9258,6 +9286,12 @@ Process.prototype.doSetBlockAttribute = function (attribute, block, val) {
             }
         }
         break;
+    case 'answer':
+        this.assertType(val, 'text');
+        if (['reporter', 'predicate'].includes(def.type)) {
+            def.reports = val;
+        }
+        break;
     case 'scope':
         if (isInUse()) {
             throw new Error('cannot change this\nfor a block that is in use');
@@ -9308,6 +9342,10 @@ Process.prototype.doSetBlockAttribute = function (attribute, block, val) {
                 def.declarations.set(name, info);
             }
         });
+        break;
+    case 'strict':
+        this.assertType(val, 'Boolean');
+        def.enforceTypes = val;
         break;
     case 'defaults':
         this.assertType(val, ['list', 'Boolean', 'number', 'text', 'color']);
