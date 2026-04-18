@@ -91,7 +91,7 @@
         5. 右键点击定义积木处，并点击菜单里的"翻译..."选项;
         6. 在弹出的窗口处追加"zh_CN:<积木名字>";
         7. 重复第4-6步，直到这个库的所有积木(包括隐藏积木)均已翻译完;
-        8. 导出自制积木库，重命名为LIBRARIES里库的对应文件名;
+        8. 导出自制积木库，重命名为LIBRARIES.json里库的对应文件名;
         9. 移动至libraries。
       
     (自制积木的翻译也不要动不动加到本文件里！)
@@ -877,7 +877,7 @@ SnapTranslator.dict.zh_CN = { ...SnapTranslator.dict.zh_CN,
     "keys": "所有按键",
     "Kind of": "类型:",
     "l": "l",
-    "label": "积木标签",
+    "label": "积木名称",
     "Language...": "语言...",
     "language_name": "简体中文",
     "language_translator": "五百刀/邓江华/孟锡峰/曹儒林/moodykeke/Ayist14",
@@ -1349,7 +1349,8 @@ SnapTranslator.dict.zh_CN = { ...SnapTranslator.dict.zh_CN,
     "Select categories of additional blocks to add to this project.": "挑选更多(自制)积木，添加到作品中\n对于Scratcher：由于自制积木和扩展的特殊性，Snap!严格区分库和扩展。\n不仅如此，Snap!库也有社区贡献者(如Snap!官方社区用户Tethrarxitet向Snap!源码贡献的画笔美术字库)，\n不过他们通常直接在Snap!官网以作品的方式发布，或直接在Github里开源，而不是像TurboWarp和Gandi iDE用户那样发布在专门的扩展平台上",
     "selection": "选择",
     "Selection tool": "选择工具",
-    "selector...": "选择器...",
+    "selector...": "对应的原生积木...",
+    "selector": "对应的原生积木",
     "self": "本身",
     "send _ to _": "发送消息 _ 给 _",
     "send data": "广播并发送数据",
@@ -1936,7 +1937,7 @@ SnapTranslator.dict.zh_CN = { ...SnapTranslator.dict.zh_CN,
     "triple run": "三重平针",
     "Blocks only": "隐藏交互对象区",
     "check to hide\nthe stage and \nsprite editor panes": "勾选以隐藏舞台区和角色区。效果类似于02Engine的舞台、角色窗口",
-    "uncheck to show\nthe stage and\nsprite editor panes": "取消勾选以显示舞台区和角色区。效果类似于02Engine的舞台、角色窗口",
+    "uncheck to show\nthe stage and\nsprite editor panes": "取消勾选以显示舞台区和角色区。效果类似于隐藏02Engine的舞台、角色窗口",
     "change a category...": "修改积木类别...",
     "Constrain proportions of shapes?\n(you can also hold shift)": "规范所绘制的形状\n(包括矩形、圆形和直线，相当于按住Shift键)",
     "Paintbrush tool\n(free draw)": "切换成画笔\n(自由绘制)",
@@ -2134,4 +2135,6 @@ SnapTranslator.dict.zh_CN = { ...SnapTranslator.dict.zh_CN,
     "97 Sound #cf4ad9": "97 声音色 #cf4ad9",
     "98 purple #7f007f": "98 紫色 #7f007f",
     "99 dark magenta #8b008b": "99 深品红 #8b008b",
+    "expression": "积木式",
+    "strict": "严格类型检查？",
 };
