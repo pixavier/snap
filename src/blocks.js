@@ -164,7 +164,7 @@ CustomHatBlockMorph, GrayPaletteMorph, ZOOM*/
 
 // Global stuff ////////////////////////////////////////////////////////
 
-modules.blocks = '2026-April-17';
+modules.blocks = '2026-April-27';
 
 var SyntaxElementMorph;
 var BlockMorph;
@@ -11388,6 +11388,7 @@ InputSlotMorph.prototype.menuFromDict = function (
 	function update(num) {
     	myself.setContents(num);
         myself.reactToSliderEdit();
+        myself.reactToEdit();
         if (trgt && !block.isTemplate) {
             trgt.recordUserEdit(
                 'scripts',
@@ -12338,7 +12339,10 @@ InputSlotMorph.prototype.pianoKeyboardMenu = function (searching) {
         instrument = block.scriptTarget().instrument;
     }
     menu = new PianoMenuMorph(
-        this.setContents,
+        (value) => {
+            this.setContents(value);
+            this.reactToEdit();
+        },
         this,
         this.fontSize,
         instrument
@@ -12347,7 +12351,7 @@ InputSlotMorph.prototype.pianoKeyboardMenu = function (searching) {
         this.right() - (menu.width() / 2),
         this.bottom()
     ));
-    menu.selectKey(Math.min(Math.max(+this.evaluate(), 0), 143));
+    menu.selectKey(Math.min(Math.max(+this.evaluate() || 0, 0), 143));
 };
 
 InputSlotMorph.prototype.directionDialMenu = function (searching) {
@@ -14149,10 +14153,7 @@ TextSlotMorph.prototype.init = function (
 // TextSlotMorph accessing:
 
 TextSlotMorph.prototype.getSpec = function () {
-    if (this.isNumeric) {
-        return '%mlt';
-    }
-    return '%mlt'; // default
+    return '%mlt';
 };
 
 TextSlotMorph.prototype.contents = function () {

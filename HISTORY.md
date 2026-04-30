@@ -75,6 +75,7 @@
     * data types
         * enhanced "is ... a ...?" predicate to support dependent data types and user defined structs (ADTs)
     * ui
+        * the green-flag button changes its color to red while any script has an error
         * keep result balloons "attached" to their originating block / script when scrolling
         * added icons to the IDE tabs (scripts, costumes, sounds)
         * added "plus" signs to the buttons in the corral bar to emphasize that a new sprite is created by clicking them
@@ -82,9 +83,11 @@
         * dialog boxes are more bright and their buttons more discernible in bright mode 
         * rearranged IDE settings menu items into "looks" submenu
         * sprite icons no longer blur when the sprite size is reduced or the zoom level increases
+        * sprite icons no longer display graphics effects, but the original costume
         * resizing the browser / window in presentation ("app") mode scales the stage smoothly
         * removed "stage selected, no motion primitives" text from the palette to support sprite-less microworlds
         * turned "language", "looks" and "microphone resolution" menus into settings-submenus
+        * rearranged some slot types in the long form input dialog so default "Any type" is the first one top left
     * blocks
         * removed landscape orientation of text-input slots
     * meta-programming
@@ -118,6 +121,45 @@
     * Chinese, thank you, @Ayist14 !
     * Catalan, thanks, Joan!
     * German
+
+### 2026-04-30
+* morphic, store: new World>>once mechanism for dynamic scheduling used to load projects and apply settings
+* store: fixed including the blocks zoom level in templates and derived projects
+* v12 beta 260430
+
+### 2026-04-29
+* Catalan translation update, thank you, Joan!
+* objects: fixed applying graphics effects to sprites
+* fixed initialization of the "Shapes" library, thanks, @DarDoro, for the report!
+* objects: added basic support for writing in "overdraw" mode on a costume-less sprite
+* v12 beta 260429
+
+### 2026-04-28
+* store: refactored loading local custom blocks with custom dropdowns in variadic slots
+* objects: fixed "fill" for the stage
+* v12 beta 260428
+
+### 2026-04-27
+* gui: made green-flag button change its color to red while any script has an error
+* blocks: guard piano keyboard dropdown menu against non-numerical values 
+* byob: rearranged some slot types in the long form input dialog so default "Any type" is the first one top left
+* store: tweaked loading local custom blocks to refresh custom dropdowns in variadic slots 
+* v12 beta 260427
+
+### 2026-04-23
+* blocks: trigger "When slot signals edited" for piano keyboard and direction dial dropdown menus
+* v12 beta 260423
+
+### 2026-04-22
+* morphic: work around occasional global zoom rendering artifacts
+* v12 beta 260422
+
+### 2026-04-21
+* gui: don't log edit changes when switching to another language
+* gui, sw: Snap! v12 beta 260421 - removed dev warning dialog
+
+### 2026-04-20
+* gui, store: don't include ide settings in tutorial scenes
 
 ### 2026-04-17
 * blocks: pause auto-following of result balloons while resizing shown watchers

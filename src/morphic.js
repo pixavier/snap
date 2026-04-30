@@ -1289,6 +1289,15 @@
 
     method.
 
+    Animations can further be used to schedule a function execution dynamically
+    once a condition has been met, avoiding the need to specify an event or
+    a promise. A syntactic shortcut for single-time conditional scheduling
+    exists in the WorldMorph's
+
+        once()
+
+    method.
+
 
     (11) minifying morphic.js
     -------------------------
@@ -1367,7 +1376,7 @@
 
 /*jshint esversion: 11, bitwise: false*/
 
-var morphicVersion = '2026-February-21';
+var morphicVersion = '2026-April-30';
 var modules = {}; // keep track of additional loaded modules
 var useBlurredShadows = true;
 var ZOOM = 1;
@@ -12103,9 +12112,12 @@ WorldMorph.prototype.fullDrawOn = function (aContext, aRect) {
 };
 
 WorldMorph.prototype.updateBroken = function () {
-    var ctx = this.worldCanvas.getContext('2d');
+    var ctx = this.worldCanvas.getContext('2d'),
+        i;
     this.condenseDamages();
-    ctx.restore(); // make sure to hit rock-bottom scale
+    for (i = 0; i < 4; i += 1) { // kludge alert:
+        ctx.restore(); // make sure to hit rock-bottom scale
+    }
     ctx.save();
     ctx.scale(ZOOM, ZOOM);
     this.broken.forEach(rect => {
@@ -12254,6 +12266,33 @@ WorldMorph.prototype.schedule = function (callback, timeout) {
     );
     this.animations.push(schedule);
     return schedule;
+};
+
+WorldMorph.prototype.once = function (
+    conditionCallback,
+    actionCallback
+) {
+    // run a function - the actionCallback - once the given condition
+    // has been met, answer an Animation object
+    var condition = new Animation(
+        nop, // setter
+        nop, // getter
+        0, // delta
+        0, // duration msecs
+        nop, // easing
+        nop // onComplete
+    );
+
+    condition.step = function () {
+        if (!this.isActive) {return; }
+        if (conditionCallback()) {
+            this.isActive = false;
+            actionCallback();
+        }
+    };
+
+    this.animations.push(condition);
+    return condition;
 };
 
 // WorldMorph global pixel access:

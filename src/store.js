@@ -63,7 +63,7 @@ Project, CustomHatBlockMorph, SnapVersion, ADT_SlotMorph, SnapTranslator*/
 
 // Global stuff ////////////////////////////////////////////////////////
 
-modules.store = '2026-April-15';
+modules.store = '2026-April-30';
 
 // XML_Serializer ///////////////////////////////////////////////////////
 /*
@@ -347,9 +347,10 @@ SnapSerializer.prototype.loadProjectModel = function (
         scenesModel = xmlNode.childNamed('scenes'),
         shouldRefresh = false,
         project = new Project(),
-        template, langLoop, scaleLoop;
+        template;
 
     function applyConfiguration() {
+        var wrld = ide.world();
         if (!isNil(template.attributes.flat)) {
             if (template.attributes.flat === 'true') {
                 ide.setFlatDesign();
@@ -369,24 +370,18 @@ SnapSerializer.prototype.loadProjectModel = function (
         if (template.attributes.lang &&
             (template.attributes.lang !== SnapTranslator.language)
         ) {
-            langLoop = setInterval(() => {
-                if (isLoadingAssets()) {
-                    return;
-                }
-                clearInterval(langLoop);
-                ide.setLanguage(template.attributes.lang, null, true);
-            });
+            wrld.once(
+                () => !isLoadingAssets(),
+                () => ide.setLanguage(template.attributes.lang, null, true)
+            );
         }
         if (template.attributes.scale &&
             (+template.attributes.scale !== SyntaxElementMorph.prototype.scale)
         ) {
-            scaleLoop = setInterval(() => {
-                if (isLoadingAssets()) {
-                    return;
-                }
-                clearInterval(scaleLoop);
-                ide.setBlocksScale(+template.attributes.scale, true);
-            });
+            wrld.once(
+                () => !isLoadingAssets(),
+                () => ide.setBlocksScale(+template.attributes.scale, true)
+            );
         }
         if (shouldRefresh) {
             ide.buildPanes();
@@ -453,6 +448,7 @@ SnapSerializer.prototype.loadScene = function (
         hidden,
         lang,
         zoom,
+        scale,
         fade,
         flat,
         bright,
@@ -505,6 +501,7 @@ SnapSerializer.prototype.loadScene = function (
     if (model.template) {
         lang = model.template.attributes.lang;
         zoom = model.template.attributes.zoom;
+        scale = model.template.attributes.scale;
         fade = model.template.attributes.fade;
         flat = model.template.attributes.flat;
         bright = model.template.attributes.bright;
@@ -525,6 +522,7 @@ SnapSerializer.prototype.loadScene = function (
         };
         if (!isNil(lang)) {scene.template.lang = lang; }
         if (!isNil(zoom)) {scene.template.zoom = zoom; }
+        if (!isNil(scale)) {scene.template.scale = scale; }
         if (!isNil(fade)) {scene.template.fade = fade; }
         if (!isNil(flat)) {scene.template.flat = flat; }
         if (!isNil(bright)) {scene.template.bright = bright; }
@@ -1704,6 +1702,16 @@ SnapSerializer.prototype.loadBlock = function (model, isReporter, object) {
             }
         }
     });
+    if (block.isCustomBlock && !block.isGlobal) {
+        // refresh local custom blocks to activate
+        // custom dropdonws in variadic slots, if any
+        block.inputs().forEach((inp, i) => {
+            if (inp instanceof MultiArgMorph
+            ) {
+                inp.setChoices.apply(inp, info.inputOptionsOfIdx(i));
+            }
+        });
+    }
     block.cachedInputs = null;
     return block;
 };
@@ -2282,7 +2290,8 @@ Scene.prototype.toXML = function (serializer) {
                 (a, b) => a + ' ' + b,
                 ''
             ),
-        this.template.hide ? templateXML(this.template) : '',
+        this.template.hide && (this.role !== 'tutorial') ?
+            templateXML(this.template) : '',
         code('codeHeaders'),
         code('codeMappings'),
         serializer.store(this.stage.globalBlocks),

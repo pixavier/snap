@@ -87,11 +87,11 @@ HatBlockMorph, ZOOM*/
 
 // Global stuff ////////////////////////////////////////////////////////
 
-modules.gui = '2026-April-15';
+modules.gui = '2026-April-30';
 
 // Declarations
 
-var SnapVersion = '12-dev';
+var SnapVersion = '12-beta-260430';
 
 var IDE_Morph;
 var ProjectDialogMorph;
@@ -1177,6 +1177,12 @@ IDE_Morph.prototype.createControlBar = function () {
             activeColor.lighter(40),
             activeColor.lighter(40)
         ],
+        errorColor = new Color(173, 15, 0),
+        errorColors = [
+            errorColor,
+            errorColor.lighter(40),
+            errorColor.lighter(40)
+        ],
         myself = this;
 
     if (this.controlBar) {
@@ -1377,23 +1383,35 @@ IDE_Morph.prototype.createControlBar = function () {
     button.labelShadowOffset = new Point(-1, -1);
     button.labelShadowColor = colors[1];
     button.fps = 4;
-    button.isActive = false;
+    button.shownState = 'idle'; // 'active', 'error'
 
     button.step = function () {
-        var isRunning;
+        var state;
         if (!myself.stage) {
             return;
         }
-        isRunning = !!myself.stage.threads.processes.length;
-        if (isRunning === this.isActive) {
+        if (myself.stage.threads.processes.length) {
+            state = myself.stage.threads.processes.some(any => any.errorFlag) ?
+                'error' : 'active';
+        } else {
+            state = 'idle';
+        }
+        if (state === this.shownState) {
             return;
         }
-        this.isActive = isRunning;
-        if (isRunning) {
+        this.shownState = state;
+        switch (state) {
+        case 'active':
             this.color = activeColors[0];
             this.highlightColor = activeColors[1];
             this.pressColor = activeColors[2];
-        } else {
+            break;
+        case 'error':
+            this.color = errorColors[0];
+            this.highlightColor = errorColors[1];
+            this.pressColor = errorColors[2];
+            break;
+        default: // 'idle'
             this.color = colors[0];
             this.highlightColor = colors[1];
             this.pressColor = colors[2];
@@ -2902,10 +2920,10 @@ IDE_Morph.prototype.getProjectName = function () {
     return this.scenes.at(1).name;
 };
 
-IDE_Morph.prototype.setProjectName = function (string) {
+IDE_Morph.prototype.setProjectName = function (string, noChange) {
     var projectScene = this.scenes.at(1),
         name = this.newSceneName(string, projectScene);
-    if (name !== projectScene.name) {
+    if (name !== projectScene.name && !noChange) {
         projectScene.name = name;
         projectScene.stage.version = Date.now();
         this.recordUnsavedChanges();
@@ -5254,7 +5272,9 @@ IDE_Morph.prototype.settingsMenu = function () {
             'check to turn this scene\ninto a tutorial'
         );
     }
-    if (this.scene.role === 'template' || this.scene.template.hide) {
+    if ((this.scene.role === 'template' || this.scene.template.hide) &&
+        this.scene.role !== 'tutorial'
+    ) {
         addPreferenceMenu(
             'Include settings',
             this.scene.hasEmbeddedTemplateSettings(),
@@ -8252,7 +8272,7 @@ IDE_Morph.prototype.reflectLanguage = function (lang, callback, noSave) {
             this.scene.createdFromTemplate = false;
             onComplete = () => {
                 this.scene.createdFromTemplate = true;
-                this.setProjectName(name);
+                this.setProjectName(name, true);
                 if (tutorial) {
                     this.launchProjectTutorial();
                 }
