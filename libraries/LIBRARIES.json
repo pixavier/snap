@@ -1389,6 +1389,10 @@
       "ca": {
         "name": "Contorns i Halos",
         "description": "Crea i mostra contorns i halos dinàmics als vestits dels objectes"
+      },
+      "zh_CN": {
+        "name": "光环库",
+        "description": "计算并显示角色当前造型周围的光环"
       }
     }
   },
