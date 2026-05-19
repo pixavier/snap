@@ -1,81 +1,5 @@
 [
   {
-    "fileName": "0-pixel.svg",
-    "name": "0 pixel"
-  },
-  {
-    "fileName": "1-glow.svg",
-    "name": "1 glow"
-  },
-  {
-    "fileName": "1-pixel.svg",
-    "name": "1 pixel"
-  },
-  {
-    "fileName": "2-glow.svg",
-    "name": "2 glow"
-  },
-  {
-    "fileName": "2-pixel.svg",
-    "name": "2 pixel"
-  },
-  {
-    "fileName": "3-glow.svg",
-    "name": "3 glow"
-  },
-  {
-    "fileName": "3-pixel.svg",
-    "name": "3 pixel"
-  },
-  {
-    "fileName": "4-glow.svg",
-    "name": "4 glow"
-  },
-  {
-    "fileName": "4-pixel.svg",
-    "name": "4 pixel"
-  },
-  {
-    "fileName": "5-glow.svg",
-    "name": "5 glow"
-  },
-  {
-    "fileName": "5-pixel.svg",
-    "name": "5 pixel"
-  },
-  {
-    "fileName": "6-glow.svg",
-    "name": "6 glow"
-  },
-  {
-    "fileName": "6-pixel.svg",
-    "name": "6 pixel"
-  },
-  {
-    "fileName": "7-glow.svg",
-    "name": "7 glow"
-  },
-  {
-    "fileName": "7-pixel.svg",
-    "name": "7 pixel"
-  },
-  {
-    "fileName": "8-glow.svg",
-    "name": "8 glow"
-  },
-  {
-    "fileName": "8-pixel.svg",
-    "name": "8 pixel"
-  },
-  {
-    "fileName": "9-glow.svg",
-    "name": "9 glow"
-  },
-  {
-    "fileName": "9-pixel.svg",
-    "name": "9 pixel"
-  },
-  {
     "fileName": "abby-a.svg",
     "name": "abby a"
   },
@@ -92,28 +16,20 @@
     "name": "abby d"
   },
   {
-    "fileName": "a-block.svg",
-    "name": "a block"
-  },
-  {
-    "fileName": "A-glow.svg",
-    "name": "A glow"
-  },
-  {
     "fileName": "airplane2.png",
     "name": "airplane2"
-  },
-  {
-    "fileName": "alonzo.gif",
-    "name": "alonzo"
   },
   {
     "fileName": "alonzo.png",
     "name": "alonzo"
   },
   {
-    "fileName": "A-pixel.svg",
-    "name": "A pixel"
+    "fileName": "Alonzo3D.png",
+    "name": "alonzo (3D)"
+  },
+  {
+    "fileName": "alonzo.svg",
+    "name": "alonzo (vector)"
   },
   {
     "fileName": "apple.svg",
@@ -134,18 +50,6 @@
   {
     "fileName": "arrow1-d.svg",
     "name": "arrow1 d"
-  },
-  {
-    "fileName": "A-story-1.svg",
-    "name": "A story 1"
-  },
-  {
-    "fileName": "A-story-2.svg",
-    "name": "A story 2"
-  },
-  {
-    "fileName": "A-story-3.svg",
-    "name": "A story 3"
   },
   {
     "fileName": "avery-a.svg",
@@ -272,10 +176,6 @@
     "name": "bat2 b"
   },
   {
-    "fileName": "b-block.svg",
-    "name": "b block"
-  },
-  {
     "fileName": "beachball.svg",
     "name": "beachball"
   },
@@ -312,10 +212,6 @@
     "name": "bells b"
   },
   {
-    "fileName": "B-glow.svg",
-    "name": "B glow"
-  },
-  {
     "fileName": "bowl-a.svg",
     "name": "bowl a"
   },
@@ -328,10 +224,6 @@
     "name": "bowtie b"
   },
   {
-    "fileName": "B-pixel.svg",
-    "name": "B pixel"
-  },
-  {
     "fileName": "breakdancer1-a.png",
     "name": "breakdancer1 a"
   },
@@ -342,18 +234,6 @@
   {
     "fileName": "breakdancer1-c.png",
     "name": "breakdancer1 c"
-  },
-  {
-    "fileName": "B-story-1.svg",
-    "name": "B story 1"
-  },
-  {
-    "fileName": "B-story-2.svg",
-    "name": "B story 2"
-  },
-  {
-    "fileName": "B-story-3.svg",
-    "name": "B story 3"
   },
   {
     "fileName": "building-a.svg",
@@ -496,14 +376,6 @@
     "name": "cat4"
   },
   {
-    "fileName": "c-block.svg",
-    "name": "c block"
-  },
-  {
-    "fileName": "C-glow.svg",
-    "name": "C glow"
-  },
-  {
     "fileName": "cloud-a.svg",
     "name": "cloud a"
   },
@@ -578,10 +450,6 @@
     "name": "cowbell"
   },
   {
-    "fileName": "C-pixel.svg",
-    "name": "C pixel"
-  },
-  {
     "fileName": "crab-a.svg",
     "name": "crab a"
   },
@@ -602,18 +470,6 @@
     "name": "creature1 c"
   },
   {
-    "fileName": "C-story-1.svg",
-    "name": "C story 1"
-  },
-  {
-    "fileName": "C-story-2.svg",
-    "name": "C story 2"
-  },
-  {
-    "fileName": "C-story-3.svg",
-    "name": "C story 3"
-  },
-  {
     "fileName": "cymbal-a.svg",
     "name": "cymbal a"
   },
@@ -632,10 +488,6 @@
   {
     "fileName": "dani-c.svg",
     "name": "dani c"
-  },
-  {
-    "fileName": "d-block.svg",
-    "name": "d block"
   },
   {
     "fileName": "dee-a.svg",
@@ -672,10 +524,6 @@
   {
     "fileName": "devin-d.svg",
     "name": "devin d"
-  },
-  {
-    "fileName": "D-glow.svg",
-    "name": "D glow"
   },
   {
     "fileName": "dinosaur1-a.svg",
@@ -786,10 +634,6 @@
     "name": "dove2 b"
   },
   {
-    "fileName": "D-pixel.svg",
-    "name": "D pixel"
-  },
-  {
     "fileName": "dragon1-a.png",
     "name": "dragon1 a"
   },
@@ -850,18 +694,6 @@
     "name": "drum snare b"
   },
   {
-    "fileName": "D-story-1.svg",
-    "name": "D story 1"
-  },
-  {
-    "fileName": "D-story-2.svg",
-    "name": "D story 2"
-  },
-  {
-    "fileName": "D-story-3.svg",
-    "name": "D story 3"
-  },
-  {
     "fileName": "duck.svg",
     "name": "duck"
   },
@@ -870,44 +702,12 @@
     "name": "earth"
   },
   {
-    "fileName": "e-block.svg",
-    "name": "e block"
-  },
-  {
-    "fileName": "E-glow.svg",
-    "name": "E glow"
-  },
-  {
     "fileName": "elephant-a_.svg",
     "name": "elephant a"
   },
   {
     "fileName": "elephant-b_.svg",
     "name": "elephant b"
-  },
-  {
-    "fileName": "E-pixel.svg",
-    "name": "E pixel"
-  },
-  {
-    "fileName": "E-story-1.svg",
-    "name": "E story 1"
-  },
-  {
-    "fileName": "E-story-2.svg",
-    "name": "E story 2"
-  },
-  {
-    "fileName": "E-story-3.svg",
-    "name": "E story 3"
-  },
-  {
-    "fileName": "f-block.svg",
-    "name": "f block"
-  },
-  {
-    "fileName": "F-glow.svg",
-    "name": "F glow"
   },
   {
     "fileName": "fish1.svg",
@@ -930,36 +730,12 @@
     "name": "fox"
   },
   {
-    "fileName": "F-pixel.svg",
-    "name": "F pixel"
-  },
-  {
     "fileName": "frog.svg",
     "name": "frog"
   },
   {
     "fileName": "fruitsalad.svg",
     "name": "fruitsalad"
-  },
-  {
-    "fileName": "F-story-1.svg",
-    "name": "F story 1"
-  },
-  {
-    "fileName": "F-story-2.svg",
-    "name": "F story 2"
-  },
-  {
-    "fileName": "F-story-3.svg",
-    "name": "F story 3"
-  },
-  {
-    "fileName": "g-block.svg",
-    "name": "g block"
-  },
-  {
-    "fileName": "G-glow.svg",
-    "name": "G glow"
   },
   {
     "fileName": "ghost1_.svg",
@@ -1030,24 +806,8 @@
     "name": "glass water b"
   },
   {
-    "fileName": "G-pixel.svg",
-    "name": "G pixel"
-  },
-  {
     "fileName": "green_flag.svg",
     "name": "green flag"
-  },
-  {
-    "fileName": "G-story-1.svg",
-    "name": "G story 1"
-  },
-  {
-    "fileName": "G-story-2.svg",
-    "name": "G story 2"
-  },
-  {
-    "fileName": "G-story-3.svg",
-    "name": "G story 3"
   },
   {
     "fileName": "guitar_bass.svg",
@@ -1080,10 +840,6 @@
   {
     "fileName": "hat_wizard.svg",
     "name": "hat wizard"
-  },
-  {
-    "fileName": "h-block.svg",
-    "name": "h block"
   },
   {
     "fileName": "headband.svg",
@@ -1122,10 +878,6 @@
     "name": "helicopter"
   },
   {
-    "fileName": "H-glow.svg",
-    "name": "H glow"
-  },
-  {
     "fileName": "hippo1-a.svg",
     "name": "hippo1 a"
   },
@@ -1152,46 +904,6 @@
   {
     "fileName": "horse1-b.svg",
     "name": "horse1 b"
-  },
-  {
-    "fileName": "H-pixel.svg",
-    "name": "H pixel"
-  },
-  {
-    "fileName": "H-story-1.svg",
-    "name": "H story 1"
-  },
-  {
-    "fileName": "H-story-2.svg",
-    "name": "H story 2"
-  },
-  {
-    "fileName": "H-story-3.svg",
-    "name": "H story 3"
-  },
-  {
-    "fileName": "i-block.svg",
-    "name": "i block"
-  },
-  {
-    "fileName": "I-glow.svg",
-    "name": "I glow"
-  },
-  {
-    "fileName": "I-pixel.svg",
-    "name": "I pixel"
-  },
-  {
-    "fileName": "I-story-1.svg",
-    "name": "I story 1"
-  },
-  {
-    "fileName": "I-story-2.svg",
-    "name": "I story 2"
-  },
-  {
-    "fileName": "I-story-3.svg",
-    "name": "I story 3"
   },
   {
     "fileName": "jaime-a.png",
@@ -1222,10 +934,6 @@
     "name": "jaime walking e"
   },
   {
-    "fileName": "j-block.svg",
-    "name": "j block"
-  },
-  {
     "fileName": "jeans-a.svg",
     "name": "jeans a"
   },
@@ -1234,36 +942,12 @@
     "name": "jeans b"
   },
   {
-    "fileName": "J-glow.svg",
-    "name": "J glow"
-  },
-  {
-    "fileName": "J-pixel.svg",
-    "name": "J pixel"
-  },
-  {
-    "fileName": "J-story-1.svg",
-    "name": "J story 1"
-  },
-  {
-    "fileName": "J-story-2.svg",
-    "name": "J story 2"
-  },
-  {
-    "fileName": "J-story-3.svg",
-    "name": "J story 3"
-  },
-  {
     "fileName": "kai-a.png",
     "name": "kai a"
   },
   {
     "fileName": "kai-b.png",
     "name": "kai b"
-  },
-  {
-    "fileName": "k-block.svg",
-    "name": "k block"
   },
   {
     "fileName": "keyboard-a.svg",
@@ -1315,28 +999,8 @@
     }
   },
   {
-    "fileName": "K-glow.svg",
-    "name": "K glow"
-  },
-  {
     "fileName": "knight.svg",
     "name": "knight"
-  },
-  {
-    "fileName": "K-pixel.svg",
-    "name": "K pixel"
-  },
-  {
-    "fileName": "K-story-1.svg",
-    "name": "K story 1"
-  },
-  {
-    "fileName": "K-story-2.svg",
-    "name": "K story 2"
-  },
-  {
-    "fileName": "K-story-3.svg",
-    "name": "K story 3"
   },
   {
     "fileName": "ladybug2-a.svg",
@@ -1359,14 +1023,6 @@
     "name": "laptop"
   },
   {
-    "fileName": "l-block.svg",
-    "name": "l block"
-  },
-  {
-    "fileName": "L-glow.svg",
-    "name": "L glow"
-  },
-  {
     "fileName": "lightning.svg",
     "name": "lightning"
   },
@@ -1383,22 +1039,6 @@
     "name": "lioness"
   },
   {
-    "fileName": "L-pixel.svg",
-    "name": "L pixel"
-  },
-  {
-    "fileName": "L-story-1.svg",
-    "name": "L story 1"
-  },
-  {
-    "fileName": "L-story-2.svg",
-    "name": "L story 2"
-  },
-  {
-    "fileName": "L-story-3.svg",
-    "name": "L story 3"
-  },
-  {
     "fileName": "magiccarpet.png",
     "name": "magiccarpet"
   },
@@ -1413,14 +1053,6 @@
   {
     "fileName": "maya.png",
     "name": "maya"
-  },
-  {
-    "fileName": "m-block.svg",
-    "name": "m block"
-  },
-  {
-    "fileName": "M-glow.svg",
-    "name": "M glow"
   },
   {
     "fileName": "microphonestand.svg",
@@ -1463,22 +1095,6 @@
     "name": "mouse1 b"
   },
   {
-    "fileName": "M-pixel.svg",
-    "name": "M pixel"
-  },
-  {
-    "fileName": "M-story-1.svg",
-    "name": "M story 1"
-  },
-  {
-    "fileName": "M-story-2.svg",
-    "name": "M story 2"
-  },
-  {
-    "fileName": "M-story-3.svg",
-    "name": "M story 3"
-  },
-  {
     "fileName": "muffin-a.svg",
     "name": "muffin a"
   },
@@ -1487,48 +1103,12 @@
     "name": "muffin b"
   },
   {
-    "fileName": "n-block.svg",
-    "name": "n block"
-  },
-  {
-    "fileName": "N-glow.svg",
-    "name": "N glow"
-  },
-  {
-    "fileName": "N-pixel.svg",
-    "name": "N pixel"
-  },
-  {
-    "fileName": "N-story-1.svg",
-    "name": "N story 1"
-  },
-  {
-    "fileName": "N-story-2.svg",
-    "name": "N story 2"
-  },
-  {
-    "fileName": "N-story-3.svg",
-    "name": "N story 3"
-  },
-  {
-    "fileName": "o-block.svg",
-    "name": "o block"
-  },
-  {
     "fileName": "octopus-a.svg",
     "name": "octopus a"
   },
   {
     "fileName": "octopus-b.svg",
     "name": "octopus b"
-  },
-  {
-    "fileName": "O-glow.svg",
-    "name": "O glow"
-  },
-  {
-    "fileName": "O-pixel.svg",
-    "name": "O pixel"
   },
   {
     "fileName": "orange2-a.svg",
@@ -1545,18 +1125,6 @@
   {
     "fileName": "orange.svg",
     "name": "orange"
-  },
-  {
-    "fileName": "O-story-1.svg",
-    "name": "O story 1"
-  },
-  {
-    "fileName": "O-story-2.svg",
-    "name": "O story 2"
-  },
-  {
-    "fileName": "O-story-3.svg",
-    "name": "O story 3"
   },
   {
     "fileName": "paddle.svg",
@@ -1585,10 +1153,6 @@
   {
     "fileName": "partyhat1.svg",
     "name": "partyhat1"
-  },
-  {
-    "fileName": "p-block.svg",
-    "name": "p block"
   },
   {
     "fileName": "pencil-a.svg",
@@ -1635,20 +1199,12 @@
     "name": "penguin3 c"
   },
   {
-    "fileName": "P-glow.svg",
-    "name": "P glow"
-  },
-  {
     "fileName": "piano.svg",
     "name": "piano"
   },
   {
     "fileName": "planet2.svg",
     "name": "planet2"
-  },
-  {
-    "fileName": "P-pixel.svg",
-    "name": "P pixel"
   },
   {
     "fileName": "princess.svg",
@@ -1659,56 +1215,12 @@
     "name": "prince"
   },
   {
-    "fileName": "P-story-1.svg",
-    "name": "P story 1"
-  },
-  {
-    "fileName": "P-story-2.svg",
-    "name": "P story 2"
-  },
-  {
-    "fileName": "P-story-3.svg",
-    "name": "P story 3"
-  },
-  {
-    "fileName": "q-block.svg",
-    "name": "q block"
-  },
-  {
-    "fileName": "Q-glow.svg",
-    "name": "Q glow"
-  },
-  {
-    "fileName": "Q-pixel.svg",
-    "name": "Q pixel"
-  },
-  {
-    "fileName": "Q-story-1.svg",
-    "name": "Q story 1"
-  },
-  {
-    "fileName": "Q-story-2.svg",
-    "name": "Q story 2"
-  },
-  {
-    "fileName": "Q-story-3.svg",
-    "name": "Q story 3"
-  },
-  {
     "fileName": "rainbow.svg",
     "name": "rainbow"
   },
   {
-    "fileName": "r-block.svg",
-    "name": "r block"
-  },
-  {
     "fileName": "reindeer.svg",
     "name": "reindeer"
-  },
-  {
-    "fileName": "R-glow.svg",
-    "name": "R glow"
   },
   {
     "fileName": "robot1.svg",
@@ -1721,22 +1233,6 @@
   {
     "fileName": "rory.png",
     "name": "rory"
-  },
-  {
-    "fileName": "R-pixel.svg",
-    "name": "R pixel"
-  },
-  {
-    "fileName": "R-story-1.svg",
-    "name": "R story 1"
-  },
-  {
-    "fileName": "R-story-2.svg",
-    "name": "R story 2"
-  },
-  {
-    "fileName": "R-story-3.svg",
-    "name": "R story 3"
   },
   {
     "fileName": "ruby-a.png",
@@ -1759,20 +1255,12 @@
     "name": "saxophone b"
   },
   {
-    "fileName": "s-block.svg",
-    "name": "s block"
-  },
-  {
     "fileName": "scarf1.svg",
     "name": "scarf1"
   },
   {
     "fileName": "scarf2.svg",
     "name": "scarf2"
-  },
-  {
-    "fileName": "S-glow.svg",
-    "name": "S glow"
   },
   {
     "fileName": "shark-a_.svg",
@@ -1855,22 +1343,6 @@
     "name": "speaker"
   },
   {
-    "fileName": "S-pixel.svg",
-    "name": "S pixel"
-  },
-  {
-    "fileName": "S-story-1.svg",
-    "name": "S story 1"
-  },
-  {
-    "fileName": "S-story-2.svg",
-    "name": "S story 2"
-  },
-  {
-    "fileName": "S-story-3.svg",
-    "name": "S story 3"
-  },
-  {
     "fileName": "star1.svg",
     "name": "star1"
   },
@@ -1927,10 +1399,6 @@
     "name": "taco b"
   },
   {
-    "fileName": "t-block.svg",
-    "name": "t block"
-  },
-  {
     "fileName": "tennisball.png",
     "name": "tennisball"
   },
@@ -1941,14 +1409,6 @@
   {
     "fileName": "text_Halloween.svg",
     "name": "text Halloween"
-  },
-  {
-    "fileName": "T-glow.svg",
-    "name": "T glow"
-  },
-  {
-    "fileName": "T-pixel.svg",
-    "name": "T pixel"
   },
   {
     "fileName": "trampoline.png",
@@ -1995,26 +1455,6 @@
     "name": "trumpet a"
   },
   {
-    "fileName": "T-story-1.svg",
-    "name": "T story 1"
-  },
-  {
-    "fileName": "T-story-2.svg",
-    "name": "T story 2"
-  },
-  {
-    "fileName": "T-story-3.svg",
-    "name": "T story 3"
-  },
-  {
-    "fileName": "u-block.svg",
-    "name": "u block"
-  },
-  {
-    "fileName": "U-glow.svg",
-    "name": "U glow"
-  },
-  {
     "fileName": "ukulele.svg",
     "name": "ukulele"
   },
@@ -2031,52 +1471,12 @@
     "name": "unicorn"
   },
   {
-    "fileName": "U-pixel.svg",
-    "name": "U pixel"
-  },
-  {
-    "fileName": "U-story-1.svg",
-    "name": "U story 1"
-  },
-  {
-    "fileName": "U-story-2.svg",
-    "name": "U story 2"
-  },
-  {
-    "fileName": "U-story-3.svg",
-    "name": "U story 3"
-  },
-  {
-    "fileName": "v-block.svg",
-    "name": "v block"
-  },
-  {
     "fileName": "vest-a.svg",
     "name": "vest a"
   },
   {
     "fileName": "vest-b.svg",
     "name": "vest b"
-  },
-  {
-    "fileName": "V-glow.svg",
-    "name": "V glow"
-  },
-  {
-    "fileName": "V-pixel.svg",
-    "name": "V pixel"
-  },
-  {
-    "fileName": "V-story-1.svg",
-    "name": "V story 1"
-  },
-  {
-    "fileName": "V-story-2.svg",
-    "name": "V story 2"
-  },
-  {
-    "fileName": "V-story-3.svg",
-    "name": "V story 3"
   },
   {
     "fileName": "wanda.svg",
@@ -2095,14 +1495,6 @@
     "name": "watermelon c"
   },
   {
-    "fileName": "w-block.svg",
-    "name": "w block"
-  },
-  {
-    "fileName": "W-glow.svg",
-    "name": "W glow"
-  },
-  {
     "fileName": "witch.svg",
     "name": "witch"
   },
@@ -2117,46 +1509,5 @@
   {
     "fileName": "wizard.svg",
     "name": "wizard"
-  },
-  {
-    "fileName": "W-pixel.svg",
-    "name": "W pixel"
-  },
-  {
-    "fileName": "W-story-1.svg",
-    "name": "W story 1"
-  },
-  {
-    "fileName": "W-story-2.svg",
-    "name": "W story 2"
-  },
-  {
-    "fileName": "W-story-3.svg",
-    "name": "W story 3"
-  },
-  {
-    "fileName": "x-block.svg",
-    "name": "x block"
-  },
-  {
-    "fileName": "X-glow.svg",
-    "name": "X glow"
-  },
-  {
-    "fileName": "X-pixel.svg",
-    "name": "X pixel"
-  },
-  {
-    "fileName": "X-story-1.svg",
-    "name": "X story 1"
-  },
-  {
-    "fileName": "X-story-2.svg",
-    "name": "X story 2"
-  },
-  {
-    "fileName": "X-story-3.svg",
-    "name": "X story 3"
   }
 ]
-

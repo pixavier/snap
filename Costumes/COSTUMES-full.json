@@ -104,12 +104,16 @@
     "name": "airplane2"
   },
   {
-    "fileName": "alonzo.gif",
+    "fileName": "alonzo.png",
     "name": "alonzo"
   },
   {
-    "fileName": "alonzo.png",
-    "name": "alonzo"
+    "fileName": "Alonzo3D.png",
+    "name": "alonzo (3D)"
+  },
+  {
+    "fileName": "alonzo.svg",
+    "name": "alonzo (vector)"
   },
   {
     "fileName": "A-pixel.svg",
