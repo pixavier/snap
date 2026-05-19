@@ -87,7 +87,7 @@ HatBlockMorph, ZOOM*/
 
 // Global stuff ////////////////////////////////////////////////////////
 
-modules.gui = '2026-May-15';
+modules.gui = '2026-May-19';
 
 // Declarations
 
@@ -10005,7 +10005,7 @@ IDE_Morph.prototype.launchTutorial = function (scene) {
     dlg.ide = this;
     scene.stage.setScale(1);
     scene.stage.tutorialMode = scene;
-    dlg.labelString = scene.name;
+    dlg.labelString = scene.displayName();
     dlg.createLabel();
     dlg.addBody(scene.stage);
     // dlg.addButton('ok', 'OK');
