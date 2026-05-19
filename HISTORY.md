@@ -116,11 +116,15 @@
     * updated API.md with new "zoom" configuration key for global magnification
 * **Translation Updates:**
     * new Vietnamese translation, thank you, Serge Faure @seeeerge !!
-    * new British-English translation, thank you, Mark de Boer !
+    * new Western Armenian translation, yay! Thanks to Avag Sayan and the Antrohoos Education Foundation !!
+    * new British-English translation, thank you, Mark de Boer !!
     * Polish, thank you, @P1neF0rest935 !
     * Chinese, thank you, @Ayist14 !
     * Catalan, thanks, Joan!
     * German
+
+### 2026-05-19
+* new Western Armenian translation, yay! Thanks to Avag Sayan and the Antrohoos Education Foundation!
 
 ### 2026-05-15
 * objects: another attempt at supporting fancy text writing when overdrawing a sprite
