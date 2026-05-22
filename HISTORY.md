@@ -128,6 +128,7 @@
 * objects: disabled asset context menus in tutorial mode
 * sw: took out removed human photo costumes from the cache
 * sw: added Ketrina's new costume to the offline cache
+* v12 rc2 260522
 
 ### 2026-05-19
 * new Western Armenian translation, yay! Thanks to Avag Sayan and the Antrohoos Education Foundation!
