@@ -124,6 +124,9 @@
     * Catalan, thanks, Joan!
     * German
 
+### 2026-05-22
+* objects: disabled asset context menus in tutorial mode
+
 ### 2026-05-19
 * new Western Armenian translation, yay! Thanks to Avag Sayan and the Antrohoos Education Foundation!
 * scenes, gui: Prefixing the scene name of a tutorial with an underscore avoids naming conflicts, the underscore will not get displayed in the tutorial window, and will not affect the translation of the name in the window title bar

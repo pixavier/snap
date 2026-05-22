@@ -96,7 +96,7 @@ CustomBlockDefinition, exportEmbroidery, CustomHatBlockMorph, HandMorph*/
 
 /*jshint esversion: 11*/
 
-modules.objects = '2026-May-15';
+modules.objects = '2026-May-22';
 
 var SpriteMorph;
 var StageMorph;
@@ -5871,7 +5871,10 @@ SpriteMorph.prototype.userMenu = function () {
         allParts,
         anchors;
 
-    if (ide && (ide.isAppMode || ide.config.noSpriteEdits)) {
+    if (
+        (ide && (ide.isAppMode || ide.config.noSpriteEdits)) ||
+        this.parentThatIsA(StageMorph)?.tutorialMode
+    ) {
         // menu.addItem('help', 'nop');
         return menu;
     }
@@ -12133,7 +12136,10 @@ StageMorph.prototype.userMenu = function () {
     var ide = this.parentThatIsA(IDE_Morph),
         menu = new MenuMorph(this);
 
-    if (ide && (ide.isAppMode || ide.config.noSpriteEdits)) {
+    if (
+        (ide && (ide.isAppMode || ide.config.noSpriteEdits)) ||
+        this.tutorialMode
+    ) {
         // menu.addItem('help', 'nop');
         return menu;
     }
@@ -16039,7 +16045,10 @@ WatcherMorph.prototype.userMenu = function () {
         );
     }
 
-    if (ide && ide.isAppMode) { // prevent context menu in app mode
+    if (
+        (ide && ide.isAppMode) ||
+        this.parentThatIsA(StageMorph)?.tutorialMode
+    ) { // prevent context menu in app and tutorial mode
         return;
     }
 
