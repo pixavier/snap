@@ -54,7 +54,7 @@ ScriptsMorph*/
 
 // Global stuff ////////////////////////////////////////////////////////
 
-modules.scenes = '2026-April-15';
+modules.scenes = '2026-May-19';
 
 // Projecct /////////////////////////////////////////////////////////
 
@@ -257,6 +257,16 @@ Scene.prototype.hasEmbeddedTemplateSettings = function () {
 };
 
 // Scene ops:
+
+Scene.prototype.displayName = function () {
+    if (this.role === 'tutorial' &&
+        this.name.length > 1 &&
+        this.name.startsWith('_')
+    ) {
+            return this.name.slice(1);
+    }
+    return this.name;
+};
 
 Scene.prototype.updateTrash = function () {
     this.trash = this.trash.filter(sprite => sprite.isCorpse);

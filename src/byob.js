@@ -113,7 +113,7 @@ ADT_SlotMorph*/
 
 // Global stuff ////////////////////////////////////////////////////////
 
-modules.byob = '2026-April-27';
+modules.byob = '2026-May-11';
 
 // Declarations
 
@@ -4908,7 +4908,7 @@ InputSlotDialogMorph.prototype.createSlotTypeButtons = function () {
             )) {
             defLabel.changed();
             if (this.fragment.type === '%adt') {
-                defLabel.text = localize('ADT Type:');
+                defLabel.text = localize('Custom Type:');
             } else if (['%upvar', '%parameter'].includes(this.fragment.type)) {
                 defLabel.text = localize('Default Name:');
             } else {
@@ -5371,7 +5371,7 @@ InputSlotDialogMorph.prototype.specialSlotsMenu = function () {
     addSpecialSlotType('number \u03BB', '%nUE');
     addSpecialSlotType('object', '%obj');
     addSpecialSlotType('parameter', '%parameter');
-    addSpecialSlotType('ADT', '%adt');
+    addSpecialSlotType('custom type', '%adt');
     menu.addLine();
     addSpecialSlotType('variables', '%scriptVars');
     addSpecialSlotType('receivers', '%receive');
