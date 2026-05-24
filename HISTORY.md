@@ -124,6 +124,9 @@
     * Catalan, thanks, Joan!
     * German
 
+### 2026-05-24
+* Chinese translation update
+
 ### 2026-05-22
 * objects: disabled asset context menus in tutorial mode
 * sw: took out removed human photo costumes from the cache
