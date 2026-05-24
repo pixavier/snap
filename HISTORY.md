@@ -126,6 +126,7 @@
 
 ### 2026-05-24
 * Chinese translation update
+* v12 rc3 260524
 
 ### 2026-05-22
 * objects: disabled asset context menus in tutorial mode
