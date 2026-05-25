@@ -124,6 +124,9 @@
     * Catalan, thanks, Joan!
     * German
 
+### 2026-05-25
+* gui: prevent switching to costume or sound tabs in blocks-only mode
+
 ### 2026-05-24
 * Chinese translation update
 * v12 rc3 260524
