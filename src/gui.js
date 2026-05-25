@@ -2378,6 +2378,7 @@ IDE_Morph.prototype.createSpriteEditor = function () {
         this.spriteEditor.isDraggable = false;
         this.spriteEditor.acceptsDrops = false;
         this.spriteEditor.contents.acceptsDrops = true;
+        this.spriteEditor.updateList = () => nop();
 
         scripts.scrollFrame = this.spriteEditor;
         scripts.updateToolbar();
