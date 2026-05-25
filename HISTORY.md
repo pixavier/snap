@@ -126,6 +126,7 @@
 
 ### 2026-05-25
 * gui: prevent switching to costume or sound tabs in blocks-only mode
+* v12 rc4 260525
 
 ### 2026-05-24
 * Chinese translation update
