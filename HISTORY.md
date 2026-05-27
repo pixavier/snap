@@ -124,6 +124,9 @@
     * Catalan, thanks, Joan!
     * German
 
+### 2026-05-27
+* gui: launch IDE in editMode when opening a template project with a tutorial scene
+
 ### 2026-05-25
 * gui: prevent switching to costume or sound tabs in blocks-only mode
 * v12 rc4 260525

@@ -87,7 +87,7 @@ HatBlockMorph, ZOOM*/
 
 // Global stuff ////////////////////////////////////////////////////////
 
-modules.gui = '2026-May-25';
+modules.gui = '2026-May-27';
 
 // Declarations
 
@@ -7198,6 +7198,7 @@ IDE_Morph.prototype.openProject = function (project, purgeCustomizedPrims) {
             each => each.role == 'tutorial'
         );
         if (tutorial) {
+            this.toggleAppMode(false);
             this.launchTutorial(tutorial);
         }
     }
