@@ -128,6 +128,7 @@
 ### 2026-05-28
 * gui: open templates in edit mode
 * updated the Streams library, thanks, Mark de Boer and Brian!
+* v12 rc6 260528
 
 ### 2026-05-27
 * gui: launch IDE in editMode when opening a template project with a tutorial scene
