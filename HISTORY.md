@@ -10,6 +10,7 @@
         * marking a starter project / puzzle as "template" removes its name when loading it (and lets users create their own projects based on the template) 
         * projects based on a template let the user restore the visibility of global blocks in the template palette
         * template-projects can store their magnification level, block fade level, blocks zoom, language, design and theme and propagate them into the projects that are created from them
+        * template-projects always open in edit mode (but still auto-run unless supressed)
         * "generate puzzle" automatically turns the project into a template
     * tutorials
         * open and run a scene inside a separate modeless window
@@ -126,6 +127,7 @@
 
 ### 2026-05-28
 * gui: open templates in edit mode
+* updated the Streams library, thanks, Mark de Boer and Brian!
 
 ### 2026-05-27
 * gui: launch IDE in editMode when opening a template project with a tutorial scene
