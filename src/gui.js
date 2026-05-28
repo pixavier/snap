@@ -87,7 +87,7 @@ HatBlockMorph, ZOOM*/
 
 // Global stuff ////////////////////////////////////////////////////////
 
-modules.gui = '2026-May-27';
+modules.gui = '2026-May-28';
 
 // Declarations
 
@@ -7192,13 +7192,14 @@ IDE_Morph.prototype.openProject = function (project, purgeCustomizedPrims) {
         scn.blocks = SpriteMorph.prototype.primitiveBlocks();
     }
     if (scn.createdFromTemplate) {
+        // switch to edit mode, unless when
+        this.toggleAppMode(false);
         // launch tutorial, if any exist
         tutorial = detect(
             project.scenes.asArray(),
             each => each.role == 'tutorial'
         );
         if (tutorial) {
-            this.toggleAppMode(false);
             this.launchTutorial(tutorial);
         }
     }

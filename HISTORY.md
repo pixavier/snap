@@ -124,6 +124,9 @@
     * Catalan, thanks, Joan!
     * German
 
+### 2026-05-28
+* gui: open templates in edit mode
+
 ### 2026-05-27
 * gui: launch IDE in editMode when opening a template project with a tutorial scene
 * v12 rc5 260527
