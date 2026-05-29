@@ -1,6 +1,8 @@
 # Snap! (BYOB) History
 
 ## in development:
+
+## 12.0.0:
 * **New Features:**
     * global zoom setting ("magnification"), scales everything seamlessly
         * new interactive "Magnification" dialog in the settings menu
@@ -124,6 +126,10 @@
     * Chinese, thank you, @Ayist14 !
     * Catalan, thanks, Joan!
     * German
+
+### 2026-05-29
+* v12.0.0 major release
+
 
 ### 2026-05-28
 * gui: open templates in edit mode
