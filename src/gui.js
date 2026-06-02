@@ -279,6 +279,7 @@ function IDE_Morph(config = {}) {
         noSprites:      bool, hide/show the stage, corral, sprite editor
         noPalette:      bool, hide/show the palette including the categories
         noImports:      bool, disable/allow importing files via drag&drop
+        noShare:        bool, disable/allow sharing and publishing projects
         noOwnBlocks:    bool, hider/show "make a block" and "make a category"
         noRingify:      bool, disable/enable "ringify"/"unringify" in ctx menu
         noUserSettings: bool, disable/enable persistent user preferences
@@ -490,6 +491,9 @@ IDE_Morph.prototype.openIn = function (world) {
         }
         if (dict.noExitWarning) {
             window.noExitWarning = true;
+        }
+        if (dict.noShare) {
+            myself.config.noShare = true;
         }
         if (dict.blocksZoom) {
             myself.savingPreferences = false;
@@ -10769,21 +10773,23 @@ ProjectDialogMorph.prototype.installCloudProjectList = function (pl) {
                 this.preview.rightCenter().add(new Point(2, 0))
             );
         }
-        if (item.ispublic) {
-            this.shareButton.hide();
-            this.unshareButton.show();
-            if (item.ispublished) {
-                this.publishButton.hide();
-                this.unpublishButton.show();
+        if (!this.ide.config.noShare) {
+            if (item.ispublic) {
+                this.shareButton.hide();
+                this.unshareButton.show();
+                if (item.ispublished) {
+                    this.publishButton.hide();
+                    this.unpublishButton.show();
+                } else {
+                    this.publishButton.show();
+                    this.unpublishButton.hide();
+                }
             } else {
-                this.publishButton.show();
+                this.unshareButton.hide();
+                this.shareButton.show();
+                this.publishButton.hide();
                 this.unpublishButton.hide();
             }
-        } else {
-            this.unshareButton.hide();
-            this.shareButton.show();
-            this.publishButton.hide();
-            this.unpublishButton.hide();
         }
         this.buttons.fixLayout();
         this.fixLayout();
@@ -10793,8 +10799,10 @@ ProjectDialogMorph.prototype.installCloudProjectList = function (pl) {
     if (this.task === 'open' || this.task === 'add') {
         this.recoverButton.show();
     }
-    this.shareButton.show();
-    this.unshareButton.hide();
+    if (!this.ide.config.noShare) {
+        this.shareButton.show();
+        this.unshareButton.hide();
+    }
     this.deleteButton.show();
     this.buttons.fixLayout();
     this.fixLayout();
