@@ -5204,7 +5204,7 @@ IDE_Morph.prototype.projectMenu = function () {
                     this.currentSprite
                 ).popUp(world)
         );
-        if (this.scene.template) {
+        if (this.scene.template.version) {
             menu.addItem(
                 'Restore palette',
                 () => this.stage.restoreHiddenGlobalBlocks(

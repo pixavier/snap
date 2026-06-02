@@ -7,6 +7,7 @@
     * keep unnamed project status when refreshing a project-template to adjust for language or block zoom
     * prevent activating both blocks-only and performer modes
     * tweaked stage layout in presentation mode to prevent the outer frame from being cut-off in certain screen aspect ratios
+    * only display "restore palette" option in the project menu if the project is based on a template
 
 ### 2026-05-29
 * v12.0.0.1-dev
@@ -14,6 +15,7 @@
 * gui: keep unnamed project status when refreshing a project-template to adjust for language or block zoom
 * gui: prevent activating both blocks-only and performer modes
 * gui: tweaked stage layout in presentation mode to prevent the outer frame from being cut-off in certain screen aspect ratios
+* gui: only display "restore palette" option in the project menu if the project is based on a template
 
 ## 12.0.0:
 * **New Features:**
