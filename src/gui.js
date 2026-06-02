@@ -2821,7 +2821,7 @@ IDE_Morph.prototype.fixLayout = function (situation) {
                 (this.height() - this.controlBar.height() * 2 - padding * 2)
                     / this.stage.dimensions.y
             ));
-            this.stage.setCenter(this.center());
+            this.stage.setCenter(this.center().add(new Point(0, padding * 2)));
         } else {
             this.stage.setScale(this.isSmallStage ? this.stageRatio : 1);
             this.stage.setTop(
