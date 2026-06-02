@@ -4706,14 +4706,16 @@ IDE_Morph.prototype.settingsMenu = function () {
         'uncheck to run scripts\nat normal speed',
         'check to prioritize\nscript execution'
     );
-    addPreference(
-        'Performer mode',
-        () => this.togglePerformerMode(),
-        this.performerMode,
-        'uncheck to go back to regular\nlayout',
-        'check to have the stage use up\nall space and go behind the\n' +
-        'scripting area'
-    );
+    if (!this.scene.hideSprites) {
+        addPreference(
+            'Performer mode',
+            () => this.togglePerformerMode(),
+            this.performerMode,
+            'uncheck to go back to regular\nlayout',
+            'check to have the stage use up\nall space and go behind the\n' +
+            'scripting area'
+        );
+    }
     if (this.performerMode) {
         menu.addItem(
             'Performer mode scale...',
@@ -8480,13 +8482,15 @@ IDE_Morph.prototype.projectSettingsMenu = function () {
         'Stage size...',
         'userSetStageSize'
     );
-    menu.addPreference(
-        'Blocks only',
-        () => this.hideSpritePanes(!this.scene.hideSprites),
-        this.scene.hideSprites,
-        'uncheck to show\nthe stage and\nsprite editor panes',
-        'check to hide\nthe stage and \nsprite editor panes'
-    );
+    if (!this.performerMode) {
+        menu.addPreference(
+            'Blocks only',
+            () => this.hideSpritePanes(!this.scene.hideSprites),
+            this.scene.hideSprites,
+            'uncheck to show\nthe stage and\nsprite editor panes',
+            'check to hide\nthe stage and \nsprite editor panes'
+        );
+    }
     menu.addPreference(
         'Single palette',
         () => this.toggleUnifiedPalette(),
