@@ -4,10 +4,12 @@
 
 * **Notable Fixes:**
     * fixed loading multi-scene project-templates with an embedded language setting and costumes / sounds only inside global variables (looking at you, Jadga, haha!)
+    * keep unnamed project status when refreshing a project-template to adjust for language or block zoom
 
 ### 2026-05-29
 * v12.0.0.1-dev
 * gui, objects, store: fixed loading multi-scene project-templates with language setting and costumes / sounds only inside global variables (looking at you, Jadga, haha!)
+* gui: keep unnamed project status when refreshing a project-template to adjust for language or block zoom
 
 ## 12.0.0:
 * **New Features:**

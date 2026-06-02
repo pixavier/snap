@@ -3655,7 +3655,11 @@ IDE_Morph.prototype.refreshIDE = function () {
         this.scene.createdFromTemplate = false;
         onComplete = () => {
             this.scene.createdFromTemplate = true;
-            this.setProjectName(name);
+            if (name?.length) {
+                this.setProjectName(name, true);
+            } else {
+                this.scenes.at(1).name = '';
+            }
             if (tutorial) {
                 this.launchProjectTutorial();
             }
@@ -8023,7 +8027,11 @@ IDE_Morph.prototype.reflectLanguage = function (lang, callback, noSave) {
             this.scene.createdFromTemplate = false;
             onComplete = () => {
                 this.scene.createdFromTemplate = true;
-                this.setProjectName(name, true);
+                if (name?.length) {
+                    this.setProjectName(name, true);
+                } else {
+                    this.scenes.at(1).name = '';
+                }
                 if (tutorial) {
                     this.launchProjectTutorial();
                 }
@@ -8929,7 +8937,11 @@ IDE_Morph.prototype.setBlocksScale = function (num, noSave) {
         this.scene.createdFromTemplate = false;
         onComplete = () => {
             this.scene.createdFromTemplate = true;
-            this.setProjectName(name);
+            if (name?.length) {
+                this.setProjectName(name, true);
+            } else {
+                this.scenes.at(1).name = '';
+            }
             if (tutorial) {
                 this.launchProjectTutorial();
             }
@@ -9246,7 +9258,11 @@ IDE_Morph.prototype.userCustomizePalette = function (callback = nop) {
         this.scene.createdFromTemplate = false;
         onComplete = () => {
             this.scene.createdFromTemplate = true;
-            this.setProjectName(name);
+            if (name?.length) {
+                this.setProjectName(name, true);
+            } else {
+                this.scenes.at(1).name = '';
+            }
             if (tutorial) {
                 this.launchProjectTutorial();
             }
