@@ -6,6 +6,7 @@
     * fixed loading multi-scene project-templates with an embedded language setting and costumes / sounds only inside global variables (looking at you, Jadga, haha!)
 
 ### 2026-05-29
+* v12.0.0.1-dev
 * gui, objects, store: fixed loading multi-scene project-templates with language setting and costumes / sounds only inside global variables (looking at you, Jadga, haha!)
 
 ## 12.0.0:
