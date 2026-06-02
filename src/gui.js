@@ -9217,7 +9217,6 @@ IDE_Morph.prototype.hideSpritePanes = function (choice = true) {
         this.controlBar.stageSizeButton.hide();
         this.controlBar.appModeButton.hide();
         this.controlBar.startButton.hide();
-        this.fixLayout();
     } else {
         this.config.noSprites = false;
         this.config.noSpriteEdits = false;
@@ -9229,8 +9228,8 @@ IDE_Morph.prototype.hideSpritePanes = function (choice = true) {
         this.stage.show();
         this.corralBar.show();
         this.corral.show();
-        this.fixLayout();
     }
+    this.fixLayout();
 };
 
 // IDE_Morph dragging threshold (internal feature)
