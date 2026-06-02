@@ -87,7 +87,7 @@ HatBlockMorph, ZOOM*/
 
 // Global stuff ////////////////////////////////////////////////////////
 
-modules.gui = '2026-May-29';
+modules.gui = '2026-June-02';
 
 // Declarations
 
@@ -522,11 +522,9 @@ IDE_Morph.prototype.openIn = function (world) {
     }
 
     function isLoadingAssets() {
-        return myself.sprites.asArray().concat([myself.stage]).some(any =>
-            (any.costume ? any.costume.loaded !== true : false) ||
-            any.costumes.asArray().some(each => each.loaded !== true) ||
-            any.sounds.asArray().some(each => each.loaded !== true)
-        );
+        return myself.scenes.itemsArray().some(any =>
+            any.stage.allAssets().some(each =>
+                each.loaded !== true));
     }
 
     // dynamic notifications from non-source text files

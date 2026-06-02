@@ -2,6 +2,12 @@
 
 ## in development:
 
+* **Notable Fixes:**
+    * fixed loading multi-scene project-templates with an embedded language setting and costumes / sounds only inside global variables (looking at you, Jadga, haha!)
+
+### 2026-05-29
+* gui, objects, store: fixed loading multi-scene project-templates with language setting and costumes / sounds only inside global variables (looking at you, Jadga, haha!)
+
 ## 12.0.0:
 * **New Features:**
     * global zoom setting ("magnification"), scales everything seamlessly
@@ -129,7 +135,6 @@
 
 ### 2026-05-29
 * v12.0.0 major release
-
 
 ### 2026-05-28
 * gui: open templates in edit mode

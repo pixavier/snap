@@ -96,7 +96,7 @@ CustomBlockDefinition, exportEmbroidery, CustomHatBlockMorph, HandMorph*/
 
 /*jshint esversion: 11*/
 
-modules.objects = '2026-May-22';
+modules.objects = '2026-June-02';
 
 var SpriteMorph;
 var StageMorph;
@@ -13272,6 +13272,56 @@ StageMorph.prototype.globalBlocksSending = function (message, receiverName) {
         }
     });
     return all;
+};
+
+// StageMorph enumerating all asynchronously loaded assets
+
+StageMorph.prototype.allAssets = function () {
+    var objects,
+        assets = [],
+        charted = [];
+
+    function collect(item) {
+        if (!assets.includes(item)) {
+            assets.push(item);
+        }
+    }
+
+    function scanVariables(varFrame) {
+        varFrame.names().forEach(vname => {
+            var value = varFrame.getVar(vname);
+            if (value instanceof Costume || value instanceof Sound) {
+                collect(value);
+            } else if (value instanceof List) {
+                scanList(value);
+            }
+        });
+    }
+
+    function scanList(list) {
+        if (!charted.includes(list)) {
+            charted.push(list);
+            list.map(each => {
+                if (each instanceof Costume || each instanceof Sound) {
+                    collect(each);
+                } else if (each instanceof List) {
+                    scanList(each);
+                }
+            });
+        }
+    }
+
+    objects = this.children.filter(morph => morph instanceof SpriteMorph);
+    objects.push(this);
+    objects.forEach(sprite => {
+        if (sprite.costume) {
+            collect(sprite.costume);
+        }
+        sprite.costumes.map(cst => collect(cst));
+    });
+    scanVariables(this.globalVariables());
+    objects.forEach(sprite => scanVariables(sprite.variables));
+    return assets;
 };
 
 // StageMorph serialization & exporting utilities
