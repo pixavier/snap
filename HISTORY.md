@@ -8,6 +8,7 @@
     * prevent activating both blocks-only and performer modes
     * tweaked stage layout in presentation mode to prevent the outer frame from being cut-off in certain screen aspect ratios
     * only display "restore palette" option in the project menu if the project is based on a template
+    * fixed santa hats looks-menu plugin
 
 ### 2026-05-29
 * v12.0.0.1-dev
@@ -16,6 +17,7 @@
 * gui: prevent activating both blocks-only and performer modes
 * gui: tweaked stage layout in presentation mode to prevent the outer frame from being cut-off in certain screen aspect ratios
 * gui: only display "restore palette" option in the project menu if the project is based on a template
+* santa: fixed santa hats looks-menu plugin
 
 ## 12.0.0:
 * **New Features:**
