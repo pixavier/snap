@@ -2,10 +2,12 @@
 
 ## in development:
 
+## 12.0.1:
 * **Notable Fixes:**
     * fixed loading multi-scene project-templates with an embedded language setting and costumes / sounds only inside global variables (looking at you, Jadga, haha!)
     * keep unnamed project status when refreshing a project-template to adjust for language or block zoom
     * prevent activating both blocks-only and performer modes
+    * suppress project sharing in Snap! Schule via a url parameter, thank you, Bernat!
     * tweaked stage layout in presentation mode to prevent the outer frame from being cut-off in certain screen aspect ratios
     * only display "restore palette" option in the project menu if the project is based on a template
     * fixed santa hats looks-menu plugin
@@ -18,6 +20,7 @@
 * gui: tweaked stage layout in presentation mode to prevent the outer frame from being cut-off in certain screen aspect ratios
 * gui: only display "restore palette" option in the project menu if the project is based on a template
 * santa: fixed santa hats looks-menu plugin
+* v12.0.1 patch
 
 ## 12.0.0:
 * **New Features:**
