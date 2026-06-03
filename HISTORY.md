@@ -2,6 +2,9 @@
 
 ## in development:
 
+### 2026-06-03
+* v12.0.0.2-dev
+
 ## 12.0.1:
 * **Notable Fixes:**
     * fixed loading multi-scene project-templates with an embedded language setting and costumes / sounds only inside global variables (looking at you, Jadga, haha!)
@@ -12,7 +15,7 @@
     * only display "restore palette" option in the project menu if the project is based on a template
     * fixed santa hats looks-menu plugin
 
-### 2026-05-29
+### 2026-06-02
 * v12.0.0.1-dev
 * gui, objects, store: fixed loading multi-scene project-templates with language setting and costumes / sounds only inside global variables (looking at you, Jadga, haha!)
 * gui: keep unnamed project status when refreshing a project-template to adjust for language or block zoom
