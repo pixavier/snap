@@ -2,8 +2,12 @@
 
 ## in development:
 
+* **Notable Fixes:**
+    * fixed loading project data from url for the Moodle plugin
+
 ### 2026-06-03
 * v12.0.0.2-dev
+* gui: fixed loading project data from url for the Moodle plugin
 
 ## 12.0.1:
 * **Notable Fixes:**

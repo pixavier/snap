@@ -836,7 +836,7 @@ IDE_Morph.prototype.openIn = function (world) {
         this.loadNewProject = true;
         this.setLanguage(this.userLanguage, interpretUrlAnchors);
     } else {
-        interpretUrlAnchors.call(this);
+        this.onNextStep = () => interpretUrlAnchors.call(this);
     }
 
     if (location.protocol === 'file:') {
