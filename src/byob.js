@@ -113,7 +113,7 @@ ADT_SlotMorph*/
 
 // Global stuff ////////////////////////////////////////////////////////
 
-modules.byob = '2026-May-11';
+modules.byob = '2026-June-03';
 
 // Declarations
 
@@ -1400,9 +1400,14 @@ CustomCommandBlockMorph.prototype.restoreInputs = function (oldInputs, offset) {
                 inp instanceof CSlotMorph) {
             inp.nestedBlock(old.evaluate());
         } else if (old instanceof MultiArgMorph &&
-                inp instanceof MultiArgMorph &&
-                (old.slotSpec === inp.slotSpec)) {
-            this.replaceInput(inp, old.fullCopy());
+            inp instanceof MultiArgMorph
+        ) {
+            if (old.slotSpec === inp.slotSpec) {
+                this.replaceInput(inp, old.fullCopy());
+            } else {
+                inp.expandTo(old.inputs().length);
+                inp.restoreInputsFrom(old.inputs());
+            }
         } else {
             preserve(old);
         }

@@ -2,8 +2,12 @@
 
 ## in development:
 
+* **Notable Fixes:**
+    * preserve the contents of variadic slots when changing their specs
+
 ### 2026-06-03
 * v12.0.3-dev
+* blocks, byob: preserve the contents of variadic slots when changing their specs 
 
 ## 12.0.2:
 * **Notable Fixes:**

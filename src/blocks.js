@@ -164,7 +164,7 @@ CustomHatBlockMorph, GrayPaletteMorph, ZOOM*/
 
 // Global stuff ////////////////////////////////////////////////////////
 
-modules.blocks = '2026-May-11';
+modules.blocks = '2026-June-03';
 
 var SyntaxElementMorph;
 var BlockMorph;
@@ -15390,6 +15390,61 @@ MultiArgMorph.prototype.defaultValueDataFor = function (index) {
         return dflt[index] || '';
     }
     return index ? '' : dflt;
+};
+
+// MultiArgMorph restoring inputs:
+
+MultiArgMorph.prototype.restoreInputsFrom = function (oldInputs) {
+    // try to restore my previous inputs when my spec has been changed
+
+    var newInputs = this.inputs(),
+        len = Math.max(oldInputs.length, newInputs.length),
+        scripts = this.parentThatIsA(ScriptsMorph),
+        old,
+        inp,
+        i;
+
+    function preserve(item) {
+        // keep unused blocks around in the scripting area
+        if (item instanceof CSlotMorph ) {
+            item = item.evaluate();
+        }
+        if (item instanceof BlockMorph && scripts) {
+            scripts.add(item);
+            item.moveBy(new Point(20, 20));
+            item.fixBlockColor();
+        }
+    }
+
+    for (i = 0; i < len; i += 1) {
+        inp = newInputs[i];
+        old = oldInputs[i];
+        if (old instanceof ArgLabelMorph) {
+            old = old.argMorph();
+        }
+        if (old instanceof ReporterBlockMorph && inp &&
+                (!(inp instanceof TemplateSlotMorph))) {
+            this.replaceInput(inp, old.fullCopy());
+        } else if (old instanceof InputSlotMorph &&
+                inp instanceof InputSlotMorph) {
+            if (old.isEmptySlot()) {
+                inp.setContents('');
+            } else {
+                inp.setContents(old.evaluate());
+            }
+        } else if (old instanceof BooleanSlotMorph &&
+                inp instanceof BooleanSlotMorph) {
+            inp.setContents(old.evaluate());
+        } else if (old instanceof TemplateSlotMorph &&
+                inp instanceof TemplateSlotMorph) {
+            inp.setContents(old.evaluate());
+        } else if (old instanceof CSlotMorph &&
+                inp instanceof CSlotMorph) {
+            inp.nestedBlock(old.evaluate());
+        } else {
+            preserve(old);
+        }
+    }
 };
 
 // MultiArgMorph events:
