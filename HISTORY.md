@@ -2,12 +2,15 @@
 
 ## in development:
 
+### 2026-06-03
+* v12.0.3-dev
+
 ## 12.0.2:
 * **Notable Fixes:**
     * fixed loading project data from url for the Moodle plugin
 
 ### 2026-06-03
-* v12.0.0.2-dev
+* v12.0.2-dev
 * gui: fixed loading project data from url for the Moodle plugin
 * v12.0.2 patch
 
@@ -22,7 +25,7 @@
     * fixed santa hats looks-menu plugin
 
 ### 2026-06-02
-* v12.0.0.1-dev
+* v12.0.1-dev
 * gui, objects, store: fixed loading multi-scene project-templates with language setting and costumes / sounds only inside global variables (looking at you, Jadga, haha!)
 * gui: keep unnamed project status when refreshing a project-template to adjust for language or block zoom
 * gui: prevent activating both blocks-only and performer modes
