@@ -495,6 +495,9 @@ IDE_Morph.prototype.openIn = function (world) {
         if (dict.noShare) {
             myself.config.noShare = true;
         }
+        if (dict.hideCloudMenu) {
+            myself.config.hideCloudMenu = true;
+        }
         if (dict.blocksZoom) {
             myself.savingPreferences = false;
             myself.setBlocksScale(Math.max(1,Math.min(dict.blocksZoom, 12)));
@@ -1593,7 +1596,7 @@ IDE_Morph.prototype.createControlBar = function () {
             projectButton.hide();
         }
 
-        if (myself.cloud.disabled) {
+        if (myself.cloud.disabled || myself.config.hideCloudMenu) {
             cloudButton.hide();
             projectButton.setRight(settingsButton.left() - padding);
         } else {

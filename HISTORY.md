@@ -4,6 +4,7 @@
 
 * **Notable Fixes:**
     * preserve the contents of variadic slots when changing their specs
+    * added new "hideCloudMenu" url switch and configuration key (for snap.schule)
 
 ### 2026-06-03
 * v12.0.3-dev
