@@ -497,6 +497,7 @@ IDE_Morph.prototype.openIn = function (world) {
         }
         if (dict.hideCloudMenu) {
             myself.config.hideCloudMenu = true;
+            this.controlBar.fixLayout();
         }
         if (dict.blocksZoom) {
             myself.savingPreferences = false;
