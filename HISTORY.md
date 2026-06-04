@@ -5,6 +5,18 @@
 * **Notable Fixes:**
     * preserve the contents of variadic slots when changing their specs
     * added new "hideCloudMenu" url switch and configuration key (for snap.schule)
+* **Documentation Updates:**
+    * updated API.md with new "noShare" and "hideCloudMenu" configuration keys
+* **Translation Updates:**
+    * made shapes library translatable
+    * added German translation for the shapes library
+    * German translation update
+
+### 2026-06-04
+* updated API documentation
+* made shapes library translatable
+* added German translation for the shapes library
+* German translation update
 
 ### 2026-06-03
 * v12.0.3-dev
