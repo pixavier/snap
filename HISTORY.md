@@ -2,11 +2,13 @@
 
 ## in development:
 
+## 12.0.2:
 * **Notable Changes:**
     * added new "hideCloudMenu" url switch and configuration key (for snap.schule)
     * point the reference manual link at the new website, thank you, Michael and Brian!
 * **Notable Fixes:**
     * preserve the contents of variadic slots when changing their specs
+    * fixed an occasional window reference glitch in the Tunescope extension, thanks, @MatrixNeoKozak
 * **Documentation Updates:**
     * updated API.md with new "noShare" and "hideCloudMenu" configuration keys
 * **Translation Updates:**
@@ -16,6 +18,8 @@
 
 ### 2026-06-05
 * gui, etc: point the reference manual link at the new website, thank you, Michael and Brian!
+* Tunescope: fixed an occasional window reference glitch, thanks, @MatrixNeoKozak
+* v12.0.3
 
 ### 2026-06-04
 * updated API documentation
