@@ -8,7 +8,7 @@
 a visual, blocks based programming language
 inspired by Scratch
 
-written by Jens Mönig and Brian Harvey  
+written by Jens Mönig and Brian Harvey
 jens@moenig.org, bh@cs.berkeley.edu
 
 ## Snap<em>!</em> Community
@@ -31,17 +31,19 @@ Please reach out to us at [contact@snap.berkeley.edu](mailto:contact@snap.berkel
 
 ## Documentation
 
-The definitive source of how to use Snap! is the [Snap! Manual](help/SnapManual.pdf).
+The definitive source of how to use Snap! is the [Snap! Manual][manual].
 
 * [API.md](docs/API.md) describes the API for modifying the Snap! interface.
 * [Extensions.md](docs/Extensions.md) describes the basic interface for building JavaScript extensions for Snap!
 * [Migrating.md](docs/Migrating.md) gives guidance for older extensions to migrate to Morphic 2 and Snap! v6.
 * [Offline.md](docs/Offline.md) has instructions for running Snap! as a progressive web application.
 
+[manual]: https://docs.snap.berkeley.edu/
+
 _Please read the [Contribution Guidelines](docs/CONTRIBUTING.md) before making an issue or pull request. Thanks!_
 
 ## License
-Copyright (C) 2008-2025 by Jens Mönig and Brian Harvey
+Copyright (C) 2008-2026 by Jens Mönig and Brian Harvey
 
 Snap! is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
