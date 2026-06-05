@@ -2,7 +2,7 @@
 
 ## in development:
 
-## 12.0.2:
+## 12.0.3:
 * **Notable Changes:**
     * added new "hideCloudMenu" url switch and configuration key (for snap.schule)
     * point the reference manual link at the new website, thank you, Michael and Brian!
