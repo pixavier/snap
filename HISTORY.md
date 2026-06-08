@@ -2,6 +2,9 @@
 
 ## in development:
 
+### 2026-06-08
+* store: tweaked "projectloaded" event to only fire once per load
+
 ## 12.0.4:
 * **Notable Changes:**
     * dispatch a "projectloaded" event when a project has been fully loaded, including all asynchronously loaded assets, used to pop-up and collapse a modal "loading..." pane / dialog in snap.schule

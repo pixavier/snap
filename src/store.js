@@ -348,6 +348,7 @@ SnapSerializer.prototype.loadProjectModel = function (
         shouldRefresh = false,
         project = new Project(),
         wrld = ide.world(),
+        loadAgain = false,
         template;
 
     function applyConfiguration() {
@@ -370,6 +371,7 @@ SnapSerializer.prototype.loadProjectModel = function (
         if (template.attributes.lang &&
             (template.attributes.lang !== SnapTranslator.language)
         ) {
+            loadAgain = true;
             wrld.once(
                 () => !isLoadingAssets(),
                 () => ide.setLanguage(template.attributes.lang, null, true)
@@ -378,6 +380,7 @@ SnapSerializer.prototype.loadProjectModel = function (
         if (template.attributes.scale &&
             (+template.attributes.scale !== SyntaxElementMorph.prototype.scale)
         ) {
+            loadAgain = true;
             wrld.once(
                 () => !isLoadingAssets(),
                 () => ide.setBlocksScale(+template.attributes.scale, true)
@@ -432,10 +435,12 @@ SnapSerializer.prototype.loadProjectModel = function (
         );
     }
 
-    wrld.once(
-        () => !isLoadingAssets(),
-        () => document.dispatchEvent(new CustomEvent('projectloaded'))
-    );
+    if (!loadAgain) {
+        wrld.once(
+            () => !isLoadingAssets(),
+            () => document.dispatchEvent(new CustomEvent('projectloaded'))
+        );
+    }
     return project.initialize();
 };
 
