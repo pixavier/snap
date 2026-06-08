@@ -2,6 +2,12 @@
 
 ## in development:
 
+* **Notable Changes:**
+    * dispatch a "projectloaded" event when a project has been fully loaded, including all asynchronously loaded assets, used to pop-up and collapse a modal "loading..." pane / dialog in snap.schule
+
+### 2026-06-08
+* store: dispatch a "projectloaded" event when a project has been fully loaded, including all asynchronously loaded assets, used to pop-up and collapse a modal "loading..." pane / dialog in snap.schule
+
 ## 12.0.3:
 * **Notable Changes:**
     * added new "hideCloudMenu" url switch and configuration key (for snap.schule)

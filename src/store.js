@@ -63,7 +63,7 @@ Project, CustomHatBlockMorph, SnapVersion, ADT_SlotMorph, SnapTranslator*/
 
 // Global stuff ////////////////////////////////////////////////////////
 
-modules.store = '2026-June-02';
+modules.store = '2026-June-08';
 
 // XML_Serializer ///////////////////////////////////////////////////////
 /*
@@ -347,10 +347,10 @@ SnapSerializer.prototype.loadProjectModel = function (
         scenesModel = xmlNode.childNamed('scenes'),
         shouldRefresh = false,
         project = new Project(),
+        wrld = ide.world(),
         template;
 
     function applyConfiguration() {
-        var wrld = ide.world();
         if (!isNil(template.attributes.flat)) {
             if (template.attributes.flat === 'true') {
                 ide.setFlatDesign();
@@ -431,6 +431,11 @@ SnapSerializer.prototype.loadProjectModel = function (
             this.loadScene(xmlNode, appVersion, remixID, keepRoles)
         );
     }
+
+    wrld.once(
+        () => !isLoadingAssets(),
+        () => document.dispatchEvent(new CustomEvent('projectloaded'))
+    );
     return project.initialize();
 };
 
