@@ -2,8 +2,13 @@
 
 ## in development:
 
+## 12.0.6:
+* **Notable Changes:**
+    * added "projectloaded" message post to support embedding the editor in an iFrame
+
 ### 2026-06-08
 * store: added "projectloaded" message post to support embedding the editor in an iFrame
+* v12.0.6
 
 ## 12.0.5:
 * **Notable Fixes:**
