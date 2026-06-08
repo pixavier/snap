@@ -438,7 +438,10 @@ SnapSerializer.prototype.loadProjectModel = function (
     if (!loadAgain) {
         wrld.once(
             () => !isLoadingAssets(),
-            () => document.dispatchEvent(new CustomEvent('projectloaded'))
+            () => {
+                window.postMessage('projectloaded', '*');
+                document.dispatchEvent(new CustomEvent('projectloaded'));
+            }
         );
     }
     return project.initialize();

@@ -2,6 +2,9 @@
 
 ## in development:
 
+### 2026-06-08
+* store: added "projectloaded" message post to support embedding the editor in an iFrame
+
 ## 12.0.5:
 * **Notable Fixes:**
     * tweaked "projectloaded" event to only fire once per load
