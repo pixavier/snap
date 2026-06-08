@@ -2,8 +2,13 @@
 
 ## in development:
 
+## 12.0.5:
+* **Notable Fixes:**
+    * tweaked "projectloaded" event to only fire once per load
+
 ### 2026-06-08
 * store: tweaked "projectloaded" event to only fire once per load
+* v12.0.5
 
 ## 12.0.4:
 * **Notable Changes:**
