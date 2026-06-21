@@ -541,3 +541,12 @@ var Base64Binary = {
 		return uarray;	
 	}
 }
+
+SnapExtensions.primitives.set(
+    'mqt_url_param()',
+    function () {
+		let hash = window.location.hash.slice(1); // remove "#"
+		let params = new URLSearchParams(hash);
+		return params.get('param');		
+    }
+);
