@@ -546,7 +546,7 @@ var Base64Binary = {
 SnapExtensions.primitives.set(
     'mqt_param_flag()',
     function () {
-		let afterHash = window.location.hash.slice(1); // remove "#"
+		let afterHash = window.location.hash.slice(1);
 		let flags = new URLSearchParams(afterHash);
 		return flags.get('param');		
     }
