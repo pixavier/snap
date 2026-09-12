@@ -105,6 +105,7 @@ SnapExtensions.primitives.set(
 		} catch (e){}
 		delete stage.mqtt[brokerKey];
 
+		opts.connectTimeout = 10000;
 		stage.mqtt[brokerKey] = mqtt.connect(wsbroker, opts);
 
 		stage.mqtt[brokerKey].on('connect', function(connack) {
